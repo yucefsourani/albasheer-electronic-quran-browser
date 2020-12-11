@@ -31,7 +31,7 @@ https://github.com/ojuba-org/othman
  
 # Download For Windows (32bit)
 
-![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/main/albasheer-setup.exe "Screenshot")
+![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/master/albasheer-setup.exe "Screenshot")
 
 
 # Linux 
@@ -39,27 +39,27 @@ https://github.com/ojuba-org/othman
 clone repository and run albasheer-browser (requires pygi and gstreamer(to run mp3 tilawa))
 
 # Screenshot
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot1.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot2.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot2.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot3.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot4.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot4.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot5.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot5.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot6.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot7.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot7.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot8.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot8.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot9.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot9.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot10.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot10.png "Screenshot")
 
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/main/Screenshot11.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot11.png "Screenshot")
 
 
 
