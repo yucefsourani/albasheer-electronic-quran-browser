@@ -1,0 +1,5 @@
+#! /usr/bin/python3
+# -*- coding: UTF-8 -*-
+from albasheer.gtkUi import main
+main()
+

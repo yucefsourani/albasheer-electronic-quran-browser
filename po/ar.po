@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# yucef <youssef.m.sourani@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: albasheer 0.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-11 20:14+0200\n"
+"PO-Revision-Date: 2010-04-28 18:31+0300\n"
+"Last-Translator: yucef <youssef.m.sourani@gmail.com>\n"
+"Language-Team: youssef.m.sourani@gmail.com\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../albasheer.desktop.in.h:1
+#, fuzzy
+msgid "Albasheer Quran Browser"
+msgstr "مصحف البشير الإلكتروني"
+
+#: ../albasheer.desktop.in.h:2 ../albasheer/gtkUi.py:2188
+msgid "Electronic Mus-haf"
+msgstr "المصحف الإلكتروني"
+
+#: ../albasheer/gtkUi.py:237
+msgid "Search results"
+msgstr "نتائج البحث"
+
+#: ../albasheer/gtkUi.py:256 ../albasheer/gtkUi.py:1339
+msgid "Sura"
+msgstr "سورة"
+
+#: ../albasheer/gtkUi.py:533 ../albasheer/gtkUi.py:1365
+msgid "Audio"
+msgstr "صوت"
+
+#: ../albasheer/gtkUi.py:539 ../albasheer/gtkUi.py:1372
+#: ../albasheer/gtkUi.py:1733
+msgid "choose a Audio"
+msgstr "إختار القارئ"
+
+#: ../albasheer/gtkUi.py:546 ../albasheer/gtkUi.py:1376
+msgid "No Audio Available"
+msgstr "ملفات الصوت غير متوفرة"
+
+#: ../albasheer/gtkUi.py:552 ../albasheer/gtkUi.py:1478
+msgid "Search"
+msgstr "بحث"
+
+#: ../albasheer/gtkUi.py:561 ../albasheer/gtkUi.py:1298
+#, fuzzy
+msgid "Search..."
+msgstr "بحث"
+
+#: ../albasheer/gtkUi.py:577 ../albasheer/gtkUi.py:1392
+#: ../albasheer/gtkUi.py:1631
+msgid "Play"
+msgstr "شغل"
+
+#: ../albasheer/gtkUi.py:584 ../albasheer/gtkUi.py:1406
+msgid "Stop"
+msgstr "أوقف"
+
+#: ../albasheer/gtkUi.py:598 ../albasheer/gtkUi.py:1431
+msgid "Zoom In"
+msgstr "تكبير الخط"
+
+#: ../albasheer/gtkUi.py:606 ../albasheer/gtkUi.py:1439
+msgid "Zoom Out"
+msgstr "تصغير الخط"
+
+#: ../albasheer/gtkUi.py:643
+msgid "Reset"
+msgstr "إعادة للوضع السابق"
+
+#: ../albasheer/gtkUi.py:934
+msgid "Cancel clicked..."
+msgstr ""
+
+#: ../albasheer/gtkUi.py:949
+msgid "Downloading "
+msgstr ""
+
+#: ../albasheer/gtkUi.py:952
+msgid "Done"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1008
+msgid "Select ayt File"
+msgstr "حدد ملفات ayt"
+
+#: ../albasheer/gtkUi.py:1010
+msgid "Choose Files"
+msgstr "إختار الملفات"
+
+#: ../albasheer/gtkUi.py:1025
+msgid "Download"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1029
+msgid "Cancel Download"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1047
+msgid "Open Data Location"
+msgstr "فتح مسار الملفات"
+
+#: ../albasheer/gtkUi.py:1052
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: ../albasheer/gtkUi.py:1079
+msgid "Please choose a files"
+msgstr "الرجاء إختيار الملفات"
+
+#: ../albasheer/gtkUi.py:1261
+msgid "Amiri Font Missing!,install amiri font?"
+msgstr "خط أميري غير متوفر,تثبيت خط أميري؟"
+
+#: ../albasheer/gtkUi.py:1264
+msgid "Re-run albasheer"
+msgstr "أعد تشغيل مصحف البشير"
+
+#: ../albasheer/gtkUi.py:1275 ../albasheer/gtkUi.py:2185
+msgid "albasheer Quran Browser"
+msgstr "مصحف البشير الإلكتروني"
+
+#: ../albasheer/gtkUi.py:1324
+#, fuzzy
+msgid "Search For Sura"
+msgstr "نتائج البحث"
+
+#: ../albasheer/gtkUi.py:1331
+msgid "Copy To Clipboard"
+msgstr "نسخ إلى الحافظة"
+
+#: ../albasheer/gtkUi.py:1355 ../albasheer/gtkUi.py:2348
+msgid "choose a Sura"
+msgstr "إختار سورة"
+
+#: ../albasheer/gtkUi.py:1383
+msgid "Previous"
+msgstr "إلى الخلف"
+
+#: ../albasheer/gtkUi.py:1399
+msgid "Forward"
+msgstr "إلى الأمام"
+
+#: ../albasheer/gtkUi.py:1419
+msgid "Add Audio Sources"
+msgstr "إضافة ملفات الصوت"
+
+#: ../albasheer/gtkUi.py:1450
+msgid "Speed Up Auto Scroll"
+msgstr "زيادة السرعة"
+
+#: ../albasheer/gtkUi.py:1460
+msgid "Auto Scroll"
+msgstr "تمرير التلقائي"
+
+#: ../albasheer/gtkUi.py:1470
+msgid "Speed Down Auto Scroll"
+msgstr "إنقاص السرعة"
+
+#: ../albasheer/gtkUi.py:1484
+msgid "About"
+msgstr "عنا"
+
+#: ../albasheer/gtkUi.py:1503
+msgid "Background Color"
+msgstr "لون الخلفية"
+
+#: ../albasheer/gtkUi.py:1505
+msgid "Foreground Color"
+msgstr "لون الخط"
+
+#: ../albasheer/gtkUi.py:1514
+msgid "Shortcut"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1634
+msgid "Tarajem"
+msgstr "تراجم"
+
+#: ../albasheer/gtkUi.py:1635
+msgid "Tafsir"
+msgstr "تفاسير"
+
+#: ../albasheer/gtkUi.py:1636
+msgid "Copy"
+msgstr "نسخ"
+
+#: ../albasheer/gtkUi.py:1637
+msgid "bg Color"
+msgstr "تغير لون الخلفية"
+
+#: ../albasheer/gtkUi.py:1638
+msgid "fg  Color"
+msgstr "تغير لون الخط"
+
+#: ../albasheer/gtkUi.py:1723
+msgid "Add Tilawa audio from ayat"
+msgstr "إضافة ملفات الصوت من مشروع آيات"
+
+#: ../albasheer/gtkUi.py:1724
+msgid "Add Tilawa from ayat"
+msgstr "ضافة ملفات الصوت من مشروع آيات"
+
+#: ../albasheer/gtkUi.py:2207
+msgid "translator-credits"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:2340
+msgid "Copy to clipboard"
+msgstr "نسخ إلى الحافظة"
+
+#: ../albasheer/gtkUi.py:2355
+msgid "Imla'i style"
+msgstr "بالرسم الإملائي"
+
+#: ../albasheer/gtkUi.py:2356
+msgid "an Aya per line"
+msgstr "كل آية على كل سطر مستقل"
+
+#: ../albasheer/gtkUi.py:2363
+msgid "Sorat:"
+msgstr "سورة"
+
+#: ../albasheer/gtkUi.py:2367
+msgid "Ayat from:"
+msgstr "الآيات من:"
+
+#: ../albasheer/gtkUi.py:2369
+msgid "To"
+msgstr "إلى :"
+
+#: ../albasheer/gtkUi.py:2400
+msgid "Add Tarajem Sources"
+msgstr "إضافة ملفات التراجم"
+
+#: ../albasheer/gtkUi.py:2401
+msgid "Add Tarajem from ayat"
+msgstr "إضافة ملفات التراجم"
+
+#: ../albasheer/gtkUi.py:2401
+msgid "Show Tarajem"
+msgstr "تراجم"
+
+#: ../albasheer/gtkUi.py:2401
+msgid "Tarajem Not Available"
+msgstr "التراجم غير متوفرة"
+
+#: ../albasheer/gtkUi.py:2411
+msgid "Add Tafasir Sources"
+msgstr "إضافة ملفات التفاسير"
+
+#: ../albasheer/gtkUi.py:2412
+msgid "Add Tafasir from ayat"
+msgstr "إضافة ملفات التفاسير من مشروع آيات"
+
+#: ../albasheer/gtkUi.py:2412
+msgid "Show Tafasir"
+msgstr "تفاسير"
+
+#: ../albasheer/gtkUi.py:2412
+msgid "Tafasir Not Available"
+msgstr "التفاسير غير متوفرة"
+
+#: ../albasheer/gtkUi.py:2419
+msgid "Save Current Sura/Aya?"
+msgstr "حفظ؟"
+
+#~ msgid "Dark Mode"
+#~ msgstr "الثيم الداكن"

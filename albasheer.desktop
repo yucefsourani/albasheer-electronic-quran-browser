@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Albasheer Quran Browser
+Name[ar]=مصحف البشير الإلكتروني
+GenericName=Electronic Mus-haf
+GenericName[ar]=المصحف الإلكتروني
+Terminal=false
+TryExec=albasheer-browser
+Exec=albasheer-browser
+Icon=albasheer
+Categories=X-Islamic-Software;X-Quran;GTK;
+StartupNotify=false
+
