@@ -29,7 +29,7 @@ https://github.com/ojuba-org/othman
  * make rpm package/copr repository.
  * make flatpak package .
  
-# Download For Windows (32bit)
+# Download For Windows (32bit) (Soon)
 
 ![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/master/albasheer-setup.exe "Screenshot")
 
