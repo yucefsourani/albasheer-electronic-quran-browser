@@ -623,7 +623,7 @@ class ShowTarajemTafasir(Gtk.Window):
                 label_aya_number = Gtk.Label()
                 label_aya_number.props.label = "/{}".format(self.max_sura_number)
     
-                img = Gtk.Image.new_from_icon_name("media-seek-backward", Gtk.IconSize.BUTTON)
+                img = Gtk.Image.new_from_icon_name("media-seek-backward" if  not self.get_direction()== Gtk.TextDirection.RTL else "media-seek-forward", Gtk.IconSize.BUTTON)
                 self.rewind_b = Gtk.Button()
                 self.rewind_b.add(img)
                 h.pack_start(self.rewind_b, False, False, 0)
@@ -632,7 +632,7 @@ class ShowTarajemTafasir(Gtk.Window):
                 h.pack_start(self.entry, False, False, 0)
                 h.pack_start(label_aya_number, False, False, 0)
             
-                img = Gtk.Image.new_from_icon_name("media-seek-forward", Gtk.IconSize.BUTTON)
+                img = Gtk.Image.new_from_icon_name("media-seek-forward" if  not self.get_direction()== Gtk.TextDirection.RTL else "media-seek-backward", Gtk.IconSize.BUTTON)
                 self.forward_b = Gtk.Button()
                 self.forward_b.add(img)
                 h.pack_start(self.forward_b, False, False, 0)
