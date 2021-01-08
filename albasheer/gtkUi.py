@@ -2205,6 +2205,9 @@ class albasheerUi(Gtk.Window, albasheerCore):
         
         dlg.set_authors(["Yucef Sourani <youssef.m.sourani@gmail.com>"])
         dlg.set_translator_credits(_("translator-credits"))
+        dlg.add_credit_section("Based on/Special thanks",["Othman Electronic Quran Browser","https://github.com/ojuba-org/othman"])
+        dlg.add_credit_section("Special thanks",["Amiri Font","https://www.amirifont.org/"])
+        dlg.add_credit_section("This program uses ",["Ayat to provides tilawa/tafasir/tarajem","https://quran.ksu.edu.sa/ayat/"])
         fn = os.path.join(self.data_dir, "quran-kareem.svg")
         try:
             logo = GdkPixbuf.Pixbuf.new_from_file_at_size(fn, 128, 128)
