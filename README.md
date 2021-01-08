@@ -33,12 +33,12 @@ https://github.com/ojuba-org/othman
 
 32bit
 
-![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe "Screenshot")
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe
 
 
 64bit
 
-![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe "Screenshot")
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe
 
 
 # Linux 
@@ -51,8 +51,6 @@ clone repository and run albasheer-browser (requires pygi and gstreamer(good and
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot2.png "Screenshot")
 
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png "Screenshot")
-
-![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot4.png "Screenshot")
 
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot5.png "Screenshot")
 
