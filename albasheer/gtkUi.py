@@ -1378,7 +1378,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
 
         audiohb = Gtk.HBox()
         audiohb.set_spacing(2)
-        img = Gtk.Image.new_from_icon_name("media-seek-backward", Gtk.IconSize.BUTTON)
+        img = Gtk.Image.new_from_icon_name("media-seek-backward" if not self.get_direction()== Gtk.TextDirection.RTL else "media-seek-forward", Gtk.IconSize.BUTTON)
         self.rewind_b = Gtk.Button()
         self.rewind_b.set_tooltip_text(_("Previous"))
         self.rewind_b.add(img)
@@ -1387,7 +1387,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         
         
         
-        img = Gtk.Image.new_from_icon_name("media-playback-start", Gtk.IconSize.BUTTON)
+        img = Gtk.Image.new_from_icon_name("media-playback-start" if  not self.get_direction()== Gtk.TextDirection.RTL else "media-seek-backward", Gtk.IconSize.BUTTON)
         self.play_b = Gtk.Button()
         self.play_b.set_tooltip_text(_("Play"))
         self.play_b.add(img)
