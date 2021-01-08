@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-11 20:14+0200\n"
+"POT-Creation-Date: 2021-01-08 17:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Copy To Clipboard"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1355 ../albasheer/gtkUi.py:2348
+#: ../albasheer/gtkUi.py:1355 ../albasheer/gtkUi.py:2351
 msgid "choose a Sura"
 msgstr ""
 
@@ -211,62 +211,62 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2340
+#: ../albasheer/gtkUi.py:2343
 msgid "Copy to clipboard"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2355
+#: ../albasheer/gtkUi.py:2358
 msgid "Imla'i style"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2356
+#: ../albasheer/gtkUi.py:2359
 msgid "an Aya per line"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2363
+#: ../albasheer/gtkUi.py:2366
 msgid "Sorat:"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2367
+#: ../albasheer/gtkUi.py:2370
 msgid "Ayat from:"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2369
+#: ../albasheer/gtkUi.py:2372
 msgid "To"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2400
+#: ../albasheer/gtkUi.py:2403
 msgid "Add Tarajem Sources"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2401
+#: ../albasheer/gtkUi.py:2404
 msgid "Add Tarajem from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2401
+#: ../albasheer/gtkUi.py:2404
 msgid "Show Tarajem"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2401
+#: ../albasheer/gtkUi.py:2404
 msgid "Tarajem Not Available"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2411
+#: ../albasheer/gtkUi.py:2414
 msgid "Add Tafasir Sources"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2412
+#: ../albasheer/gtkUi.py:2415
 msgid "Add Tafasir from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2412
+#: ../albasheer/gtkUi.py:2415
 msgid "Show Tafasir"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2412
+#: ../albasheer/gtkUi.py:2415
 msgid "Tafasir Not Available"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2419
+#: ../albasheer/gtkUi.py:2422
 msgid "Save Current Sura/Aya?"
 msgstr ""
