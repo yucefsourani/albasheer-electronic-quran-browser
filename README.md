@@ -24,20 +24,26 @@ https://github.com/ojuba-org/othman
   
 # To Do 
  * trying support macOS .
- * Fix pot/mo files.
  * add bookmark aya .
  * make rpm package/copr repository.
  * make flatpak package .
  
   
-# Download For Windows (32bit)(Require Visual C++ Redistributable) (Soon)
+# Download (If Your system Windows 7 and albasheer fail to run update your system)
 
-![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/master/albasheer-setup.exe "Screenshot")
+32bit
+
+![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe "Screenshot")
+
+
+64bit
+
+![Download](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe "Screenshot")
 
 
 # Linux 
 
-clone repository and run albasheer-browser (requires pygi and gstreamer(to run mp3 tilawa))
+clone repository and run albasheer-browser (requires pygi and gstreamer(good and base)(to run mp3 tilawa))
 
 # Screenshot
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png "Screenshot")
