@@ -661,8 +661,8 @@ class ShowTarajemTafasir(Gtk.Window):
             sw1.add(self.listbox_)
             paned.add1(sw1)
             self.__check = True
-
             self.text_v   = Gtk.TextView()
+            self.text_v.modify_font(Pango.FontDescription.from_string("Amiri 32"))
             self.text_v.set_hexpand(True)
             self.text_v.set_vexpand(True)
             self.text_v.props.editable = False
