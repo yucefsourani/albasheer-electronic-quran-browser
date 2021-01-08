@@ -11,7 +11,7 @@ all: $(TARGETS) icons
 
 icons:
 	install -d icons; 
-	for i in 96 72 64 48 36 32 24 22 16; do \
+	for i in  512 256 128 96 72 64 48 36 32 24 22 16; do \
 		convert albasheer-128.png -resize $${i}x$${i} icons/albasheer-$${i}.png; \
 	done
 
@@ -28,7 +28,7 @@ install: all
 	$(PYTHON) setup.py install --prefix=$(PREFIX)
 	$(INSTALL) -d $(datadir)/applications/
 	$(INSTALL) -m 0644 albasheer.desktop $(datadir)/applications/
-	for i in 96 72 64 48 36 32 24 22 16; do \
+	for i in  512 256 128 96 72 64 48 36 32 24 22 16; do \
 		install -d $(datadir)/icons/hicolor/$${i}x$${i}/apps; \
 		$(INSTALL) -m 0644 -D icons/albasheer-$${i}.png $(datadir)/icons/hicolor/$${i}x$${i}/apps/albasheer.png; \
 	done
