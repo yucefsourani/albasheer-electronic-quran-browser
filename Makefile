@@ -12,7 +12,7 @@ all: $(TARGETS) icons
 icons:
 	install -d icons; 
 	for i in 96 72 64 48 36 32 24 22 16; do \
-		convert albasheer-128.png -resize $${i}x$${i} icons/albasheer$${i}.png; \
+		convert albasheer-128.png -resize $${i}x$${i} icons/albasheer-$${i}.png; \
 	done
 
 albasheer-data/ix.db: albasheer-data/quran.db
