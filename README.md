@@ -29,7 +29,7 @@ https://github.com/ojuba-org/othman
  * make flatpak package .
  
   
-# Download (If Your system Windows 7 and albasheer fail to run update your system)
+# Download For Windows (If Your system Windows 7 and albasheer fail to run update your system)
 
 32bit
 
