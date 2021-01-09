@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 Mosaab Alzoubi <moceap@hotmail.com> -->
-<!--
-EmailAddress: moceap@hotmail.com
-SentUpstream: 2017-1-8
--->
-<application>
-  <id type="desktop">albasheer.desktop</id>
-  <name>albasheer</name>
-  <metadata_license>CC0-1.0</metadata_license>
+<!-- Copyright 2021 Yucef Sourani <youssef.m.sourani@gmail.com> -->
+<component type="desktop-application">
+  <id>com.github.yucefsourani.albasheer-electronic-quran-browser</id>
+  <name>com.github.yucefsourani.albasheer-electronic-quran-browser</name>
   <summary>Electronic Quran Browser</summary>
-  <summary xml:lang="ar">مصحف إلكتروني</summary>
-  <description>
-    <p>
-    Electronic Quran Browser
-    </p>
-  </description>
-  <description xml:lang="ar">
-    <p>
-    مصحف إلكتروني.
-    </p>
-  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0-only</project_license>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  <developer_name>Yucef Sourani</developer_name>
   <url type="homepage">https://github.com/yucefsourani/unofficial-othman-electronic-quran-browser</url>
-  <screenshots>
-    <screenshot type="default">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</screenshot>
-    <screenshot type="default">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png</screenshot>
-    <screenshot type="default">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png</screenshot>
+  <description>
+    <p>Electronic Quran Browser.</p>
+    <ul>
+      <li>Support Audio Tilawa (mp3 from ayat) And add Option To add Audio tilawa from ayat files (*.ayt)</li>
+      <li>Support Auto Scroll + Run Tilawa</li>
+      <li>Support Tarajem (from ayat) And add Option To add Tajarem from ayat files (*.ayt)</li>
+      <li>Support Tafasir (from ayat) And add Option To add Tafasir from ayat files (*.ayt)</li>
+      <li>Support Speed Up/Down Auto scroll </li>
+      <li>Support save/load last current sura aya</li>
+      <li>Support search for sura</li>
+    </ul>
+  </description>
+
+<screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png</image>
+    </screenshot>
   </screenshots>
+  <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
-    <release version="1.0" date="2020-12-11"/>
-</releases>
+    <release version="1.0.1" date="2021-01-09"/>
+  </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
@@ -58,5 +70,5 @@ SentUpstream: 2017-1-8
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <updatecontact>moceap@hotmail.com</updatecontact>
-</application>
+  <update_contact>youssef.m.sourani@gmail.com</update_contact>
+</component>

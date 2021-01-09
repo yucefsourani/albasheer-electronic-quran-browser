@@ -71,7 +71,7 @@
         },
         {
                 "type": "file",
-                "path": "com.github.yucefsourani.albasheer-electronic-quran-browser.appdata.xml"
+                "path": "com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml"
         }
         ],
         "build-commands": [
@@ -79,7 +79,7 @@
         ],
         "post-install": [
             "mkdir -p /app/share/metainfo",
-            "cp com.github.yucefsourani.albasheer-electronic-quran-browser.appdata.xml /app/share/metainfo"        ]
+            "cp  com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml  /app/share/metainfo"        ]
     }
     ]
 }
