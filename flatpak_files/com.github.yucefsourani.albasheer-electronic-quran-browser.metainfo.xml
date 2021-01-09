@@ -25,16 +25,11 @@
       <li>Support search for sura</li>
     </ul>
   </description>
-
-<screenshots>
-    <screenshot type="default">
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</image>
-    </screenshot>
+  <screenshots>
     <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png</image>
-    </screenshot>
-    <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png</image>
+      <image type="source">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</image>
+      <image type="source">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png</image>
+      <image type="source">https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png</image>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
