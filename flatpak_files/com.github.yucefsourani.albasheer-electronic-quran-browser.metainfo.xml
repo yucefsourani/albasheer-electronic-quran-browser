@@ -2,7 +2,7 @@
 <!-- Copyright 2021 Yucef Sourani <youssef.m.sourani@gmail.com> -->
 <component type="desktop-application">
   <id>com.github.yucefsourani.albasheer-electronic-quran-browser</id>
-  <name>com.github.yucefsourani.albasheer-electronic-quran-browser</name>
+  <name>albasheer</name>
   <summary>Electronic Quran Browser</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0-only</project_license>
