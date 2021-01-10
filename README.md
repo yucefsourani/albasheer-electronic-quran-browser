@@ -43,7 +43,16 @@ https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/down
 
 # Linux 
 
+Install from flathub :
+
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
+
+flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
+
+or :
+
 clone repository and run albasheer-browser (requires pygi and gstreamer(good and base)(to run mp3 tilawa))
+
 
 # Screenshot
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png "Screenshot")
