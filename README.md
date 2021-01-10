@@ -26,7 +26,7 @@ https://github.com/ojuba-org/othman
  * trying support macOS .
  * add bookmark aya .
  * make rpm package/copr repository.
- * make flatpak package .
+
  
   
 # Download For Windows (If Your system Windows 7 and albasheer fail to run update your system)
