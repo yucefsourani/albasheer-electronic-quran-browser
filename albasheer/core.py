@@ -97,9 +97,10 @@ def cmp_bisect_left(ccmp, a, x, lo=0, hi=None):
 class albasheerCore(object):
     SQL_GET_AYAT = 'SELECT othmani, imlai FROM Quran WHERE id>=? ORDER BY id LIMIT ?'
     SQL_GET_SURA_INFO = 'SELECT rowid, sura_name, other_names, makki, starting_row, comment FROM SuraInfo ORDER BY rowid'
-    def __init__(self, load_ix=True):
+    def __init__(self, load_ix=True,qurandb=None):
+        self.qurandb = qurandb
         self.data_dir = d = guessDataDir()
-        self.db_fn = db_fn = os.path.join(d, 'quran.db')
+        self.db_fn = db_fn = self.qurandb
         self._cn = {}
         cn = self._getConnection()
         l = list(cn.execute(self.SQL_GET_SURA_INFO).fetchall())
@@ -114,7 +115,7 @@ class albasheerCore(object):
         self.basmala = self.basmala[:self.basmala.rfind(' ')]
         self.ix = None
         if load_ix:
-            self.ix = searchIndexer()
+            self.ix = searchIndexer(ix=self.qurandb)
 
     def _getConnection(self):
         n = threading.current_thread().name
@@ -187,9 +188,9 @@ class searchIndexerItem(set):
         return l
 
 class searchIndexer:
-    def __init__(self, unlink = False, normalize = normalize):
+    def __init__(self, unlink = False, normalize = normalize,ix="ix.db"):
         d = guessDataDir()
-        self.db_fn = fn = os.path.join(d, "ix.db")
+        self.db_fn = fn =  ix
         if unlink and os.path.exists(fn):
             os.unlink(fn)
         self._cn = {}
@@ -200,6 +201,7 @@ class searchIndexer:
         self.terms_count = 0
 
     def _getConnection(self):
+        print(self.db_fn)
         n = threading.current_thread().name
         if n in self._cn.keys():
             r = self._cn[n]

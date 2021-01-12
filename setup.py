@@ -16,20 +16,29 @@ class my_build(build):
     build.run(self)
     # generate data
     from albasheer.core import albasheerCore, searchIndexer
-
-    if not os.path.isfile('albasheer-data/ix.db'):
-      q=albasheer(False)
-      ix=searchIndexer(True)
-      for n,(o,i) in enumerate(q.getAyatIter(1, 6236)):
-        for w in i.split(): ix.addWord(w,n+1)
-      d=os.path.dirname(sys.argv[0])
-      ix.save()
+    for d in os.listdir("albasheer-data"):
+        d = os.path.join("albasheer-data",d)
+        if os.path.isdir(d):
+            l_ = os.path.join(d,"ix.db")
+            if not os.path.isfile(l_):
+              q=albasheer(False,qurandb=os.path.join(d,"quran.db"))
+              ix=searchIndexer(True,ix=l_)
+              for n,(o,i) in enumerate(q.getAyatIter(1, 6236)):
+                for w in i.split(): ix.addWord(w,n+1)
+              d=os.path.dirname(sys.argv[0])
+              ix.save()
 
 class my_clean(clean):
   def run(self):
     clean.run(self)
-    try: os.unlink('albasheer-data/ix.db')
-    except OSError: pass
+    for d in os.listdir("albasheer-data"):
+        d = os.path.join("albasheer-data",d)
+        if os.path.isdir(d):
+            l_ = os.path.join(d,"ix.db")
+            try:
+                os.unlink(l_)
+            except OSError:
+                 pass
 
 locales=map(lambda i: ('share/'+i,[''+i+'/albasheer.mo',]),glob('locale/*/LC_MESSAGES'))
 data_files=[('share/albasheer/',glob('albasheer-data/*'))]

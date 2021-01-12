@@ -310,7 +310,7 @@ class searchWindow(Gtk.Window):
 ###############################################################################
 
 class ShowTarajemTafasir(Gtk.Window):
-    def __init__(self, w=None,tafasir_data_location=None,tooltip="",add_title="",title_="",sura_n=1,aya_n=1,sura="",aya="",msg_if_faild = "",all_audio=None,istarajem=True):
+    def __init__(self, w=None,tafasir_data_location=None,tooltip="",add_title="",title_="",sura_n=1,aya_n=1,sura="",aya="",msg_if_faild = "",all_audio=None,istarajem=True,quran_db=None,link=("http://quran.ksu.edu.sa/ayat/?l=ar&pg=patches","http://quran.ksu.edu.sa")):
         Gtk.Window.__init__(self)
         self.suwar_info = {'1': '7', '2': '286', '3': '200', '4': '176', '5': '120', '6': '165', '7': '206', '8': '75', '9': '129', '10': '109', 
                            '11': '123', '12': '111', '13': '43', '14': '52', '15': '99', '16': '128', '17': '111', '18': '110', '19': '98', 
@@ -343,6 +343,8 @@ class ShowTarajemTafasir(Gtk.Window):
         self._all         = True
         self.set_size_request(600, 400)
         self.max_sura_number = self.suwar_info[str(self.sura_n)]
+        self.quran_db     = quran_db
+        self.link         = link
         self.pipeline = Gst.ElementFactory.make("playbin", "player")
         
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT )
@@ -370,7 +372,7 @@ class ShowTarajemTafasir(Gtk.Window):
         self.connect("key-press-event", self._on_key_press)
         self.connect('delete-event', self._on_delete_event)
         self.__all_tafasir = self.get_all_tafasir_location()
-        self.albasheercore = albasheerCore()
+        self.albasheercore = albasheerCore(qurandb=self.quran_db)
         self.gui_()
 
     def _stop_audio(self,button=False):
@@ -408,7 +410,7 @@ class ShowTarajemTafasir(Gtk.Window):
 
 
     def _on_add_tafasir_clicked(self,button):
-        self.add_w = AddData(self,self.tafasir_data_location,self.add_title,self.istarajem)
+        self.add_w = AddData(self,self.tafasir_data_location,self.add_title,self.istarajem,link=self.link)
         self.add_w.set_title(self.add_title)
         self.add_w.connect("success",self._on_add_tafasir_success)
         
@@ -972,13 +974,14 @@ class AddData(Gtk.Window):
         "success"     : (GObject.SignalFlags.RUN_LAST, None, ()),
     }
     
-    def __init__(self, w=None,audio_data_location="",msg="",istarajem=None):
+    def __init__(self, w=None,audio_data_location="",msg="",istarajem=None,link=("http://quran.ksu.edu.sa/ayat/?l=ar&pg=patches","http://quran.ksu.edu.sa")):
         Gtk.Window.__init__(self)
         self.w = w
         self.audio_data_location = audio_data_location
         self.set_size_request(600, 400)
         self.__files = []
         self.msg = msg
+        self.link = link
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT )
 
         self.connect('delete-event', self._on_cancel_button_clicked)
@@ -991,7 +994,8 @@ class AddData(Gtk.Window):
         vb = Gtk.VBox()
         hb = Gtk.HBox()
         
-        linkbutton = Gtk.LinkButton.new_with_label("http://quran.ksu.edu.sa/ayat/?l=ar&pg=patches","http://quran.ksu.edu.sa")
+        if self.link:
+            linkbutton = Gtk.LinkButton.new_with_label(self.link[0],self.link[1])
         
         label      = Gtk.Label()
         label.get_style_context().add_class("h2")
@@ -1055,7 +1059,8 @@ class AddData(Gtk.Window):
         buttonbox.pack_start(self.open_audio_location_button,True,False,0)
         buttonbox.pack_start(self.cansel_b,True,False,0)
         
-        vb.pack_start(linkbutton,True,False,0)
+        if self.link:
+            vb.pack_start(linkbutton,True,False,0)
         vb.pack_start(label,True,False,0)
         hb.pack_start(self.fvbox,True,False,0)
         hb.pack_start(self.svbox,True,False,0)
@@ -1185,10 +1190,11 @@ def check_amiri_font(window):
 ###############################################################################
 
 class albasheerUi(Gtk.Window, albasheerCore):
-    def __init__(self,albasheer_data):
+    def __init__(self,quran_db):
         Gtk.Window.set_default_icon_name('albasheer')
         Gtk.Window.__init__(self)
-        albasheerCore.__init__(self)
+        albasheerCore.__init__(self,qurandb=quran_db)
+        self.quran_db = quran_db
         
         ############################
         self.__can_play = True
@@ -1208,7 +1214,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self.__bus2 = self.pipeline2.get_bus()
         self.__bus2.add_signal_watch()
         self.__bus2.connect("message", self.__on_message)
-        self.albasheer_data = albasheer_data
+        self.albasheer_data = os.path.dirname(self.quran_db)
         self.audio_data_location = os.path.join(self.albasheer_data,"ayat_audio")
         os.makedirs(self.audio_data_location,exist_ok=True)
         self.tarajem_data_location = os.path.join(self.albasheer_data,"ayat_tarajem")
@@ -1271,7 +1277,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self.sw = None
         self.lastSearchText = None
         self.lastSearchResult = []
-        self.ix = searchIndexer()
+        self.ix = searchIndexer(ix=self.quran_db)
         self.set_title(_('albasheer Quran Browser'))
         self.connect("delete_event", self.quit)
         self.connect('destroy', self.quit)
@@ -2401,7 +2407,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self._stop_audio()
         ShowTarajemTafasir(self,self.tarajem_data_location ,
                     _("Add Tarajem Sources"),
-                    _("Add Tarajem from ayat"),_("Show Tarajem"),sura_n+1,aya_n,sura,aya,_("Tarajem Not Available"),self.__all_audio,True)
+                    _("Add Tarajem from ayat"),_("Show Tarajem"),sura_n+1,aya_n,sura,aya,_("Tarajem Not Available"),self.__all_audio,True,self.quran_db)
 
     def get_current_info_aya_tafasir(self,b=None):
         sura_n,aya_n = self.get_sura_aya()
@@ -2412,7 +2418,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self._stop_audio()
         ShowTarajemTafasir(self,self.tafasir_data_location ,
                     _("Add Tafasir Sources"),
-                    _("Add Tafasir from ayat"),_("Show Tafasir"),sura_n+1,aya_n,sura,aya,_("Tafasir Not Available"),self.__all_audio,False)
+                    _("Add Tafasir from ayat"),_("Show Tafasir"),sura_n+1,aya_n,sura,aya,_("Tafasir Not Available"),self.__all_audio,False,self.quran_db)
 
     def quit(self,*args):
         last_sura_aya_config  = self.get_last_sura_aya()
@@ -2438,6 +2444,60 @@ class albasheerUi(Gtk.Window, albasheerCore):
         l.install()
         return True
     return False"""
+
+class ChR(Gtk.Window):
+    __gsignals__ = {
+        "apply"     : (GObject.SignalFlags.RUN_LAST, None, (str,)),
+    }
+    
+    def __init__(self,location):
+        Gtk.Window.__init__(self)
+        self.location = location
+        
+    def gui(self):
+        fn = os.path.join(self.location, "quran-kareem.svg")
+        logo = GdkPixbuf.Pixbuf.new_from_file_at_size(fn, 128, 128)
+        image = Gtk.Image.new_from_pixbuf(logo)
+        
+        combo = Gtk.ComboBoxText.new()
+        self.set_size_request(600, 400)
+        sw = Gtk.ScrolledWindow()
+        self.mainvbox = Gtk.VBox()
+        for d in os.listdir(self.location):
+            l_ = os.path.join(self.location,d)
+            if os.path.isdir(l_):
+                for i in os.listdir(l_):
+                    if i.endswith(".name"):
+                        combo.append(os.path.join(l_,"quran.db"),i.split(".")[0])
+        result = combo.get_model()
+        if len(result)==0:
+            self.destroy()
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            exit()
+        combo.set_active(0)
+        if len(result)==1:
+            self.emit("apply",result[combo.get_active_iter()][1])
+        else:
+            button_apply = Gtk.Button()
+            button_apply.props.label = _("Run")
+            button_apply.connect("clicked",self.on_apply,combo,result)
+            self.mainvbox.pack_start(image,True,False,0)
+            self.mainvbox.pack_start(combo,False,False,0)
+            self.mainvbox.pack_start(button_apply,False,False,0)
+            sw.add(self.mainvbox)
+            self.add(sw)
+            self.show_all()
+
+    def on_apply(self,button,combo,result):
+        self.emit("apply",result[combo.get_active_iter()][1])
+
+def on_apply(window,location):
+    window.destroy()
+    while Gtk.events_pending():
+        Gtk.main_iteration()
+    w = albasheerUi(location)
+    
     
 def main():
     if sys.platform.startswith('win'):
@@ -2459,7 +2519,10 @@ def main():
             albasheer_data = os.path.join(GLib.get_user_data_dir(),"albasheer")
             os.makedirs(albasheer_data,exist_ok=True)
     gettext.install('albasheer', localedir=ld)
-    w = albasheerUi(albasheer_data)
+    chr_ = ChR(albasheer_data)
+    chr_.connect("delete-event",Gtk.main_quit)
+    chr_.connect("apply",on_apply)
+    chr_.gui()
     Gtk.main()
 
 if __name__ == "__main__":
