@@ -49,9 +49,9 @@ https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/down
 
 ### فلات باك من Flathub
 
-`flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user`
-
-`flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user`
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user && flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
+```
 
 ### مباشرة
 
@@ -132,9 +132,10 @@ https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/down
 
 ### flatpak from flathub
 
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user && flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
+```
 
-flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
 
 ### naitive
 
