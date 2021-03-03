@@ -31,12 +31,11 @@ https://github.com/ojuba-org/othman
 
 ## تنزيلات لويندوز (اذا كان لديك ويندوز 7 ولم يعمل البرنامج, تاكد من تحديث النظام)
 
-32bit
+### 32bit
 
 https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe
 
-
-64bit
+### 64bit
 
 https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe
 
