@@ -1,5 +1,11 @@
 # مصحف البشير الالكتروني (مبني على مصحف عثمان الالكتروني) [English](#albasheer-electronic-quran-browser-based-on--othman-electronic-quran-browser)
 
+<div align="center">
+
+![logo](albasheer-128.png)
+
+</div>
+
 <div dir="rtl">
 
 https://arfedora.blogspot.com
