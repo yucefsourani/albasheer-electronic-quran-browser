@@ -15,7 +15,7 @@ Copyright © 2009-2013, Muayyad Alsadi <alsadi@ojuba.org>
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     The Latest version of the license can be found on
-    "http://waqf.ojuba.org/license"
+    "https://ojuba.org/waqf:license"
 
 """
 import sys, os, os.path, time

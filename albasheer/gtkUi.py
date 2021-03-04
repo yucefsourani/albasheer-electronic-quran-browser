@@ -15,7 +15,7 @@ Copyright © 2019-2020, Yucef Sourani <youssef.m.sourani@gmail.com>
         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
         The Latest version of the license can be found on
-        "http://waqf.ojuba.org/license"
+        "https://ojuba.org/waqf:license"
 
 """
 import gi
@@ -2197,7 +2197,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
         The Latest version of the license can be found on
-        "http://waqf.ojuba.org/"
+        "https://ojuba.org/waqf:license/"
 
         """)
         dlg.set_website("https://github.com/yucefsourani/albasheer-electronic-quran-browser")
