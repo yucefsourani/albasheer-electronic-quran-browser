@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 17:10+0200\n"
+"POT-Creation-Date: 2021-04-19 18:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,252 +21,306 @@ msgstr ""
 msgid "Albasheer Quran Browser"
 msgstr ""
 
-#: ../albasheer.desktop.in.h:2 ../albasheer/gtkUi.py:2188
+#: ../albasheer.desktop.in.h:2 ../albasheer/gtkUi.py:2622
 msgid "Electronic Mus-haf"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:237
-msgid "Search results"
+#: ../albasheer/gtkUi.py:288
+msgid "Extract zip file"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:256 ../albasheer/gtkUi.py:1339
-msgid "Sura"
+#: ../albasheer/gtkUi.py:294 ../albasheer/gtkUi.py:300
+msgid "Extract zip file failed"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:533 ../albasheer/gtkUi.py:1365
-msgid "Audio"
+#: ../albasheer/gtkUi.py:302
+msgid "Extract zip file Done"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:539 ../albasheer/gtkUi.py:1372
-#: ../albasheer/gtkUi.py:1733
-msgid "choose a Audio"
+#: ../albasheer/gtkUi.py:346
+msgid "Downloading..."
 msgstr ""
 
-#: ../albasheer/gtkUi.py:546 ../albasheer/gtkUi.py:1376
-msgid "No Audio Available"
+#: ../albasheer/gtkUi.py:349
+msgid "Download Canceled"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:552 ../albasheer/gtkUi.py:1478
+#: ../albasheer/gtkUi.py:370
+msgid "Download Done"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:407 ../albasheer/gtkUi.py:965
+#: ../albasheer/gtkUi.py:1898
 msgid "Search"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:561 ../albasheer/gtkUi.py:1298
+#: ../albasheer/gtkUi.py:414
+msgid "Open Downloads Save Location"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:422 ../albasheer/gtkUi.py:974
+#: ../albasheer/gtkUi.py:1711
 msgid "Search..."
 msgstr ""
 
-#: ../albasheer/gtkUi.py:577 ../albasheer/gtkUi.py:1392
-#: ../albasheer/gtkUi.py:1631
-msgid "Play"
+#: ../albasheer/gtkUi.py:482
+msgid "Name"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:584 ../albasheer/gtkUi.py:1406
-msgid "Stop"
+#: ../albasheer/gtkUi.py:491
+msgid "Progress"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:598 ../albasheer/gtkUi.py:1431
-msgid "Zoom In"
+#: ../albasheer/gtkUi.py:502
+msgid "Logs"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:606 ../albasheer/gtkUi.py:1439
-msgid "Zoom Out"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:643
-msgid "Reset"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:934
-msgid "Cancel clicked..."
-msgstr ""
-
-#: ../albasheer/gtkUi.py:949
-msgid "Downloading "
-msgstr ""
-
-#: ../albasheer/gtkUi.py:952
-msgid "Done"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:1008
-msgid "Select ayt File"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:1010
-msgid "Choose Files"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:1025
+#: ../albasheer/gtkUi.py:553 ../albasheer/gtkUi.py:1438
 msgid "Download"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1029
-msgid "Cancel Download"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:1047
-msgid "Open Data Location"
-msgstr ""
-
-#: ../albasheer/gtkUi.py:1052
+#: ../albasheer/gtkUi.py:555 ../albasheer/gtkUi.py:1465
 msgid "Cancel"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1079
-msgid "Please choose a files"
+#: ../albasheer/gtkUi.py:557
+msgid "Import"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1261
-msgid "Amiri Font Missing!,install amiri font?"
+#: ../albasheer/gtkUi.py:611
+msgid "Tasks Running In Background,Are You Sure You Want To Exit?"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1264
-msgid "Re-run albasheer"
+#: ../albasheer/gtkUi.py:650
+msgid "Search results"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1275 ../albasheer/gtkUi.py:2185
-msgid "albasheer Quran Browser"
+#: ../albasheer/gtkUi.py:669 ../albasheer/gtkUi.py:1752
+msgid "Sura"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1324
-msgid "Search For Sura"
+#: ../albasheer/gtkUi.py:946 ../albasheer/gtkUi.py:1778
+msgid "Audio"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1331
-msgid "Copy To Clipboard"
+#: ../albasheer/gtkUi.py:952 ../albasheer/gtkUi.py:1785
+#: ../albasheer/gtkUi.py:2167
+msgid "choose a Audio"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1355 ../albasheer/gtkUi.py:2351
-msgid "choose a Sura"
+#: ../albasheer/gtkUi.py:959 ../albasheer/gtkUi.py:1789
+msgid "No Audio Available"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1383
-msgid "Previous"
+#: ../albasheer/gtkUi.py:990 ../albasheer/gtkUi.py:1805
+#: ../albasheer/gtkUi.py:2051
+msgid "Play"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1399
-msgid "Forward"
+#: ../albasheer/gtkUi.py:997 ../albasheer/gtkUi.py:1819
+msgid "Stop"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1419
-msgid "Add Audio Sources"
+#: ../albasheer/gtkUi.py:1011 ../albasheer/gtkUi.py:1851
+msgid "Zoom In"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1450
-msgid "Speed Up Auto Scroll"
+#: ../albasheer/gtkUi.py:1019 ../albasheer/gtkUi.py:1859
+msgid "Zoom Out"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1056
+msgid "Reset"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1347
+msgid "Cancel clicked..."
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1362
+msgid "Downloading "
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1365
+msgid "Done"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1421
+msgid "Select ayt File"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1423
+msgid "Choose Files"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1442
+msgid "Cancel Download"
 msgstr ""
 
 #: ../albasheer/gtkUi.py:1460
+msgid "Open Data Location"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1492
+msgid "Please choose a files"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1674
+msgid "Amiri Font Missing!,install amiri font?"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1677
+msgid "Re-run albasheer"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1688 ../albasheer/gtkUi.py:2619
+msgid "albasheer Quran Browser"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1737
+msgid "Search For Sura"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1744
+msgid "Copy To Clipboard"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1768 ../albasheer/gtkUi.py:2785
+msgid "choose a Sura"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1796
+msgid "Previous"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1812
+msgid "Forward"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1832
+msgid "Add Audio Sources"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1839
+msgid "Download Audio Sources"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1870
+msgid "Speed Up Auto Scroll"
+msgstr ""
+
+#: ../albasheer/gtkUi.py:1880
 msgid "Auto Scroll"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1470
+#: ../albasheer/gtkUi.py:1890
 msgid "Speed Down Auto Scroll"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1484
+#: ../albasheer/gtkUi.py:1904
 msgid "About"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1503
+#: ../albasheer/gtkUi.py:1923
 msgid "Background Color"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1505
+#: ../albasheer/gtkUi.py:1925
 msgid "Foreground Color"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1514
+#: ../albasheer/gtkUi.py:1934
 msgid "Shortcut"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1634
+#: ../albasheer/gtkUi.py:2054
 msgid "Tarajem"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1635
+#: ../albasheer/gtkUi.py:2055
 msgid "Tafsir"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1636
+#: ../albasheer/gtkUi.py:2056
 msgid "Copy"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1637
+#: ../albasheer/gtkUi.py:2057
 msgid "bg Color"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1638
+#: ../albasheer/gtkUi.py:2058
 msgid "fg  Color"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1723
+#: ../albasheer/gtkUi.py:2143
 msgid "Add Tilawa audio from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:1724
+#: ../albasheer/gtkUi.py:2144
 msgid "Add Tilawa from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2207
+#: ../albasheer/gtkUi.py:2641
 msgid "translator-credits"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2343
+#: ../albasheer/gtkUi.py:2777
 msgid "Copy to clipboard"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2358
+#: ../albasheer/gtkUi.py:2792
 msgid "Imla'i style"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2359
+#: ../albasheer/gtkUi.py:2793
 msgid "an Aya per line"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2366
+#: ../albasheer/gtkUi.py:2800
 msgid "Sorat:"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2370
+#: ../albasheer/gtkUi.py:2804
 msgid "Ayat from:"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2372
+#: ../albasheer/gtkUi.py:2806
 msgid "To"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2403
+#: ../albasheer/gtkUi.py:2837
 msgid "Add Tarajem Sources"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2404
+#: ../albasheer/gtkUi.py:2838
 msgid "Add Tarajem from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2404
+#: ../albasheer/gtkUi.py:2838
 msgid "Show Tarajem"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2404
+#: ../albasheer/gtkUi.py:2838
 msgid "Tarajem Not Available"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2414
+#: ../albasheer/gtkUi.py:2848
 msgid "Add Tafasir Sources"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2415
+#: ../albasheer/gtkUi.py:2849
 msgid "Add Tafasir from ayat"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2415
+#: ../albasheer/gtkUi.py:2849
 msgid "Show Tafasir"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2415
+#: ../albasheer/gtkUi.py:2849
 msgid "Tafasir Not Available"
 msgstr ""
 
-#: ../albasheer/gtkUi.py:2422
+#: ../albasheer/gtkUi.py:2856
 msgid "Save Current Sura/Aya?"
 msgstr ""

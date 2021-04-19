@@ -32,7 +32,7 @@ class my_clean(clean):
     except OSError: pass
 
 locales=map(lambda i: ('share/'+i,[''+i+'/albasheer.mo',]),glob('locale/*/LC_MESSAGES'))
-data_files=[('share/albasheer/',glob('albasheer-data/*'))]
+data_files=[('share/albasheer/',glob('albasheer-data/*')),('share/albasheer/tilawa_json_files',glob('tilawa_json_files/*'))]
 data_files.extend(locales)
 setup (name='Albasheer', version=__version__,
       description='Albasheer Quran Browser',
