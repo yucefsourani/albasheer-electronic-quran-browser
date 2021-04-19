@@ -224,7 +224,420 @@ shortcut_main_window_ui = """<?xml version="1.0" encoding="UTF-8"?>
   </object>
 </interface>
 """
+ajzaa = ("1-3","4-6","7-9","10-12","13-15","16-18","19-21","22-24","25-27","28-30")
+ALLTILAWAINFO = {"Al-Husary"                    : "Husary_64kbps",
+     "Al-Husary - qasr"             : "husary_qasr_64kbps",
+     "Al-Husary Mujawwad"           : "Husary_Mujawwad_64kbps",
+     "Al-Husary - Teacher"          : "Hussary.teacher_64kbps",
+     "Al-Hudhaify"                  : "Hudhaify_64kbps",
+     "Ayman Sowaid - Teacher"       : "Ayman_Sowaid_64kbps",
+     "Saad Al-Gamdi"                : "Ghamadi_40kbps",
+     "AbdullRahman Al-Sudais"       : "Abdurrahmaan_As-Sudais_64kbps",
+     "Saud Al-Shoraim"              : "Saood_ash-Shuraym_64kbps",
+     "Maher Al-moaqeli"             : "Maher_AlMuaiqly_64kbps",
+     "Ahmad Al-ajami"               : "Ahmed_ibn_Ali_al-Ajamy_64kbps",
+     "Nasser Al-Qatami"             : "Nasser_Alqatami_128kbps",
+     "Mishari Al-efasi"             : "Alafasy_64kbps",
+     "Mohammad Jebreil"             : "Muhammad_Jibreel_64kbps",
+     "Abdullah Basfar"              : "Abdullah_Basfar_64kbps",
+     "Mostafa Ismail"               : "Mostafa_Ismail_128kbps",
+     "Mohammad Ayoub"               : "Muhammad_Ayyoub_64kbps",
+     "Al-Menshawy"                  : "Minshawy_Murattal_128kbps",
+     "Al-Menshawy - Mojawwad"       : "Minshawy_Mujawwad_64kbps",
+     "Al-Menshawy - Teacher"        : "Minshawy_Teacher_128kbps",
+     "Yasser Salamah"               : "Yaser_Salamah_128kbps",
+     "Hani Al-Refaei"               : "Hani_Rifai_192kbps",
+     "Al-Tabalawi"                  : "Mohammad_al_Tablaway_64kbps",
+     "Abu Baker Al-shatrei"         : "Abu_Bakr_Ash-Shaatree_64kbps",
+     "Abdullbaset"                  : "Abdul_Basit_Murattal_64kbps",
+     "Abdullbaset - Mojawwad"       : "AbdulSamad_64kbps",
+     "Awad Al-Juhanee"              : "Abdullaah_3awwaad_Al-Juhaynee_128kbps",
+     "Abdel-Muhsin Al-Qassem"       : "Muhsin_Al_Qasim_192kbps",
+     "Khalefa Al-Tunaiji"           : "tunaiji_64kbps",
+     "Al-Husari (Warsh)"            : "warsh_husary_64kbps",
+     "Ibrahim Al-Dosary (Warsh)"    : "warsh_dossary_128kbps",
+     "Yassin Al-Jazaery (Warsh)"    : "warsh_yassin_64kbps",
+     "English Translation"          : "English_Walk",
+     "Urdu Translation"             : "ur.khan_46kbs"
+     }
 
+class UnpackTilawaZip(threading.Thread):
+    def __init__(self,parent,treeview,iter_string,name,target_location="tillawa"):
+        threading.Thread.__init__(self)
+        self.parent = parent
+        self.treeview         = treeview
+        self.iter_string      = iter_string
+        self.target_location  = get_correct_path(target_location)
+        os.makedirs(self.target_location,exist_ok=True)
+        self.name             = name
+        selection = self.treeview.get_selection()
+        sel = selection.get_selected()
+        self.list_store = sel[0]
+        self.iteer      = sel[1]
+        self.j,self.fraction,self.fs,self.isrunning,self.file_l,self.fsize,self.link,self.psize,self.logs = self.list_store[self.iteer]
+        
+            
+    def run(self):
+        self.unpack_file(self.file_l)
+
+    def unpack_file(self,source_location):
+        if source_location.endswith('.ayt'):
+            fun, mode = zipfile.ZipFile, 'r'
+        else:
+            return False
+        GLib.idle_add(self.parent.emit,"log",_("Extract zip file"),self.name,self.iter_string)
+        try:
+            file_ = fun(source_location, mode)
+            try:
+                file_.extractall(self.target_location)
+            except:
+                GLib.idle_add(self.parent.emit,"log",_("Extract zip file failed"),self.name,self.iter_string)
+                return False
+            finally:
+                file_.close()
+                
+        except:
+            GLib.idle_add(self.parent.emit,"log",_("Extract zip file failed"),self.name.iter_string)
+            return False
+        GLib.idle_add(self.parent.emit,"log",_("Extract zip file Done"),self.name,self.iter_string)
+        GLib.idle_add(self.parent.emit,"success")
+        return True
+        
+class DownloadFile(GObject.Object,threading.Thread):
+    __gsignals__ = { "break"     : (GObject.SignalFlags.RUN_LAST, None, ())
+    }
+    
+    def __init__(self,parent,treeview,iter_string,name,header={"User-Agent":"Mozilla/5.0"}):
+        GObject.Object.__init__(self)
+        threading.Thread.__init__(self)
+        self.parent = parent
+        self.treeview      = treeview
+        self.break_        = False
+        self.header        = header
+        GLib.idle_add(self.connect,"break",self.on_break)
+        selection = self.treeview.get_selection()
+        sel = selection.get_selected()
+        self.list_store  = sel[0]
+        self.iteer       = sel[1]
+        self.name        = name
+        self.iter_string = iter_string
+        self.j,self.fraction,self.fs,self.isrunning,self.file_l,self.fsize,self.link,self.psize,self.logs = self.list_store[self.iteer]
+            
+    def on_break(self,s):
+        self.break_ = True        
+            
+    def run(self):
+        self.break_ = False
+        ch = 64*1024 
+        try:
+            if self.psize == 0:
+                mode = "wb"
+                os.makedirs(os.path.dirname(self.file_l),exist_ok=True)
+            else:
+                mode = "ab"
+            with open(self.file_l, mode) as op:
+                if "Range" in self.header.keys():
+                    self.header["Range"] = "bytes={}-{}".format(self.psize,self.fsize)
+                else:
+                    self.header.setdefault("Range", "bytes={}-{}".format(self.psize,self.fsize))
+                
+                url   = request.Request(self.link,headers=self.header)
+                opurl = request.urlopen(url,timeout=10)
+                GLib.idle_add(self.parent.emit,"changedata",self.j,self.fraction,False,True,self.file_l,self.fsize,self.link,self.psize,_("Downloading..."),self.name,self.iter_string)
+                while True:
+                    if self.break_:
+                        GLib.idle_add(self.parent.emit,"changedata",self.j,self.fraction,self.fraction>=100,False,self.file_l,self.fsize,self.link,self.psize,_("Download Canceled"),self.name,self.iter_string)
+                        try:
+                            op.close()
+                            opurl.close()
+                        except Exception as e:
+                            pass
+                        return
+                    op.flush()
+                    if self.psize >=int(self.fsize):
+                        break
+                    n = int(self.fsize)-self.psize
+                    if n<ch:
+                        ch = n
+
+                    chunk = opurl.read(ch)
+
+                    self.fraction = int((self.psize*100)//int(self.fsize))
+                    op.write(chunk)
+                    self.psize += ch
+                    GLib.idle_add(self.parent.emit,"pulse",self.fraction,self.name,self.iter_string)
+                
+            GLib.idle_add(self.parent.emit,"changedata",self.j,100,True,False,self.file_l,self.fsize,self.link,self.psize,_("Download Done"),self.name,self.iter_string)            
+        except Exception as e:
+            GLib.idle_add(self.parent.emit,"changedata",self.j,self.fraction,self.fraction>=100,False,self.file_l,self.fsize,self.link,self.psize,str(e),self.name,self.iter_string)
+            print(e)
+        finally:
+            try:
+                opurl.close()
+            except Exception as e:
+                pass
+        
+class DownloadTilawaWindow(Gtk.Window):
+    __gsignals__ = { "success"     : (GObject.SignalFlags.RUN_LAST, None, ()),
+                     "changedata"  : (GObject.SignalFlags.RUN_LAST, None, (str,int,bool,bool,str,int,str,int,str,str,str)),
+                     "pulse"       : (GObject.SignalFlags.RUN_LAST, None, (int,str,str)),
+                     "log"         : (GObject.SignalFlags.RUN_LAST, None, (str,str,str))
+    }
+    def __init__(self,parent,download_location="Downloads_f",json_files_location="tilawa_json_files",audio_data_location=""):
+        Gtk.Window.__init__(self)
+        self.parent = parent
+        #self.set_type_hint(Gdk.WindowTypeHint.UTILITY)
+        #self.set_modal(True)
+        self.set_deletable(True)
+        #self.set_transient_for(self.parent)
+
+        self.set_border_width(10)
+        self.set_size_request(800, 600)
+        self.__download_location  = get_correct_path(download_location)
+        self.__json_files_location = get_correct_path(json_files_location)
+        self.audio_data_location = audio_data_location
+        self.__all_download_thread = dict()
+        self.__all_liststore = dict()
+        headerbar = Gtk.HeaderBar()
+        headerbar.set_show_close_button(True)
+        self.set_titlebar(headerbar)
+
+        img = Gtk.Image.new_from_icon_name("system-search-symbolic", Gtk.IconSize.BUTTON)
+        self.search_b = Gtk.Button()
+        self.search_b.set_tooltip_text(_("Search"))
+        self.search_b.add(img)
+        self.search_b.connect("clicked", self._on_search_button_clicked)
+        headerbar.pack_start(self.search_b)
+
+        open_button = Gtk.Button()
+        open_button.get_style_context().add_class("destructive-action")
+        open_button.props.label = _("Open Downloads Save Location")
+        open_button.connect("clicked",self.on_open_data_location_button_clicked)
+        headerbar.pack_end(open_button)
+
+        self.revealer     = Gtk.Revealer()
+        self.revealer.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+
+        self.__old_search_text = ""
+        self.search_entry = Gtk.SearchEntry(placeholder_text= _("Search..."))
+        self.search_entry.props.margin_start  = 15
+        self.search_entry.props.margin_end    = 15
+        self.search_entry.props.margin_top    = 5
+        self.search_entry.props.margin_bottom = 5
+        self.search_entry.props.max_length    = 30
+        #self.search_entry.set_size_request (100, 1)
+        self.revealer.add(self.search_entry)
+        headerbar.pack_start(self.revealer)
+        
+
+        
+        mainvbox = Gtk.VBox()
+        self.add(mainvbox)
+        mainhbox = Gtk.HBox()
+        mainvbox.pack_start(mainhbox,True,True,0)
+        
+        stack = Gtk.Stack()
+        stack.set_hexpand(True)
+        stack.set_vexpand(True)
+        
+        stack_switcher = Gtk.StackSidebar()
+        stack_switcher.set_stack(stack)
+        mainhbox.pack_start(stack_switcher,False,False,0)
+        mainhbox.pack_start(stack,True,True,0)
+        
+        for i in ALLTILAWAINFO.keys():
+            b_ = Gtk.VBox()
+            stack.add_titled(b_,i,i)
+            liststore = Gtk.ListStore(str,int,bool,bool,str,int,str,int,str)
+            self.__all_liststore.setdefault(i,liststore)
+            jsonfile = os.path.join(self.__json_files_location,i+".json")
+            if os.path.isfile(jsonfile):
+                try:
+                    with open(jsonfile,"rb") as mf:
+                        data = json.load(mf)
+                except Exception as e:
+                    print(e)
+                    data = False
+            if data:
+                for j,v in data["links_byajzaa"].items():
+                    file_name = v[1]
+                    file_l    = os.path.join(self.__download_location,i,file_name)
+                    file_size = v[2]
+                    if os.path.isfile(file_l):
+                        current_size = os.path.getsize(file_l)
+                    else:
+                        current_size = 0
+                    
+                    fraction = (current_size*100)//file_size
+                    if fraction>100:
+                        fraction = 100
+                    liststore.append([j,fraction,fraction>=100,False,file_l,file_size,v[0],current_size,""])
+            
+            treeview = Gtk.TreeView(model=liststore)
+            b_.pack_start(treeview,True,True,0)
+            renderer_text = Gtk.CellRendererText()
+            renderer_text.set_property("editable", False)
+            renderer_text.set_property("ellipsize", Pango.EllipsizeMode.START)
+            
+            column_text = Gtk.TreeViewColumn(_("Name"), renderer_text, text=0)
+            column_text.set_resizable(True)
+            column_text.set_fixed_width(100)
+            column_text.set_min_width(30)
+            #column_text.set_max_width(200)
+            treeview.append_column(column_text)
+            
+            renderer_33 = Gtk.CellRendererProgress()
+
+            column_22 = Gtk.TreeViewColumn(_("Progress"),
+                    renderer_33, value=1)
+            column_22.set_resizable(True)
+            column_22.set_min_width(30)
+            column_22.set_fixed_width(200)
+            treeview.append_column(column_22)
+            
+            renderer_text1 = Gtk.CellRendererText()
+            renderer_text1.set_property("editable", False)
+            renderer_text1.set_property("ellipsize", Pango.EllipsizeMode.END)
+            
+            column_text1 = Gtk.TreeViewColumn(_("Logs"), renderer_text1, text=8)
+            column_text1.set_resizable(True)
+            column_text1.set_fixed_width(200)
+            column_text1.set_min_width(30)
+            #column_text.set_max_width(200)
+            treeview.append_column(column_text1)
+            treeview.connect("row-activated", self.on_row_activated,i)
+        
+        listbox = stack_switcher.get_child().get_child().get_child()
+        listbox.set_filter_func(self.filter_listbox_func)
+        
+        self.search_entry.connect("search-changed", self._on_search,listbox)
+        self.connect("delete-event",self.on_quit)
+        self.connect("changedata",self.update_all)
+        self.connect("pulse",self.update_progress)
+        self.connect("log",self.update_log)
+        
+
+    def update_all(self,p,j,fraction,fs,isrunning,file_l,fsize,link,psize,logs,name,iter_string):
+        liststore = self.__all_liststore[name]
+        liststore[liststore.get_iter_from_string(iter_string)] = [j,fraction,fs,isrunning,file_l,fsize,link,psize,logs]
+
+    def update_progress(self,p,fraction,name,iter_string):
+        liststore = self.__all_liststore[name]
+        liststore[liststore.get_iter_from_string(iter_string)][1] = fraction
+        
+    def update_log(self,p,logs,name,iter_string):
+        liststore = self.__all_liststore[name]
+        liststore[liststore.get_iter_from_string(iter_string)][8] = logs
+
+        
+    def on_open_data_location_button_clicked(self,button):
+        if  sys.platform.startswith('win'):
+            os.system("explorer {}".format(self.__download_location))
+        else:
+            try:
+                Gio.AppInfo.launch_default_for_uri(("file:///"+self.__download_location),None)
+            except Exception as e:
+                print(e)
+                
+    def on_row_activated(self,treeview, row, col,name):
+        selection = treeview.get_selection()
+        sel = selection.get_selected()
+        list_store = sel[0]
+        iteer      = sel[1]
+        if not iteer:
+            return
+        iter_string = list_store.get_string_from_iter(iteer)
+        j,f,fs,isrunning,file_l,fsize,link,psize,logs = list_store[iteer]
+        menu = Gtk.Menu()
+        menu.set_screen(Gdk.Screen().get_default())
+        download_m  = Gtk.MenuItem.new_with_label(_("Download"))
+        download_m.connect("activate", self.on_download_clicked,treeview,iter_string,name)
+        cancel_m    = Gtk.MenuItem.new_with_label(_("Cancel"))
+        cancel_m.connect("activate", self.on_cancel_clicked,file_l)
+        self.import_m    = Gtk.MenuItem.new_with_label(_("Import"))
+        self.import_m.connect("activate", self.on_import_clicked,treeview,iter_string,name)
+        if isrunning:
+            download_m.set_sensitive(False)
+        else:
+            cancel_m.set_sensitive(False)
+        
+        if fsize!=psize:
+            self.import_m.set_sensitive(False)
+        else:
+            download_m.set_sensitive(False)
+        
+        menu.append(download_m)
+        menu.append(cancel_m)
+        menu.append(self.import_m)
+        
+        menu.show_all()
+        self.show_all()
+        menu.popup_at_pointer(None)
+
+    def on_import_clicked(self,button,treeview,iter_string,name):
+        selection = treeview.get_selection()
+        sel = selection.get_selected()
+        list_store = sel[0]
+        iteer      = sel[1]
+        if not iteer:
+            return
+        t = UnpackTilawaZip(self,treeview,iter_string,name,self.audio_data_location)
+        t.setDaemon(True)
+        t.start()
+            
+    def on_cancel_clicked(self,button,file_l):
+        if self.__all_download_thread[file_l]:
+            self.__all_download_thread[file_l].emit("break")
+            del self.__all_download_thread[file_l] 
+            
+    def on_download_clicked(self,button,treeview,iter_string,name):
+        selection = treeview.get_selection()
+        sel = selection.get_selected()
+        list_store = sel[0]
+        iteer      = sel[1]
+        if not iteer:
+            return
+        file_l = list_store[iteer][4]
+        t = DownloadFile(self,treeview,iter_string,name)
+        t.setDaemon(True)
+        t.start()
+        if file_l in self.__all_download_thread.keys():
+            self.__all_download_thread[file_l] = t
+        else:
+            self.__all_download_thread.setdefault(file_l,t)
+
+    def on_quit(self,*argv):
+        if threading.active_count()>1:
+            check = Yes_Or_No(_("Tasks Running In Background,Are You Sure You Want To Exit?"),self,link_button="")
+            check = check.check()
+            if  check:
+                for i in self.__all_download_thread.values():
+                    i.emit("break")            
+            else:
+                return True
+
+        
+    def _on_search(self, entry,listbox):
+        listbox.invalidate_filter()
+        
+    def _on_search_button_clicked(self,button):
+        if self.revealer.get_reveal_child():
+            self.revealer.set_reveal_child(False)
+            self.__old_search_text = self.search_entry.get_text()
+            self.search_entry.set_text("") 
+        else:
+            self.revealer.set_reveal_child(True)
+            self.search_entry.set_text(self.__old_search_text)
+            self.search_entry.grab_focus_without_selecting()
+    
+    def filter_listbox_func(self,row):
+        text  = self.search_entry.get_text().strip().lower()
+        if not text:
+            return True
+        row_text = row.get_child().props.label.lower()
+        if text in row_text:
+            return True
+            
 class searchWindow(Gtk.Window):
     def __init__(self, w):
         Gtk.Window.__init__(self)
@@ -1420,6 +1833,13 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self.add_tilawa.add(img)
         hb.pack_start(self.add_tilawa, False, False, 0)
         self.add_tilawa.connect("clicked", self._on_add_tilawa_clicked)
+        
+        img = Gtk.Image.new_from_icon_name("pan-down-symbolic", Gtk.IconSize.BUTTON)
+        self.download_tilawa = Gtk.Button()
+        self.download_tilawa.set_tooltip_text(_("Download Audio Sources"))
+        self.download_tilawa.add(img)
+        hb.pack_start(self.download_tilawa, False, False, 0)
+        self.download_tilawa.connect("clicked", self._on_download_tilawa_clicked)
         ###############################################################
         
         
@@ -1723,7 +2143,21 @@ class albasheerUi(Gtk.Window, albasheerCore):
         w = AddData(self,self.audio_data_location,_("Add Tilawa audio from ayat"))
         w.set_title(_('Add Tilawa from ayat'))
         w.connect("success",self._on_add_tilawa_success)
-    
+
+    def _on_download_tilawa_clicked(self,button):
+        self._stop_audio()
+        is_pyinstaller = getattr(sys, 'frozen',False) and hasattr(sys, '_MEIPASS')
+        if   is_pyinstaller:
+            tilawa_json_file_l = get_correct_path('tilawa_json_files')
+        else:
+            exedir = os.path.dirname(sys.argv[0])
+            tilawa_json_file_l = os.path.join(exedir,'..', 'share', 'albasheer','tilawa_json_files')
+            if not os.path.exists(tilawa_json_file_l):
+                tilawa_json_file_l = os.path.join(exedir, 'tilawa_json_files')
+        w = DownloadTilawaWindow(self,os.path.join(self.albasheer_data,"Downloads"),tilawa_json_file_l,self.audio_data_location)
+        w.show_all()
+        w.connect("success",self._on_add_tilawa_success)
+        
     def _on_add_tilawa_success(self,w=None):
         self.__all_audio = self.get_all_audio_location()   
         if self.__all_audio:
