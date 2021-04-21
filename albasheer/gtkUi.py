@@ -261,6 +261,26 @@ ALLTILAWAINFO = {"Al-Husary"                    : "Husary_64kbps",
      "Urdu Translation"             : "ur.khan_46kbs"
      }
 
+def fix_certifi():
+    if getattr(sys, 'frozen',False) and hasattr(sys, '_MEIPASS'):
+        import ssl
+        if ssl.get_default_verify_paths().cafile is None:
+            try:
+                import certifi
+                cert_l = certifi.where()
+                if os.path.isfile(cert_l):
+                    os.environ['SSL_CERT_FILE'] = cert_l
+                else:
+                    os.environ['SSL_CERT_FILE'] = os.path.join(sys._MEIPASS, 'certifi', 'cacert.pem')
+            except:
+                try:
+                    _create_unverified_https_context = ssl._create_unverified_context
+                except AttributeError:
+                    pass
+                else:
+                    ssl._create_default_https_context = _create_unverified_https_context
+fix_certifi()
+
 class UnpackTilawaZip(threading.Thread):
     def __init__(self,parent,treeview,iter_string,name,target_location="tillawa"):
         threading.Thread.__init__(self)
@@ -303,29 +323,19 @@ class UnpackTilawaZip(threading.Thread):
         GLib.idle_add(self.parent.emit,"success")
         return True
         
-class DownloadFile(GObject.Object,threading.Thread):
-    __gsignals__ = { "break"     : (GObject.SignalFlags.RUN_LAST, None, ())
-    }
-    
-    def __init__(self,parent,treeview,iter_string,name,header={"User-Agent":"Mozilla/5.0"}):
-        GObject.Object.__init__(self)
+class DownloadFile(threading.Thread):    
+    def __init__(self,parent,list_store,iteer,iter_string,name,target_location,header={"User-Agent":"Mozilla/5.0"}):
         threading.Thread.__init__(self)
-        self.parent = parent
-        self.treeview      = treeview
-        self.break_        = False
-        self.header        = header
-        GLib.idle_add(self.connect,"break",self.on_break)
-        selection = self.treeview.get_selection()
-        sel = selection.get_selected()
-        self.list_store  = sel[0]
-        self.iteer       = sel[1]
-        self.name        = name
-        self.iter_string = iter_string
+        self.parent          = parent
+        self.break_          = False
+        self.header          = header
+        self.list_store      = list_store
+        self.iteer           = iteer
+        self.name            = name
+        self.target_location = target_location
+        self.iter_string     = iter_string
         self.j,self.fraction,self.fs,self.isrunning,self.file_l,self.fsize,self.link,self.psize,self.logs = self.list_store[self.iteer]
-            
-    def on_break(self,s):
-        self.break_ = True        
-            
+        
     def run(self):
         self.break_ = False
         ch = 64*1024 
@@ -348,34 +358,51 @@ class DownloadFile(GObject.Object,threading.Thread):
                     if self.break_:
                         GLib.idle_add(self.parent.emit,"changedata",self.j,self.fraction,self.fraction>=100,False,self.file_l,self.fsize,self.link,self.psize,_("Download Canceled"),self.name,self.iter_string)
                         try:
-                            op.close()
                             opurl.close()
+                            op.close()
                         except Exception as e:
                             pass
                         return
-                    op.flush()
+                    
                     if self.psize >=int(self.fsize):
                         break
                     n = int(self.fsize)-self.psize
                     if n<ch:
                         ch = n
 
-                    chunk = opurl.read(ch)
-
                     self.fraction = int((self.psize*100)//int(self.fsize))
-                    op.write(chunk)
+                    op.write(opurl.read(ch))
+                    op.flush()
                     self.psize += ch
                     GLib.idle_add(self.parent.emit,"pulse",self.fraction,self.name,self.iter_string)
                 
-            GLib.idle_add(self.parent.emit,"changedata",self.j,100,True,False,self.file_l,self.fsize,self.link,self.psize,_("Download Done"),self.name,self.iter_string)            
+            GLib.idle_add(self.parent.emit,"changedata",self.j,100,True,False,self.file_l,self.fsize,self.link,self.psize,_("Download Done"),self.name,self.iter_string)
+            GLib.idle_add(self.parent.emit,"log",_("Extract zip file"),self.name,self.iter_string)
+            try:
+                file_ = zipfile.ZipFile(self.file_l, 'r')
+                try:
+                    file_.extractall(self.target_location)
+                except:
+                    GLib.idle_add(self.parent.emit,"log",_("Extract zip file failed"),self.name,self.iter_string)
+                    return False
+                finally:
+                    file_.close()
+                    
+            except:
+                GLib.idle_add(self.parent.emit,"log",_("Extract zip file failed"),self.name.iter_string)
+                return False
+            GLib.idle_add(self.parent.emit,"log",_("Extract zip file Done"),self.name,self.iter_string)
+            GLib.idle_add(self.parent.emit,"success")
         except Exception as e:
             GLib.idle_add(self.parent.emit,"changedata",self.j,self.fraction,self.fraction>=100,False,self.file_l,self.fsize,self.link,self.psize,str(e),self.name,self.iter_string)
             print(e)
         finally:
             try:
                 opurl.close()
+                op.close()
             except Exception as e:
                 pass
+
         
 class DownloadTilawaWindow(Gtk.Window):
     __gsignals__ = { "success"     : (GObject.SignalFlags.RUN_LAST, None, ()),
@@ -479,7 +506,7 @@ class DownloadTilawaWindow(Gtk.Window):
             renderer_text.set_property("editable", False)
             renderer_text.set_property("ellipsize", Pango.EllipsizeMode.START)
             
-            column_text = Gtk.TreeViewColumn(_("Name"), renderer_text, text=0)
+            column_text = Gtk.TreeViewColumn(_("Juz"), renderer_text, text=0)
             column_text.set_resizable(True)
             column_text.set_fixed_width(100)
             column_text.set_min_width(30)
@@ -518,16 +545,13 @@ class DownloadTilawaWindow(Gtk.Window):
         
 
     def update_all(self,p,j,fraction,fs,isrunning,file_l,fsize,link,psize,logs,name,iter_string):
-        liststore = self.__all_liststore[name]
-        liststore[liststore.get_iter_from_string(iter_string)] = [j,fraction,fs,isrunning,file_l,fsize,link,psize,logs]
+        self.__all_liststore[name][self.__all_liststore[name].get_iter_from_string(iter_string)] = [j,fraction,fs,isrunning,file_l,fsize,link,psize,logs]
 
     def update_progress(self,p,fraction,name,iter_string):
-        liststore = self.__all_liststore[name]
-        liststore[liststore.get_iter_from_string(iter_string)][1] = fraction
+        self.__all_liststore[name][self.__all_liststore[name].get_iter_from_string(iter_string)][1] = fraction
         
     def update_log(self,p,logs,name,iter_string):
-        liststore = self.__all_liststore[name]
-        liststore[liststore.get_iter_from_string(iter_string)][8] = logs
+        self.__all_liststore[name][self.__all_liststore[name].get_iter_from_string(iter_string)][8] = logs
 
         
     def on_open_data_location_button_clicked(self,button):
@@ -587,7 +611,7 @@ class DownloadTilawaWindow(Gtk.Window):
             
     def on_cancel_clicked(self,button,file_l):
         if self.__all_download_thread[file_l]:
-            self.__all_download_thread[file_l].emit("break")
+            self.__all_download_thread[file_l].break_ = True
             del self.__all_download_thread[file_l] 
             
     def on_download_clicked(self,button,treeview,iter_string,name):
@@ -598,7 +622,7 @@ class DownloadTilawaWindow(Gtk.Window):
         if not iteer:
             return
         file_l = list_store[iteer][4]
-        t = DownloadFile(self,treeview,iter_string,name)
+        t = DownloadFile(self,list_store,iteer,iter_string,name,self.audio_data_location)
         t.setDaemon(True)
         t.start()
         if file_l in self.__all_download_thread.keys():
@@ -612,7 +636,7 @@ class DownloadTilawaWindow(Gtk.Window):
             check = check.check()
             if  check:
                 for i in self.__all_download_thread.values():
-                    i.emit("break")            
+                    i.break_ = True         
             else:
                 return True
 
@@ -1834,7 +1858,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         hb.pack_start(self.add_tilawa, False, False, 0)
         self.add_tilawa.connect("clicked", self._on_add_tilawa_clicked)
         
-        img = Gtk.Image.new_from_icon_name("pan-down-symbolic", Gtk.IconSize.BUTTON)
+        img = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON)
         self.download_tilawa = Gtk.Button()
         self.download_tilawa.set_tooltip_text(_("Download Audio Sources"))
         self.download_tilawa.add(img)
