@@ -2,7 +2,7 @@
 
 block_cipher = None
 data_files = [("LICENSE-ar.txt","."),("LICENSE-en","."),
-              ("albasheer.ico","."),("albasheer-128.png","."),("README","."),("README-ar.txt","."),("locale","./locale")]
+              ("albasheer.ico","."),("albasheer-128.png","."),("README","."),("README-ar.txt","."),("locale","./locale"),("tilawa_json_files","./tilawa_json_files")]
 binary_files = [("icons","./icons"),("albasheer","./albasheer"),("albasheer-data","./albasheer-data"),("po","./po"),("amiri_font","./amiri_font")]
 a = Analysis(['albasheer-browser'],
              pathex=['.'],
