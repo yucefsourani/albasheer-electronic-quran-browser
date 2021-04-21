@@ -85,6 +85,8 @@ https://ojuba.org/waqf:%D8%B1%D8%AE%D8%B5%D8%A9_%D9%88%D9%82%D9%81_%D8%A7%D9%84%
 
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot11.png "Screenshot")
 
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot24.png "Screenshot")
+
 </div>
 
 # albasheer-electronic-quran-browser (based on  Othman Electronic Quran Browser)
