@@ -16,7 +16,7 @@
   <description>
     <p>Electronic Quran Browser.</p>
     <ul>
-      <li>Support Audio Tilawa (mp3 from ayat) And add Option To add Audio tilawa from ayat files (*.ayt)</li>
+      <li>Support Audio Tilawa (mp3 from ayat) And add Option To Add/Download Audio tilawa from ayat files (*.ayt)</li>
       <li>Support Auto Scroll + Run Tilawa</li>
       <li>Support Tarajem (from ayat) And add Option To add Tajarem from ayat files (*.ayt)</li>
       <li>Support Tafasir (from ayat) And add Option To add Tafasir from ayat files (*.ayt)</li>
@@ -38,7 +38,7 @@
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
-    <release version="1.0.1" date="2021-01-09"/>
+    <release version="2.0.1" date="2021-04-21"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>

@@ -40,11 +40,11 @@ https://github.com/ojuba-org/othman
 
 ### 32bit
 
-https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v2.0/albasheer32bit-setup.exe
 
 ### 64bit
 
-https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v2.0/albasheer64bit-setup.exe
 
 ## لينكس 
 
@@ -121,12 +121,12 @@ https://github.com/ojuba-org/othman
 
 ### 32bit
 
-https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer32bit-setup.exe
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v2.0/albasheer32bit-setup.exe
 
 
 ### 64bit
 
-https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v1.0/albasheer64bit-setup.exe
+https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/download/v2.0/albasheer64bit-setup.exe
 
 
 ## Linux 

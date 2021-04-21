@@ -4,9 +4,9 @@
 # yucef <youssef.m.sourani@gmail.com>, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: albasheer 0.8.0\n"
+"Project-Id-Version: albasheer 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-21 15:15+0300\n"
+"POT-Creation-Date: 2021-04-21 15:32+0300\n"
 "PO-Revision-Date: 2010-04-28 18:31+0300\n"
 "Last-Translator: yucef <youssef.m.sourani@gmail.com>\n"
 "Language-Team: youssef.m.sourani@gmail.com\n"

@@ -2659,7 +2659,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
 
         """)
         dlg.set_website("https://github.com/yucefsourani/albasheer-electronic-quran-browser")
-        dlg.set_version("1.0")
+        dlg.set_version("2.0")
         
         dlg.set_authors(["Yucef Sourani <youssef.m.sourani@gmail.com>"])
         dlg.set_translator_credits(_("translator-credits"))
