@@ -171,6 +171,8 @@ https://ojuba.org/waqf:license
 
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot11.png "Screenshot")
 
+![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot24.png "Screenshot")
+
 
 
 

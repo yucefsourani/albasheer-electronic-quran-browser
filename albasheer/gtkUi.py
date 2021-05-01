@@ -636,9 +636,11 @@ class DownloadTilawaWindow(Gtk.Window):
             check = check.check()
             if  check:
                 for i in self.__all_download_thread.values():
-                    i.break_ = True         
+                    i.break_ = True
+                self.parent.isdownloadwindow = False
             else:
                 return True
+        self.parent.isdownloadwindow = False
 
         
     def _on_search(self, entry,listbox):
@@ -1629,6 +1631,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         
         ############################
         self.__can_play = True
+        self.isdownloadwindow = False
         self.__isfullscreen = False
         self._current_tafasir = ""
         self._current_tarajem = ""
@@ -2169,6 +2172,9 @@ class albasheerUi(Gtk.Window, albasheerCore):
         w.connect("success",self._on_add_tilawa_success)
 
     def _on_download_tilawa_clicked(self,button):
+        if self.isdownloadwindow :
+            self.isdownloadwindow.present()
+            return
         self._stop_audio()
         is_pyinstaller = getattr(sys, 'frozen',False) and hasattr(sys, '_MEIPASS')
         if   is_pyinstaller:
@@ -2181,6 +2187,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         w = DownloadTilawaWindow(self,os.path.join(self.albasheer_data,"Downloads"),tilawa_json_file_l,self.audio_data_location)
         w.show_all()
         w.connect("success",self._on_add_tilawa_success)
+        self.isdownloadwindow  = w
         
     def _on_add_tilawa_success(self,w=None):
         self.__all_audio = self.get_all_audio_location()   
