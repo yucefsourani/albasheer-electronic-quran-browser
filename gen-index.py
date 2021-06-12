@@ -5,7 +5,7 @@ from __future__ import print_function
 import sys, os, os.path, time
 from albasheer.core import albasheerCore, searchIndexer
 
-q = albasheer(False)
+q = albasheerCore(False)
 ix = searchIndexer(True)
 wc = 0
 for n,(o,i) in enumerate(q.getAyatIter(1, 6236)):
