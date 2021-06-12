@@ -31,6 +31,7 @@ import zipfile
 import sqlite3
 import re
 from urllib import request
+import random
 
 Gst.init(None)
 
@@ -261,6 +262,412 @@ ALLTILAWAINFO = {"Al-Husary"                    : "Husary_64kbps",
      "Urdu Translation"             : "ur.khan_46kbs"
      }
 
+suwar_info_ = {'1': '7', '2': '286', '3': '200', '4': '176', '5': '120', '6': '165', '7': '206', '8': '75', '9': '129', '10': '109', 
+               '11': '123', '12': '111', '13': '43', '14': '52', '15': '99', '16': '128', '17': '111', '18': '110', '19': '98', 
+               '20': '135', '21': '112', '22': '78', '23': '118', '24': '64', '25': '77', '26': '227', '27': '93', '28': '88', 
+               '29': '69', '30': '60', '31': '34', '32': '30', '33': '73', '34': '54', '35': '45', '36': '83', '37': '182', 
+               '38': '88', '39': '75', '40': '85', '41': '54', '42': '53', '43': '89', '44': '59', '45': '37', '46': '35', 
+               '47': '38', '48': '29', '49': '18', '50': '45', '51': '60', '52': '49', '53': '62', '54': '55', '55': '78', 
+               '56': '96', '57': '29', '58': '22', '59': '24', '60': '13', '61': '14', '62': '11', '63': '11', '64': '18', 
+               '65': '12', '66': '12', '67': '30', '68': '52', '69': '52', '70': '44', '71': '28', '72': '28', '73': '20', 
+               '74': '56', '75': '40', '76': '31', '77': '50', '78': '40', '79': '46', '80': '42', '81': '29', '82': '19', 
+               '83': '36', '84': '25', '85': '22', '86': '17', '87': '19', '88': '26', '89': '30', '90': '20', '91': '15', 
+               '92': '21', '93': '11', '94': '8', '95': '8', '96': '19', '97': '5', '98': '8', '99': '8', '100': '11', '101': '11', 
+               '102': '8', '103': '3', '104': '9', '105': '5', '106': '4', '107': '7', '108': '3', '109': '6', '110': '3', '111': '5', 
+               '112': '4', '113': '5', '114': '6'}
+                            
+class MprisQuran():
+    def __init__(self,parent=None): #HERE
+        xml = """<node name="/org/mpris/MediaPlayer2">
+          <interface name="org.freedesktop.DBus.Introspectable">
+            <method name="Introspect">
+              <arg direction="out" name="xml_data" type="s"/>
+            </method>
+          </interface>
+          <interface name="org.freedesktop.DBus.Properties">
+            <method name="Get">
+              <arg direction="in" name="interface_name" type="s"/>
+              <arg direction="in" name="property_name" type="s"/>
+              <arg direction="out" name="value" type="v"/>
+            </method>
+            <method name="GetAll">
+              <arg direction="in" name="interface_name" type="s"/>
+              <arg direction="out" name="properties" type="a{sv}"/>
+            </method>
+            <method name="Set">
+              <arg direction="in" name="interface_name" type="s"/>
+              <arg direction="in" name="property_name" type="s"/>
+              <arg direction="in" name="value" type="v"/>
+            </method>
+            <signal name="PropertiesChanged">
+              <arg name="interface_name" type="s"/>
+              <arg name="changed_properties" type="a{sv}"/>
+              <arg name="invalidated_properties" type="as"/>
+            </signal>
+          </interface>
+          <interface name="org.mpris.MediaPlayer2">
+            <method name="Raise"/>
+            <method name="Quit"/>
+            <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+            <property name="CanQuit" type="b" access="read"/>
+            <property name="CanRaise" type="b" access="read"/>
+            <property name="HasTrackList" type="b" access="read"/>
+            <property name="Identity" type="s" access="read"/>
+            <property name="DesktopEntry" type="s" access="read"/>
+            <property name="SupportedUriSchemes" type="as" access="read"/>
+            <property name="SupportedMimeTypes" type="as" access="read"/>
+          </interface>
+          <interface name="org.mpris.MediaPlayer2.Player">
+            <method name="Next"/>
+            <method name="Previous"/>
+            <method name="Pause"/>
+            <method name="PlayPause"/>
+            <method name="Stop"/>
+            <method name="Play"/>
+            <method name="Seek">
+              <arg direction="in" name="Offset" type="x"/>
+            </method>
+            <method name="SetPosition">
+              <arg direction="in" name="TrackId" type="o"/>
+              <arg direction="in" name="Position" type="x"/>
+            </method>
+            <method name="OpenUri">
+              <arg direction="in" name="Uri" type="s"/>
+            </method>
+            <signal name="Seeked">
+              <arg name="Position" type="x"/>
+            </signal>
+            <property name="PlaybackStatus" type="s" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="LoopStatus" type="s" access="readwrite">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="Rate" type="d" access="readwrite">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="Shuffle" type="b" access="readwrite">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="Metadata" type="a{sv}" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="Volume" type="d" access="readwrite">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+            </property>
+            <property name="Position" type="x" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+            </property>
+            <property name="MinimumRate" type="d" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="MaximumRate" type="d" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanGoNext" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanGoPrevious" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanPlay" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanPause" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanSeek" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true"/>
+            </property>
+            <property name="CanControl" type="b" access="read">
+              <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+            </property>
+          </interface>
+          <interface name="org.mpris.MediaPlayer2.Playlists">
+            <method name="ActivatePlaylist">
+              <arg direction="in" name="PlaylistId" type="o"/>
+            </method>
+            <method name="GetPlaylists">
+              <arg direction="in" name="Index" type="u"/>
+              <arg direction="in" name="MaxCount" type="u"/>
+              <arg direction="in" name="Order" type="s"/>
+              <arg direction="in" name="ReverseOrder" type="b"/>
+              <arg direction="out" name="Playlists" type="a(oss)"/>
+            </method>
+            <signal name="PlaylistChanged">
+              <arg name="Playlist" type="a(oss)"/>
+            </signal>
+            <property name="PlaylistCount" type="u" access="read"></property>
+            <property name="Orderings" type="as" access="read"></property>
+            <property name="ActivePlaylist" type="(b(oss))" access="read"></property>
+          </interface>
+        </node>"""
+        self.parent       = parent
+        self.bus_name     = "org.mpris.MediaPlayer2.Albasheer"
+        self.node         = Gio.DBusNodeInfo.new_for_xml(xml)
+
+        self.owner_id = Gio.bus_own_name(
+            Gio.BusType.SESSION, 
+            self.bus_name,
+            Gio.BusNameOwnerFlags.NONE,  # If other has same name, what to do?
+            self.on_bus_acquired,
+            self.on_name_acquired,
+            self.on_name_lost,
+        )
+        self.playbackstatus = "Stopped"
+        self.canquit        = False
+        self.volume         = 1.0
+        self.firstrun       = True
+        self.orderings      = "Alphabetical"
+        self.loopstatus     = "Playlist"
+        self.shuffle        = False
+
+    def handle_method_call(self,connection, sender, object_path, interface_name, method_name, params, invocation):
+        if method_name == "Introspect":
+            string_builder = GLib.String()
+            self.node.generate_xml(1,string_builder)
+            introspect = GLib.Variant( "s", (string_builder.str,)) # tuple with out parameters 
+            #https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html#Gio.DBusMethodInvocation
+
+        elif method_name == "Play":
+            if self.parent.audio_c.get_sensitive():
+                GLib.idle_add(self.parent._play_audio)
+
+        elif method_name == "Stop" or method_name == "Pause":
+            if self.parent.audio_c.get_sensitive():
+                GLib.idle_add(self.parent._stop_audio)
+            
+        elif method_name == "Raise":
+            GLib.idle_add(self.parent.present)
+            
+        elif method_name == "Previous":
+            playagain = self.parent.pipeline2.get_state(Gst.CLOCK_TIME_NONE )[1]==Gst.State.PLAYING
+            if playagain:
+                GLib.idle_add(self.parent._stop_audio)
+            sura_n,aya_n = self.parent.get_sura_aya()
+            sura_n += 1
+            if self.loopstatus in ("Track","Playlist"):
+                if int(suwar_info_[str(sura_n)]) - (aya_n) == int(suwar_info_[str(sura_n)])-1:
+                    aya_n  = int(suwar_info_[str(sura_n)])
+                    if self.loopstatus == "Playlist":
+                        if sura_n == 1:
+                            sura_n = 115
+                        if self.shuffle:
+                            sura_n = random.randrange(1,114)
+                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                            row   = self.parent.listbox_.get_row_at_index(sura_n)
+                        else:
+                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
+                            row   = self.parent.listbox_.get_row_at_index(sura_n-2)
+                        GLib.idle_add(self.parent.listbox_.select_row,row)
+                        GLib.idle_add(self.parent.viewAya,0)
+                    else:
+                        GLib.idle_add(self.parent.viewAya,aya_n)
+                else:
+                    aya_n -= 1
+                    GLib.idle_add(self.parent.viewAya,aya_n)
+                if playagain:
+                    GLib.idle_add(self.parent._play_audio)
+            else:
+                if int(suwar_info_[str(sura_n)]) - (aya_n) == int(suwar_info_[str(sura_n)])-1:
+                    return
+                else:
+                    aya_n -= 1
+                    GLib.idle_add(self.parent.viewAya,aya_n)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
+                    
+            
+        elif method_name == "Next":
+            playagain = self.parent.pipeline2.get_state(Gst.CLOCK_TIME_NONE )[1]==Gst.State.PLAYING
+            if playagain:
+                GLib.idle_add(self.parent._stop_audio)
+            sura_n,aya_n = self.parent.get_sura_aya()
+            sura_n += 1
+
+            if self.loopstatus in ("Track","Playlist"):
+                if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                    aya_n  = 0
+                    if self.loopstatus == "Playlist":
+                        if sura_n == 114:
+                            sura_n = 0
+                        if self.shuffle:
+                            sura_n = random.randrange(1,114)
+                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                        else:
+                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                        row   = self.parent.listbox_.get_row_at_index(sura_n)
+                        GLib.idle_add(self.parent.listbox_.select_row,row)
+                    else:
+                        GLib.idle_add(self.parent.viewAya,aya_n)
+                else:
+                    aya_n += 1
+                    GLib.idle_add(self.parent.viewAya,aya_n)
+                if playagain:
+                    GLib.idle_add(self.parent._play_audio)
+            else:
+                if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                    return
+                else:
+                    aya_n += 1
+                    GLib.idle_add(self.parent.viewAya,aya_n)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
+                    
+        elif method_name == "PlayPause":
+            if self.parent.audio_c.get_sensitive():
+                if self.parent.pipeline2.get_state(Gst.CLOCK_TIME_NONE )[1]!=Gst.State.PLAYING:
+                    GLib.idle_add(self.parent._play_audio)
+                else:
+                    GLib.idle_add(self.parent._stop_audio)
+                    
+        elif method_name == "Quit":
+            if self.canquit:
+                self.parent.quit()
+                
+        elif method_name == "ActivatePlaylist":
+            index = int(os.path.basename(params.unpack()[0])) - 1
+            row   = self.parent.listbox_.get_row_at_index(index)
+            GLib.idle_add(self.parent.listbox_.select_row,row)
+            
+        elif method_name == "GetPlaylists":
+            index , maxcount, order , reverseorder  = params.unpack()
+            if index <1:
+                index = 1
+            elif index > maxcount:
+                index = maxcount - 1
+            if maxcount < 2:
+                maxcount = 3
+            elif maxcount > 114:
+                maxcount = 114
+            if reverseorder:
+                r_ = []
+                for i in list(map(str,range(index,maxcount)))[::-1]:
+                    i = str(i)
+                    r_.append(("/org/mpris/MediaPlayer2/Playlists/"+i,i,""))
+                invocation.return_value(GLib.Variant("a(oss)",(r_,)))
+            else:
+                r_ = []
+                for i  in map(str,range(index,maxcount)):
+                    i = str(i)
+                    r_.append(("/org/mpris/MediaPlayer2/Playlists/"+i,i,""))
+                invocation.return_value(GLib.Variant("a(oss)",(r_,)))
+                
+    def on_get_property_closure(self,connection,sender, object_path, interface_name, propeties_name):
+        if propeties_name == "PlaybackStatus":
+            value = GLib.Variant("s", self.playbackstatus)
+            return value
+            
+        elif propeties_name == "Volume":
+            v = self.parent.pipeline2.get_property("volume")
+            return GLib.Variant("d",v)
+            
+        elif propeties_name == "LoopStatus":
+            return GLib.Variant("s",self.loopstatus)
+            
+        elif propeties_name == "Identity":
+            return GLib.Variant("s","Albasheer Quran Browser")
+
+        elif propeties_name == "DesktopEntry":
+            return GLib.Variant("s","albasheer")
+            #return GLib.Variant("s","albasheer")
+            
+        elif propeties_name == "SupportedUriSchemes":
+            return GLib.Variant("as",("",))
+            
+        elif propeties_name == "SupportedMimeTypes":
+            return GLib.Variant("as",("",))
+            
+        elif propeties_name == "HasTrackList":
+            return GLib.Variant("b",False)
+            
+        elif propeties_name == "CanRaise":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "CanQuit":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "Rate":
+            return GLib.Variant("d",1.0)
+
+        elif propeties_name == "CanGoNext":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "CanGoPrevious":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "CanPlay":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "CanPause":
+            return GLib.Variant("b",True)
+
+        elif propeties_name == "Shuffle":
+            return GLib.Variant("b",self.shuffle)
+        
+        elif propeties_name == "CanSeek":
+            return GLib.Variant("b",False)
+            
+        elif propeties_name == "Metadata":
+            return GLib.Variant("a{sv}",{"None":GLib.Variant("s","")})
+            
+        elif propeties_name == "Position":
+            return GLib.Variant("x",0)
+            
+        elif propeties_name == "MinimumRate":
+            return GLib.Variant("d",1.0)
+            
+        elif propeties_name == "MaximumRate":
+            return GLib.Variant("d",1.0)
+            
+        elif propeties_name == "CanControl":
+            return GLib.Variant("b",True)
+            
+        elif propeties_name == "PlaylistCount":
+            return GLib.Variant("u",114)
+
+        elif propeties_name == "Orderings":
+            return GLib.Variant("s",self.orderings)
+            
+        elif propeties_name == "ActivePlaylist":
+            sura_n,aya_n = self.parent.get_sura_aya()
+            self.activeplaylist = "/org/mpris/MediaPlayer2/Playlists/{}".format(sura_n+1)
+            return GLib.Variant("o",self.activeplaylist)
+            
+    def on_set_property_closure(self,connection, sender, object_path, interface_name, propertie_name, params):
+        if propertie_name == "Volume":
+            v = params.get_double()
+            if v<0:
+                v=0
+            elif v>1.5:
+                v = 1.5
+            self.parent.pipeline2.set_property("volume",v)
+            return params
+            
+        elif propertie_name == "Shuffle":
+            self.shuffle = params.get_boolean()
+            return params
+            
+        elif propertie_name == "LoopStatus":
+            r = params.get_string()
+            if r not in ("None","Track","Playlist"):
+                r = "None"
+            self.loopstatus = r
+            return params
+        
+        
+        
+    def on_bus_acquired(self,connection, name):
+        reg_id2 = connection.register_object("/org/mpris/MediaPlayer2", self.node.interfaces[2], self.handle_method_call, self.on_get_property_closure, self.on_set_property_closure)
+        reg_id3 = connection.register_object("/org/mpris/MediaPlayer2", self.node.interfaces[3], self.handle_method_call, self.on_get_property_closure, self.on_set_property_closure)
+        reg_id4 = connection.register_object("/org/mpris/MediaPlayer2", self.node.interfaces[4], self.handle_method_call, self.on_get_property_closure, self.on_set_property_closure)
+
+    def on_name_acquired(self,connection, name):
+        self.connection = connection
+
+    def on_name_lost(self,connection, name):
+        Gio.bus_unown_name(self.owner_id)
+        
 def fix_certifi():
     if getattr(sys, 'frozen',False) and hasattr(sys, '_MEIPASS'):
         import ssl
@@ -751,19 +1158,6 @@ class searchWindow(Gtk.Window):
 class ShowTarajemTafasir(Gtk.Window):
     def __init__(self, w=None,tafasir_data_location=None,tooltip="",add_title="",title_="",sura_n=1,aya_n=1,sura="",aya="",msg_if_faild = "",all_audio=None,istarajem=True):
         Gtk.Window.__init__(self)
-        self.suwar_info = {'1': '7', '2': '286', '3': '200', '4': '176', '5': '120', '6': '165', '7': '206', '8': '75', '9': '129', '10': '109', 
-                           '11': '123', '12': '111', '13': '43', '14': '52', '15': '99', '16': '128', '17': '111', '18': '110', '19': '98', 
-                            '20': '135', '21': '112', '22': '78', '23': '118', '24': '64', '25': '77', '26': '227', '27': '93', '28': '88', 
-                            '29': '69', '30': '60', '31': '34', '32': '30', '33': '73', '34': '54', '35': '45', '36': '83', '37': '182', 
-                            '38': '88', '39': '75', '40': '85', '41': '54', '42': '53', '43': '89', '44': '59', '45': '37', '46': '35', 
-                            '47': '38', '48': '29', '49': '18', '50': '45', '51': '60', '52': '49', '53': '62', '54': '55', '55': '78', 
-                            '56': '96', '57': '29', '58': '22', '59': '24', '60': '13', '61': '14', '62': '11', '63': '11', '64': '18', 
-                            '65': '12', '66': '12', '67': '30', '68': '52', '69': '52', '70': '44', '71': '28', '72': '28', '73': '20', 
-                            '74': '56', '75': '40', '76': '31', '77': '50', '78': '40', '79': '46', '80': '42', '81': '29', '82': '19', 
-                            '83': '36', '84': '25', '85': '22', '86': '17', '87': '19', '88': '26', '89': '30', '90': '20', '91': '15', 
-                            '92': '21', '93': '11', '94': '8', '95': '8', '96': '19', '97': '5', '98': '8', '99': '8', '100': '11', '101': '11', 
-                            '102': '8', '103': '3', '104': '9', '105': '5', '106': '4', '107': '7', '108': '3', '109': '6', '110': '3', '111': '5', 
-                            '112': '4', '113': '5', '114': '6'}
         self.w            = w
         self.tafasir_data_location = tafasir_data_location
         self.tooltip      = tooltip
@@ -781,7 +1175,7 @@ class ShowTarajemTafasir(Gtk.Window):
         self.isavailable  = False
         self._all         = True
         self.set_size_request(600, 400)
-        self.max_sura_number = self.suwar_info[str(self.sura_n)]
+        self.max_sura_number = suwar_info_[str(self.sura_n)]
         self.pipeline = Gst.ElementFactory.make("playbin", "player")
         
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT )
@@ -2050,7 +2444,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         ##################################################################
         last_sura_aya = self.get_last_sura_aya()
         
-        
+        threading.Thread(target=self.run_mpris_quran).start() #HERE
         if last_sura_aya:
             __sura = last_sura_aya[0]
             __aya  = last_sura_aya[1]
@@ -2106,7 +2500,10 @@ class albasheerUi(Gtk.Window, albasheerCore):
         #self.txt_list.connect("row_activated",self.on_row_activated)
         #self.txt_list.connect("cursor_changed",self.on_cursor_changed)
         self.scroll1.get_vadjustment().set_value((self.scroll1.get_vadjustment().get_upper()/114)*self.sura_c.get_active())
-
+    
+    def run_mpris_quran(self): #HERE
+        self.mprisquran = MprisQuran(self) 
+        
     def on_shortcut_button_clicked(self,button):
         self.menu_popover.popdown()
         builder = Gtk.Builder.new_from_string(shortcut_main_window_ui, -1)
@@ -2216,6 +2613,35 @@ class albasheerUi(Gtk.Window, albasheerCore):
                 if sura in (1,9) :
                     if aya>=len(self.txt):
                         self.tb.set_sensitive(True)
+                        self._stop_audio()
+                        sura_n,aya_n = self.get_sura_aya() #HERE
+                        sura_n += 1
+                        if self.mprisquran.loopstatus in ("Track","Playlist"):
+                            if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                                aya_n  = 0
+                                if self.mprisquran.loopstatus == "Playlist":
+                                    if sura_n == 114:
+                                        sura_n = 0
+                                    if self.mprisquran.shuffle:
+                                        sura_n = random.randrange(1,114)
+                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                    else:
+                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                    row   = self.listbox_.get_row_at_index(sura_n)
+                                    self.listbox_.select_row(row)
+                                else:
+                                    self.viewAya(aya_n)
+                            else:
+                                aya_n += 1
+                                self.viewAya(aya_n)
+                            self._play_audio()
+                        else:
+                            if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                                return
+                            else:
+                                aya_n += 1
+                                self.viewAya(aya_n)
+                                self._play_audio()
                         return
                     #self.txt_list.get_selection().select_path((aya,))
                     #self.txt_list.row_activated(Gtk.TreePath.new_from_indices([aya]),self.cols[0])
@@ -2223,6 +2649,35 @@ class albasheerUi(Gtk.Window, albasheerCore):
                 else:
                     if aya>=len(self.txt)-1:
                         self.tb.set_sensitive(True)
+                        self._stop_audio()
+                        
+                        sura_n,aya_n = self.get_sura_aya()#HERE
+                        sura_n += 1
+                        if self.mprisquran.loopstatus in ("Track","Playlist"):
+                            if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                                aya_n  = 0
+                                if self.mprisquran.loopstatus == "Playlist":
+                                    if sura_n == 114:
+                                        sura_n = 0
+                                    if self.mprisquran.shuffle:
+                                        sura_n = random.randrange(1,114)
+                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                    self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                    row   = self.listbox_.get_row_at_index(sura_n)
+                                    self.listbox_.select_row(row)
+                                else:
+                                    self.viewAya(aya_n)
+                            else:
+                                aya_n += 1
+                                self.viewAya(aya_n)
+                            self._play_audio()
+                        else:
+                            if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                                return
+                            else:
+                                aya_n += 1
+                                self.viewAya(aya_n)
+                                self._play_audio()
                         return
                     #self.txt_list.get_selection().select_path((aya+1,))
                     #self.txt_list.row_activated(Gtk.TreePath.new_from_indices([aya]),self.cols[0])
@@ -2294,6 +2749,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         self.pipeline2.set_state(Gst.State.NULL)
         self.pipeline.set_state(Gst.State.NULL)
         self.tb.set_sensitive(True)
+        self.mprisquran.playbackstatus = "Stopped" #HERE
         
     def _play_audio(self,button=False,oneshot=False):
         if not self.__can_play:
@@ -2327,6 +2783,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         else:
             self.pipeline2.set_property('uri',q)
             self.pipeline2.set_state(Gst.State.PLAYING)
+            self.mprisquran.playbackstatus = "Playing" #HERE
 
 
     def get_all_audio_location(self):
