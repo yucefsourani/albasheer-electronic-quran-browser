@@ -1,7 +1,7 @@
 {
     "id": "com.github.yucefsourani.albasheer-electronic-quran-browser",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.38",
+    "runtime-version": "4.0",
     "sdk": "org.gnome.Sdk",
     "command": "albasheer-browser",
     "rename-icon": "albasheer",
@@ -13,7 +13,9 @@
             "--socket=wayland",
             "--share=network",
             "--socket=pulseaudio",
-            "--filesystem=home:ro"
+            "--filesystem=home:ro",
+            "--talk-name=org.mpris.MediaPlayer2.Player",
+            "--own-name=org.mpris.MediaPlayer2.Albasheer"
     ],
     "modules": [
 	{
@@ -67,7 +69,8 @@
         "sources": [
             {
                 "type": "git",
-                "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser"
+                "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser",
+                "branch" : "add_mpris"
         },
         {
                 "type": "file",
