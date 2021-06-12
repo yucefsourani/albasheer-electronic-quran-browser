@@ -4,6 +4,7 @@ from distutils.core import setup
 from glob import glob
 
 from albasheer import __version__
+from albasheer.core import albasheerCore, searchIndexer
 
 # to install type: 
 # python setup.py install --root=/
@@ -18,7 +19,7 @@ class my_build(build):
     from albasheer.core import albasheerCore, searchIndexer
 
     if not os.path.isfile('albasheer-data/ix.db'):
-      q=albasheer(False)
+      q=albasheerCore(False)
       ix=searchIndexer(True)
       for n,(o,i) in enumerate(q.getAyatIter(1, 6236)):
         for w in i.split(): ix.addWord(w,n+1)
