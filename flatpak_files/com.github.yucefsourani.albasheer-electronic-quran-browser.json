@@ -1,7 +1,7 @@
 {
     "id": "com.github.yucefsourani.albasheer-electronic-quran-browser",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "4.0",
+    "runtime-version": "40",
     "sdk": "org.gnome.Sdk",
     "command": "albasheer-browser",
     "rename-icon": "albasheer",
