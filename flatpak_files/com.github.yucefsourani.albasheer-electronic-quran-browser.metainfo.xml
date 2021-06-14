@@ -5,7 +5,7 @@
   <name>albasheer</name>
   <summary>Electronic Quran Browser</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
+  <project_license>AGPL-3.0-only</project_license>
   <recommends>
     <control>pointing</control>
     <control>keyboard</control>
@@ -23,22 +23,28 @@
       <li>Support Speed Up/Down Auto scroll </li>
       <li>Support save/load last current sura aya</li>
       <li>Support search for sura</li>
+      <li>Support MPRIS (Media Player Remote Interfacing)</li>
     </ul>
   </description>
-
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot24.png</image>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot3.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot7.png</image>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot6.png</image>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
+    <release version="3.0.1" date="2021-06-12">
+      <description>
+        <p>New features:</p>
+          <ul><li>Add MPRIS (Media Player Remote Interfacing)</li></ul>
+      </description>
+    </release>
     <release version="2.0.1" date="2021-04-21"/>
   </releases>
   <content_rating type="oars-1.1">
