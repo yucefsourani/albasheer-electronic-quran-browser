@@ -34,7 +34,7 @@ from urllib import request
 import random
 
 Gst.init(None)
-
+windows = sys.platform.startswith('win')
 PY2 = sys.version_info[0]==2
 BYTE = str if PY2 else bytes
 
@@ -311,6 +311,8 @@ class MprisQuran():
             <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
             <property name="CanQuit" type="b" access="read"/>
             <property name="CanRaise" type="b" access="read"/>
+            <property name="Fullscreen" type="b" access="readwrite"/>
+            <property name="CanSetFullscreen" type="b" access="read"/>
             <property name="HasTrackList" type="b" access="read"/>
             <property name="Identity" type="s" access="read"/>
             <property name="DesktopEntry" type="s" access="read"/>
@@ -403,17 +405,18 @@ class MprisQuran():
           </interface>
         </node>"""
         self.parent       = parent
-        self.bus_name     = "org.mpris.MediaPlayer2.Albasheer"
-        self.node         = Gio.DBusNodeInfo.new_for_xml(xml)
+        if not windows:
+            self.bus_name     = "org.mpris.MediaPlayer2.Albasheer"
+            self.node         = Gio.DBusNodeInfo.new_for_xml(xml)
 
-        self.owner_id = Gio.bus_own_name(
-            Gio.BusType.SESSION, 
-            self.bus_name,
-            Gio.BusNameOwnerFlags.NONE,  # If other has same name, what to do?
-            self.on_bus_acquired,
-            self.on_name_acquired,
-            self.on_name_lost,
-        )
+            self.owner_id = Gio.bus_own_name(
+                Gio.BusType.SESSION, 
+                self.bus_name,
+                Gio.BusNameOwnerFlags.NONE,  # If other has same name, what to do?
+                self.on_bus_acquired,
+                self.on_name_acquired,
+                self.on_name_lost,
+            )
         self.playbackstatus = "Stopped"
         self.canquit        = False
         self.volume         = 1.0
@@ -421,6 +424,7 @@ class MprisQuran():
         self.orderings      = "Alphabetical"
         self.loopstatus     = "Playlist"
         self.shuffle        = False
+        self.fullscreen     = False
 
     def handle_method_call(self,connection, sender, object_path, interface_name, method_name, params, invocation):
         if method_name == "Introspect":
@@ -454,10 +458,10 @@ class MprisQuran():
                             sura_n = 115
                         if self.shuffle:
                             sura_n = random.randrange(1,114)
-                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
                             row   = self.parent.listbox_.get_row_at_index(sura_n)
                         else:
-                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
+                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
                             row   = self.parent.listbox_.get_row_at_index(sura_n-2)
                         GLib.idle_add(self.parent.listbox_.select_row,row)
                         GLib.idle_add(self.parent.viewAya,0)
@@ -493,9 +497,9 @@ class MprisQuran():
                             sura_n = 0
                         if self.shuffle:
                             sura_n = random.randrange(1,114)
-                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
                         else:
-                            connection.emit_signal(sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
                         row   = self.parent.listbox_.get_row_at_index(sura_n)
                         GLib.idle_add(self.parent.listbox_.select_row,row)
                     else:
@@ -523,7 +527,7 @@ class MprisQuran():
                     
         elif method_name == "Quit":
             if self.canquit:
-                self.parent.quit()
+                GLib.idle_add(self.parent.quit)
                 
         elif method_name == "ActivatePlaylist":
             index = int(os.path.basename(params.unpack()[0])) - 1
@@ -545,91 +549,106 @@ class MprisQuran():
                 for i in list(map(str,range(index,maxcount)))[::-1]:
                     i = str(i)
                     r_.append(("/org/mpris/MediaPlayer2/Playlists/"+i,i,""))
-                invocation.return_value(GLib.Variant("a(oss)",(r_,)))
+                GLib.idle_add(invocation.return_value,GLib.Variant("a(oss)",(r_,)))
             else:
                 r_ = []
                 for i  in map(str,range(index,maxcount)):
                     i = str(i)
                     r_.append(("/org/mpris/MediaPlayer2/Playlists/"+i,i,""))
-                invocation.return_value(GLib.Variant("a(oss)",(r_,)))
+                GLib.idle_add(invocation.return_value,GLib.Variant("a(oss)",(r_,)))
                 
-    def on_get_property_closure(self,connection,sender, object_path, interface_name, propeties_name):
-        if propeties_name == "PlaybackStatus":
+    def on_get_property_closure(self,connection,sender, object_path, interface_name, properties_name):
+        if properties_name == "PlaybackStatus":
             value = GLib.Variant("s", self.playbackstatus)
             return value
             
-        elif propeties_name == "Volume":
+        elif properties_name == "Volume":
             v = self.parent.pipeline2.get_property("volume")
             return GLib.Variant("d",v)
             
-        elif propeties_name == "LoopStatus":
+        elif properties_name == "LoopStatus":
             return GLib.Variant("s",self.loopstatus)
             
-        elif propeties_name == "Identity":
+        elif properties_name == "Identity":
             return GLib.Variant("s","Albasheer Quran Browser")
 
-        elif propeties_name == "DesktopEntry":
-            return GLib.Variant("s","albasheer")
-            #return GLib.Variant("s","albasheer")
+        elif properties_name == "DesktopEntry":
+            if os.path.isfile(get_correct_path("albasheer.desktop")):
+                return GLib.Variant("s","albasheer")
+            else:
+                exedir = os.path.dirname(sys.argv[0])
+                desktop_entry_file_l  = os.path.join(exedir,'..', 'share',"applications")
+                if os.path.isfile(os.path.join(desktop_entry_file_l,"albasheer.desktop")):
+                    return GLib.Variant("s","albasheer")
+                elif os.path.isfile(os.path.join(desktop_entry_file_l,"com.github.yucefsourani.albasheer-electronic-quran-browser.desktop")):
+                    return GLib.Variant("s","com.github.yucefsourani.albasheer-electronic-quran-browser")
+                else:
+                    return GLib.Variant("s","")
             
-        elif propeties_name == "SupportedUriSchemes":
+        elif properties_name == "SupportedUriSchemes":
             return GLib.Variant("as",("",))
             
-        elif propeties_name == "SupportedMimeTypes":
+        elif properties_name == "SupportedMimeTypes":
             return GLib.Variant("as",("",))
             
-        elif propeties_name == "HasTrackList":
+        elif properties_name == "HasTrackList":
             return GLib.Variant("b",False)
             
-        elif propeties_name == "CanRaise":
+        elif properties_name == "CanRaise":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "CanQuit":
+        elif properties_name == "CanQuit":
+            return GLib.Variant("b",True)
+
+        elif properties_name == "CanSetFullscreen":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "Rate":
+        elif properties_name == "Fullscreen":
+            return GLib.Variant("b",self.fullscreen) 
+            
+        elif properties_name == "Rate":
             return GLib.Variant("d",1.0)
 
-        elif propeties_name == "CanGoNext":
+        elif properties_name == "CanGoNext":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "CanGoPrevious":
+        elif properties_name == "CanGoPrevious":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "CanPlay":
+        elif properties_name == "CanPlay":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "CanPause":
+        elif properties_name == "CanPause":
             return GLib.Variant("b",True)
 
-        elif propeties_name == "Shuffle":
+        elif properties_name == "Shuffle":
             return GLib.Variant("b",self.shuffle)
         
-        elif propeties_name == "CanSeek":
+        elif properties_name == "CanSeek":
             return GLib.Variant("b",False)
             
-        elif propeties_name == "Metadata":
+        elif properties_name == "Metadata":
             return GLib.Variant("a{sv}",{"None":GLib.Variant("s","")})
             
-        elif propeties_name == "Position":
+        elif properties_name == "Position":
             return GLib.Variant("x",0)
             
-        elif propeties_name == "MinimumRate":
+        elif properties_name == "MinimumRate":
             return GLib.Variant("d",1.0)
             
-        elif propeties_name == "MaximumRate":
+        elif properties_name == "MaximumRate":
             return GLib.Variant("d",1.0)
             
-        elif propeties_name == "CanControl":
+        elif properties_name == "CanControl":
             return GLib.Variant("b",True)
             
-        elif propeties_name == "PlaylistCount":
+        elif properties_name == "PlaylistCount":
             return GLib.Variant("u",114)
 
-        elif propeties_name == "Orderings":
+        elif properties_name == "Orderings":
             return GLib.Variant("s",self.orderings)
             
-        elif propeties_name == "ActivePlaylist":
+        elif properties_name == "ActivePlaylist":
             sura_n,aya_n = self.parent.get_sura_aya()
             self.activeplaylist = "/org/mpris/MediaPlayer2/Playlists/{}".format(sura_n+1)
             return GLib.Variant("o",self.activeplaylist)
@@ -641,7 +660,7 @@ class MprisQuran():
                 v=0
             elif v>1.5:
                 v = 1.5
-            self.parent.pipeline2.set_property("volume",v)
+            GLib.idle_add(self.parent.pipeline2.set_property,"volume",v)
             return params
             
         elif propertie_name == "Shuffle":
@@ -654,8 +673,14 @@ class MprisQuran():
                 r = "None"
             self.loopstatus = r
             return params
-        
-        
+            
+        elif propertie_name == "Fullscreen":
+            self.fullscreen = params.get_boolean()
+            if self.fullscreen:
+                GLib.idle_add(self.parent.fullscreen)
+            else:
+                GLib.idle_add(self.parent.unfullscreen)
+            return params
         
     def on_bus_acquired(self,connection, name):
         reg_id2 = connection.register_object("/org/mpris/MediaPlayer2", self.node.interfaces[2], self.handle_method_call, self.on_get_property_closure, self.on_set_property_closure)
@@ -2444,7 +2469,8 @@ class albasheerUi(Gtk.Window, albasheerCore):
         ##################################################################
         last_sura_aya = self.get_last_sura_aya()
         
-        threading.Thread(target=self.run_mpris_quran).start() #HERE
+        mpris_t = threading.Thread(target=self.run_mpris_quran)
+        mpris_t.start() #HERE
         if last_sura_aya:
             __sura = last_sura_aya[0]
             __aya  = last_sura_aya[1]
@@ -2624,9 +2650,11 @@ class albasheerUi(Gtk.Window, albasheerCore):
                                         sura_n = 0
                                     if self.mprisquran.shuffle:
                                         sura_n = random.randrange(1,114)
-                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                        if not windows:
+                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
                                     else:
-                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                        if not windows:
+                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
                                     row   = self.listbox_.get_row_at_index(sura_n)
                                     self.listbox_.select_row(row)
                                 else:
@@ -2661,8 +2689,11 @@ class albasheerUi(Gtk.Window, albasheerCore):
                                         sura_n = 0
                                     if self.mprisquran.shuffle:
                                         sura_n = random.randrange(1,114)
-                                        self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                                    self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                        if not windows:
+                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                    else:
+                                        if not windows:
+                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
                                     row   = self.listbox_.get_row_at_index(sura_n)
                                     self.listbox_.select_row(row)
                                 else:

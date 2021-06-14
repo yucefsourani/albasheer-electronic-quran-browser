@@ -23,7 +23,6 @@
       <li>Support Speed Up/Down Auto scroll </li>
       <li>Support save/load last current sura aya</li>
       <li>Support search for sura</li>
-      <li>Support MPRIS (Media Player Remote Interfacing)</li>
     </ul>
   </description>
   <screenshots>
@@ -39,12 +38,6 @@
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
-    <release version="3.0.1" date="2021-06-12">
-      <description>
-        <p>New features:</p>
-          <ul><li>Add MPRIS (Media Player Remote Interfacing)</li></ul>
-      </description>
-    </release>
     <release version="2.0.1" date="2021-04-21"/>
   </releases>
   <content_rating type="oars-1.1">
