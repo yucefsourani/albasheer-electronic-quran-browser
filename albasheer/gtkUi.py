@@ -417,15 +417,21 @@ class MprisQuran():
                 self.on_name_acquired,
                 self.on_name_lost,
             )
-        self.playbackstatus = "Stopped"
-        self.canquit        = False
-        self.volume         = 1.0
-        self.firstrun       = True
-        self.orderings      = "Alphabetical"
-        self.loopstatus     = "Playlist"
-        self.shuffle        = False
-        self.fullscreen     = False
+        self.playbackstatus       = "Stopped"
+        self.canquit              = True
+        self.volume               = 1.0
+        self.firstrun             = True
+        self.orderings            = "Alphabetical"
+        self.loopstatus           = "Playlist"
+        self.shuffle              = False
+        self.fullscreen           = False
+        self.next_previous_by_aya = False
+        self.runfullscreentask    = False
 
+    def run_fullscreen_task(self,*arg):
+        self.runfullscreentask = False
+        return False
+        
     def handle_method_call(self,connection, sender, object_path, interface_name, method_name, params, invocation):
         if method_name == "Introspect":
             string_builder = GLib.String()
@@ -438,8 +444,20 @@ class MprisQuran():
                 GLib.idle_add(self.parent._play_audio)
 
         elif method_name == "Stop" or method_name == "Pause":
-            if self.parent.audio_c.get_sensitive():
-                GLib.idle_add(self.parent._stop_audio)
+            #if self.parent.audio_c.get_sensitive():
+            #   GLib.idle_add(self.parent._stop_audio)
+            
+            if self.runfullscreentask:
+                self.next_previous_by_aya = not self.next_previous_by_aya
+                self.fullscreen = not self.fullscreen
+                if self.fullscreen:
+                    GLib.idle_add(self.parent.fullscreen)
+                else:
+                    GLib.idle_add(self.parent.unfullscreen)
+            else:
+                self.runfullscreentask = True
+                GLib.timeout_add(1000,self.run_fullscreen_task)
+                self.next_previous_by_aya = not self.next_previous_by_aya
             
         elif method_name == "Raise":
             GLib.idle_add(self.parent.present)
@@ -451,27 +469,39 @@ class MprisQuran():
             sura_n,aya_n = self.parent.get_sura_aya()
             sura_n += 1
             if self.loopstatus in ("Track","Playlist"):
-                if int(suwar_info_[str(sura_n)]) - (aya_n) == int(suwar_info_[str(sura_n)])-1:
-                    aya_n  = int(suwar_info_[str(sura_n)])
-                    if self.loopstatus == "Playlist":
-                        if sura_n == 1:
-                            sura_n = 115
-                        if self.shuffle:
-                            sura_n = random.randrange(1,114)
-                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                            row   = self.parent.listbox_.get_row_at_index(sura_n)
-                        else:
-                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
-                            row   = self.parent.listbox_.get_row_at_index(sura_n-2)
-                        GLib.idle_add(self.parent.listbox_.select_row,row)
-                        GLib.idle_add(self.parent.viewAya,0)
+                if self.next_previous_by_aya and self.loopstatus == "Playlist":
+                    if sura_n == 1:
+                        sura_n = 115
+                    if self.shuffle:
+                        sura_n = random.randrange(1,114)
+                        row   = self.parent.listbox_.get_row_at_index(sura_n)
                     else:
-                        GLib.idle_add(self.parent.viewAya,aya_n)
+                        row   = self.parent.listbox_.get_row_at_index(sura_n-2)
+                    GLib.idle_add(self.parent.listbox_.select_row,row)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
                 else:
-                    aya_n -= 1
-                    GLib.idle_add(self.parent.viewAya,aya_n)
-                if playagain:
-                    GLib.idle_add(self.parent._play_audio)
+                    if int(suwar_info_[str(sura_n)]) - (aya_n) == int(suwar_info_[str(sura_n)])-1:
+                        aya_n  = int(suwar_info_[str(sura_n)])
+                        if self.loopstatus == "Playlist":
+                            if sura_n == 1:
+                                sura_n = 115
+                            if self.shuffle:
+                                sura_n = random.randrange(1,114)
+                                #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                row   = self.parent.listbox_.get_row_at_index(sura_n)
+                            else:
+                                #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
+                                row   = self.parent.listbox_.get_row_at_index(sura_n-2)
+                            GLib.idle_add(self.parent.listbox_.select_row,row)
+                            GLib.idle_add(self.parent.viewAya,0)
+                        else:
+                            GLib.idle_add(self.parent.viewAya,aya_n)
+                    else:
+                        aya_n -= 1
+                        GLib.idle_add(self.parent.viewAya,aya_n)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
             else:
                 if int(suwar_info_[str(sura_n)]) - (aya_n) == int(suwar_info_[str(sura_n)])-1:
                     return
@@ -490,26 +520,35 @@ class MprisQuran():
             sura_n += 1
 
             if self.loopstatus in ("Track","Playlist"):
-                if aya_n+1 > int(suwar_info_[str(sura_n)]):
-                    aya_n  = 0
-                    if self.loopstatus == "Playlist":
-                        if sura_n == 114:
-                            sura_n = 0
-                        if self.shuffle:
-                            sura_n = random.randrange(1,114)
-                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                        #else:
-                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
-                            
-                        row   = self.parent.listbox_.get_row_at_index(sura_n)
-                        GLib.idle_add(self.parent.listbox_.select_row,row)
-                    else:
-                        GLib.idle_add(self.parent.viewAya,aya_n)
+                if self.next_previous_by_aya and self.loopstatus == "Playlist":
+                    if sura_n == 114:
+                        sura_n = 0
+                    if self.shuffle:
+                        sura_n = random.randrange(1,114)
+                    row   = self.parent.listbox_.get_row_at_index(sura_n)
+                    GLib.idle_add(self.parent.listbox_.select_row,row)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
                 else:
-                    aya_n += 1
-                    GLib.idle_add(self.parent.viewAya,aya_n)
-                if playagain:
-                    GLib.idle_add(self.parent._play_audio)
+                    if aya_n+1 > int(suwar_info_[str(sura_n)]):
+                        aya_n  = 0
+                        if self.loopstatus == "Playlist":
+                            if sura_n == 114:
+                                sura_n = 0
+                            if self.shuffle:
+                                sura_n = random.randrange(1,114)
+                                #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                            #else:
+                                #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                            row   = self.parent.listbox_.get_row_at_index(sura_n)
+                            GLib.idle_add(self.parent.listbox_.select_row,row)
+                        else:
+                            GLib.idle_add(self.parent.viewAya,aya_n)
+                    else:
+                        aya_n += 1
+                        GLib.idle_add(self.parent.viewAya,aya_n)
+                    if playagain:
+                        GLib.idle_add(self.parent._play_audio)
             else:
                 if aya_n+1 > int(suwar_info_[str(sura_n)]):
                     return
@@ -528,6 +567,7 @@ class MprisQuran():
                     
         elif method_name == "Quit":
             if self.canquit:
+                GLib.idle_add(self.parent.save_sura_aya)
                 GLib.idle_add(self.parent.quit)
                 
         elif method_name == "ActivatePlaylist":
