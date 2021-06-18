@@ -458,10 +458,10 @@ class MprisQuran():
                             sura_n = 115
                         if self.shuffle:
                             sura_n = random.randrange(1,114)
-                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
                             row   = self.parent.listbox_.get_row_at_index(sura_n)
                         else:
-                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
+                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n-1),str(sura_n-1),"")))
                             row   = self.parent.listbox_.get_row_at_index(sura_n-2)
                         GLib.idle_add(self.parent.listbox_.select_row,row)
                         GLib.idle_add(self.parent.viewAya,0)
@@ -497,9 +497,10 @@ class MprisQuran():
                             sura_n = 0
                         if self.shuffle:
                             sura_n = random.randrange(1,114)
-                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                        else:
-                            GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                        #else:
+                            #GLib.idle_add(connection.emit_signal,sender, object_path, "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                            
                         row   = self.parent.listbox_.get_row_at_index(sura_n)
                         GLib.idle_add(self.parent.listbox_.select_row,row)
                     else:
@@ -2650,11 +2651,11 @@ class albasheerUi(Gtk.Window, albasheerCore):
                                         sura_n = 0
                                     if self.mprisquran.shuffle:
                                         sura_n = random.randrange(1,114)
-                                        if not windows:
-                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                                    else:
-                                        if not windows:
-                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                        #if not windows:
+                                         #   self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                    #else:
+                                        #if not windows:
+                                         #   self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
                                     row   = self.listbox_.get_row_at_index(sura_n)
                                     self.listbox_.select_row(row)
                                 else:
@@ -2689,11 +2690,11 @@ class albasheerUi(Gtk.Window, albasheerCore):
                                         sura_n = 0
                                     if self.mprisquran.shuffle:
                                         sura_n = random.randrange(1,114)
-                                        if not windows:
-                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
-                                    else:
-                                        if not windows:
-                                            self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
+                                        #if not windows:
+                                         #   self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n),str(sura_n),"")))
+                                    #else:
+                                        #if not windows:
+                                         #   self.mprisquran.connection.emit_signal(self.mprisquran.connection.get_unique_name(), "/org/mpris/MediaPlayer2/Playlists", "org.mpris.MediaPlayer2.Playlists", "ActivePlaylist",GLib.Variant("(oss)",("/org/mpris/MediaPlayer2/Playlists/"+str(sura_n+1),str(sura_n+1),"")))
                                     row   = self.listbox_.get_row_at_index(sura_n)
                                     self.listbox_.select_row(row)
                                 else:
