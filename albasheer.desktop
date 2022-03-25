@@ -8,6 +8,6 @@ Terminal=false
 TryExec=albasheer-browser
 Exec=albasheer-browser
 Icon=albasheer
-Categories=X-Islamic-Software;X-Quran;GTK;
+Categories=X-Islamic-Software;X-Quran;GTK;Education;
 StartupNotify=false
 
