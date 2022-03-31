@@ -110,8 +110,8 @@ class albasheerCore(object):
         for i in range(113):
             self.suraInfoById[i][5] = self.suraInfoById[i + 1][3] - self.suraInfoById[i][3]
         self.suraInfoById[-1][5] = 6
-        self.basmala, self.basmala_imlai = list(self.getAyatIter(1))[0]
-        self.basmala = self.basmala[:self.basmala.rfind(' ')]
+        self.basmala_imlai = list(self.getAyatIter(1))[-1][0]
+        self.basmala = list(self.getAyatIter(1))[-1][-1]
         self.ix = None
         if load_ix:
             self.ix = searchIndexer()

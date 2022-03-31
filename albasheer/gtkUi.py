@@ -671,7 +671,7 @@ class searchWindow(Gtk.Window):
         self.connect('delete-event', lambda w,*a: w.hide() or True)
         self.last_txt = None
         self.set_type_hint(Gdk.WindowTypeHint.UTILITY)
-        self.set_modal(True)
+        #self.set_modal(True)
         self.set_deletable(True)
         self.set_title(_('Search results'))
         self.set_transient_for(w)
@@ -1727,7 +1727,7 @@ class albasheerUi(Gtk.Window, albasheerCore):
         vb.pack_start(hb, False, False, 0)
         
         self.scroll2 = Gtk.ScrolledWindow()
-        self.scroll2.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.ALWAYS)
+        self.scroll2.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self.scroll2.connect_after("size-allocate", self.resize_cb)
 
         self.scroll1 = Gtk.ScrolledWindow()
