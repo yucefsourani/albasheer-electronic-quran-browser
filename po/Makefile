@@ -1,4 +1,4 @@
-POTFILE=$(shell cat POTFILES.in)
+POTFILE=$(shell cat POTFILES)
 SOURCES=$(addprefix ../, $(POTFILE))
 POFILES=$(wildcard *.po)
 MOFILES=$(patsubst %.po,%.mo,$(POFILES))
