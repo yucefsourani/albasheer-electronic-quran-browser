@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-_Name=Albasheer Quran Browser
-_GenericName=Electronic Mus-haf
+Name=Albasheer Quran Browser
+GenericName=Electronic Mus-haf
 Terminal=false
 TryExec=albasheer-browser
 Exec=albasheer-browser
