@@ -1,14 +1,14 @@
 {
     "id": "com.github.yucefsourani.albasheer-electronic-quran-browser",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.38",
+    "runtime-version": "42",
     "sdk": "org.gnome.Sdk",
     "command": "albasheer-browser",
     "rename-icon": "albasheer",
     "copy-icon": true,
     "rename-desktop-file": "albasheer.desktop",
     "finish-args": [
-            "--share=ipc", "--socket=x11",
+            "--share=ipc", "--socket=fallback-x11",
             "--device=dri",
             "--socket=wayland",
             "--share=network",
@@ -33,8 +33,8 @@
         "sources": [
             {
                 "type": "archive",
-                "url": "https://github.com/alif-type/amiri/archive/054d41d/amiri-054d41dc54992ff082808f6cfd2a068b59d3211c.tar.gz",
-                "sha256": "ea6e035baad47dbfcc6a0e9ae1f49d7eab3d7e47938ff2d37c77b4b17437c10e"
+                "url": "https://github.com/aliftype/amiri/archive/refs/tags/0.114.tar.gz",
+                "sha256": "43a159897f5d11e1c2fbac481553dd1c75464111d615b89c43f1b4be19f94b8c"
             },
             {
                 "type": "file",
@@ -46,8 +46,6 @@
             }
         ],
         "build-commands": [
-            "pwd",
-            "ls -lh",
             "mkdir -p /app/share/fonts/",
             "cp *.ttf /app/share/fonts/",
             "mkdir -p /app/etc/fonts/conf.d/",
@@ -58,24 +56,17 @@
     },
     {
         "name": "albasheer",
-        "buildsystem": "simple",
-        "build-options" : {
-                "env": {
-                    "PYTHON": "/usr/bin/python3"
-                }
-        },
+        "buildsystem": "meson",
         "sources": [
             {
                 "type": "git",
-                "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser"
+                "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser",
+		        "commit" : "dee74026f0c0e225ac8c21ad433322a9dc7c2096"
         },
         {
                 "type": "file",
                 "path": "com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml"
         }
-        ],
-        "build-commands": [
-                "make TEST_DEPS=1 PREFIX=/app install"
         ],
         "post-install": [
             "mkdir -p /app/share/metainfo",
