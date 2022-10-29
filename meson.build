@@ -75,15 +75,14 @@ install_data(
     install_dir : get_option('bindir')
 )
 
-i18n = import('i18n')
-desktop_file = i18n.merge_file(
-        input: 'albasheer.desktop.in',
-       output: 'albasheer.desktop',
-         type: 'desktop',
-       po_dir: './po',
-      install: true,
-  install_dir: join_paths(get_option('datadir'), 'applications')
-)
 
+custom_target('albasheer.desktop',
+  input : 'albasheer.desktop.in',
+  output : 'albasheer.desktop',
+  command: [intltool_merge, '-d', '-u', join_paths(meson.source_root(), 'po'), '@INPUT@', '@OUTPUT@'],
+  install : true,
+  install_dir : join_paths(get_option('datadir'), 'applications'
+)
+  
 subdir('po')
 
