@@ -1,7 +1,7 @@
 {
     "id": "com.github.yucefsourani.albasheer-electronic-quran-browser",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "42",
+    "runtime-version": "43",
     "sdk": "org.gnome.Sdk",
     "command": "albasheer-browser",
     "rename-icon": "albasheer",
@@ -16,61 +16,68 @@
             "--filesystem=home:ro"
     ],
     "modules": [
-	{
-	  "name": "intltool",
-	  "cleanup": [ "*" ],
-	  "sources": [
-	    {
-	      "type": "archive",
-	      "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
-	      "sha256": "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
-	    }
-	  ]
-	},
-    {
-        "name": "amiri-quran-fonts",
-        "buildsystem":"simple",
-        "sources": [
+        {
+          "name": "intltool",
+          "cleanup": [ "*" ],
+          "sources": [
             {
-                "type": "archive",
-                "url": "https://github.com/aliftype/amiri/archive/refs/tags/0.114.tar.gz",
-                "sha256": "43a159897f5d11e1c2fbac481553dd1c75464111d615b89c43f1b4be19f94b8c"
-            },
-            {
-                "type": "file",
-                "path": "amiri-fontconfig.conf"
-            },
-            {
-                "type": "file",
-                "path": "amiri-quran-fontconfig.conf"
+              "type": "archive",
+              "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+              "sha256": "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
             }
-        ],
-        "build-commands": [
-            "mkdir -p /app/share/fonts/",
-            "cp *.ttf /app/share/fonts/",
-            "mkdir -p /app/etc/fonts/conf.d/",
-            "cp amiri-fontconfig.conf /app/etc/fonts/conf.d/",
-            "cp amiri-quran-fontconfig.conf /app/etc/fonts/conf.d/",
-            "fc-cache -fs"
-        ]
-    },
-    {
-        "name": "albasheer",
-        "buildsystem": "meson",
-        "sources": [
-            {
-                "type": "git",
-                "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser",
-		        "commit" : "36cee061f89ef92cb8cb0fe73e0ecef3abffb748"
+          ]
         },
         {
-                "type": "file",
-                "path": "com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml"
+            "name": "amiri-quran-fonts",
+            "buildsystem":"simple",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/aliftype/amiri/archive/refs/tags/0.114.tar.gz",
+                    "sha256": "43a159897f5d11e1c2fbac481553dd1c75464111d615b89c43f1b4be19f94b8c"
+                },
+                {
+                    "type": "file",
+                    "path": "amiri-fontconfig.conf"
+                },
+                {
+                    "type": "file",
+                    "path": "amiri-quran-fontconfig.conf"
+                }
+            ],
+            "build-commands": [
+                "mkdir -p /app/share/fonts/",
+                "cp *.ttf /app/share/fonts/",
+                "mkdir -p /app/etc/fonts/conf.d/",
+                "cp amiri-fontconfig.conf /app/etc/fonts/conf.d/",
+                "cp amiri-quran-fontconfig.conf /app/etc/fonts/conf.d/",
+                "fc-cache -fs"
+            ]
+        },
+        {
+            "name": "albasheer-electronic-quran-browser-metainfo-xml",
+            "buildsystem":"simple",
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml"
+                }
+            ],
+            "build-commands": [
+                "mkdir -p /app/share/metainfo",
+                "cp  com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml  /app/share/metainfo"
+            ]
+        },
+        {
+            "name": "albasheer",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/yucefsourani/albasheer-electronic-quran-browser",
+                    "commit" : "36cee061f89ef92cb8cb0fe73e0ecef3abffb748"
+            }
+            ]
         }
-        ],
-        "post-install": [
-            "mkdir -p /app/share/metainfo",
-            "cp  com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml  /app/share/metainfo"        ]
-    }
     ]
 }
