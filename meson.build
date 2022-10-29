@@ -30,7 +30,7 @@ data_files = [
               ['icons/hicolor/256x256/apps',['icons/albasheer-512.png'],['albasheer.png']],
               ['icons/hicolor/512x512/apps',['icons/albasheer-16.png'],['albasheer.png']],
               ['icons/hicolor/scalable/apps',['albasheer-data/quran-kareem.svg'],['albasheer.svg']],
-              ['pixmaps/albasheer.png',['icons/albasheer-128.png'],['albasheer.png']],
+              ['pixmaps',['icons/albasheer-128.png'],['albasheer.png']],
               ['albasheer',['albasheer-data/ix.db'],['ix.db']],
               ['albasheer',['albasheer-data/quran.db'],['quran.db']],
               ['albasheer',['albasheer-data/quran-kareem.svg'],['quran-kareem.svg']]
