@@ -54,6 +54,11 @@ https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/down
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user && flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
 ```
 
+<a href="https://flathub.org/apps/details/com.github.yucefsourani.albasheer-electronic-quran-browser" align="center">
+  <img width="200" src="https://flathub.org/assets/badges/flathub-badge-i-en.png">
+</a>
+
+
 ### مباشرة
 
 انسخ المستودع و قم بتشغيل albasheer-browser (يحتاج الى pygi و gstreamer(good و base) لتشغيل الايات من ملفات mp3 )
@@ -139,6 +144,9 @@ https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases/down
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user && flatpak install flathub com.github.yucefsourani.albasheer-electronic-quran-browser --user
 ```
 
+<a href="https://flathub.org/apps/details/com.github.yucefsourani.albasheer-electronic-quran-browser" align="center">
+  <img width="200" src="https://flathub.org/assets/badges/flathub-badge-i-en.png">
+</a>
 
 ### naitive
 
