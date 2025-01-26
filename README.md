@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![logo](albasheer-128.png)
+![logo](src/icons/albasheer-128.png)
 
 <h2><a href="https://arfedora.blogspot.com">فيدورا بالعربي</a></h2>
 
@@ -19,10 +19,10 @@ https://github.com/ojuba-org/othman
 
   1.  تحديث الى Python 3 
   2.  واجهة رسومية متجاوبة بإستخدام Gtk4 و Libadwaita
-  3.  دعم تلاوه من ملف MP3(من موقع ايات) و اضافه دعم التلاوه من ملفات ايات (*.ayt)
+  3.  دعم تلاوه من ملف MP3(من موقع ايات)
   4.  دعم التمرير التلقائي(scroll) مع التلاوه
-  5.  دعم الترجمات من ايات و خيار اضافتها من ملفات ايات (*.ayt)
-  6.  دعم التفاسير من ايار و خيار اضافتها من ملفات ايات (*.ayt)
+  5.  دعم الترجمات من ايات
+  6.  دعم التفاسير من ايات
   7.  دعم تغيير سرعه التمرير التلقائي(scroll)
   8.  دعم حفظ الصوره و الايه الحاليه عند اغلاق البرنامج
   9.  بعض الاشياء الاخرى, مثل اضافه اختصارات
@@ -87,10 +87,10 @@ https://github.com/ojuba-org/othman
 
   1.  Port To Python3
   2.  Gtk4 and Libadwaita.
-  3.  support Audio Tilawa (mp3 from ayat) And add Option To add Audio tilawa from ayat files (*.ayt).
+  3.  support Audio Tilawa (mp3 from ayat).
   4.  support Auto Scroll + Run Tilawa  .
-  5.  support Tarajem (from ayat) And add Option To add Tajarem  from ayat files (*.ayt). 
-  6.  support Tafasir (from ayat) And add Option To add Tafasir  from ayat files (*.ayt).
+  5.  support Tarajem (from ayat). 
+  6.  support Tafasir (from ayat).
   7.  support Speed Up/Down Auto scroll .
   8.  support save/load last current sura aya.
   9.  Other things like add some shortcuts and ...
