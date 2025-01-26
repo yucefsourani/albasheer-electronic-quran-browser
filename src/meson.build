@@ -75,7 +75,7 @@ foreach folder_ : data_folders
   endforeach
 endforeach
 
-document_files = ['README',  'README.md', 'README-ar.txt']
+document_files = ['README', 'README-ar.txt']
 install_data(
     document_files,
     install_dir : join_paths(get_option('datadir'),'doc/albasheer')
