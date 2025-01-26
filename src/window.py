@@ -554,7 +554,7 @@ class AlbasheerWindow(Adw.ApplicationWindow):
         return True
 
     def make_breakpoint(self):
-        breakpoint_c = Adw.BreakpointCondition.new_length(Adw.BreakpointConditionLengthType.MAX_WIDTH ,640, Adw.LengthUnit.SP)
+        breakpoint_c = Adw.BreakpointCondition.new_length(Adw.BreakpointConditionLengthType.MAX_WIDTH ,660, Adw.LengthUnit.SP)
         breakpoint_ = Adw.Breakpoint.new(breakpoint_c)
         breakpoint_.add_setter(self.header,"show_title",False)
         breakpoint_.add_setter(self.view_switcher_bar,"reveal",True)
@@ -564,7 +564,7 @@ class AlbasheerWindow(Adw.ApplicationWindow):
         #breakpoint_.add_setter(self.flap,"collapsed",True)
         #breakpoint_.add_setter(self,"auto",True)
         self.add_breakpoint(breakpoint_)
-        breakpoint_c = Adw.BreakpointCondition.new_length(Adw.BreakpointConditionLengthType.MIN_WIDTH ,640, Adw.LengthUnit.SP)
+        breakpoint_c = Adw.BreakpointCondition.new_length(Adw.BreakpointConditionLengthType.MIN_WIDTH ,660, Adw.LengthUnit.SP)
         breakpoint_ = Adw.Breakpoint.new(breakpoint_c)
         breakpoint_.add_setter(self.toolbar.hb,"orientation",Gtk.Orientation.HORIZONTAL)
         #breakpoint_.add_setter(self.toolbar.hb,"homogeneous",True)
