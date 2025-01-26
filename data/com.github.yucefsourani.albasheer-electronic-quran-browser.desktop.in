@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=albasheer
-Exec=env LANG=ar_LB.UTF-8 albasheer
+Exec=albasheer
 Icon=com.github.yucefsourani.albasheer-electronic-quran-browser
 Terminal=false
 Type=Application
