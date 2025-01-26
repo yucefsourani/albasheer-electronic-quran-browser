@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.github.yucefsourani.albasheer-electronic-quran-browser
+Exec=@bindir@/albasheer --gapplication-service

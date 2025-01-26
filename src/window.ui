@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="AlbasheerWindow" parent="AdwApplicationWindow">
+    <property name="title" translatable="yes">Albasheer</property>
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+  </template>
+  <menu id="primary_menu">
+  <section>
+    <item>
+      <attribute name="label">Coloring Amiri Font</attribute>
+      <attribute name="action">win.coloring_font</attribute>
+    </item>
+    <item>
+      <attribute name="label">Halign Center</attribute>
+      <attribute name="action">win.halign_center</attribute>
+    </item>
+    <submenu>
+      <attribute name="label">Font Size</attribute>
+      <item>
+        <attribute name="label">XLarge</attribute>
+        <attribute name="action">win.radio</attribute>
+        <attribute name="target">0</attribute>
+      </item>
+      <item>
+        <attribute name="label">Large</attribute>
+        <attribute name="action">win.radio</attribute>
+        <attribute name="target">1</attribute>
+      </item>
+      <item>
+        <attribute name="label">Medium</attribute>
+        <attribute name="action">win.radio</attribute>
+        <attribute name="target">2</attribute>
+      </item>
+      <item>
+        <attribute name="label">Small</attribute>
+        <attribute name="action">win.radio</attribute>
+        <attribute name="target">3</attribute>
+      </item>
+    </submenu>
+    <item>
+      <attribute name="label" translatable="yes">_Search For Aya</attribute>
+      <attribute name="action">win.search</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Copy Ayat</attribute>
+      <attribute name="action">win.copy</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+      <attribute name="action">win.show-help-overlay</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">_About Albasheer</attribute>
+      <attribute name="action">app.about</attribute>
+    </item>
+    </section>
+  </menu>
+  <object class="GtkMenuButton" id="menubutton">
+    <property name="primary">True</property>
+    <property name="icon-name">open-menu-symbolic</property>
+    <property name="tooltip-text" translatable="yes">Main Menu</property>
+    <property name="menu-model">primary_menu</property>
+  </object>
+</interface>
+
+

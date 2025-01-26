@@ -1,0 +1,16 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/com.github.yucefsourani.albasheer-electronic-quran-browser.desktop.in
+data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in
+data/com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
+src/tafasir_w.py
+src/utl.py
+src/tools_bar.py
+src/tilawa_download.py
+src/tilawa_gui.py
+src/tilawa_settings.py
+src/search_window.py
+src/copy_gui.py

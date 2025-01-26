@@ -1,0 +1,78 @@
+{
+    "id" : "com.github.yucefsourani.albasheer-electronic-quran-browser",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "47",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "albasheer",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--device=all",
+        "--socket=wayland",
+        "--socket=pulseaudio"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name": "amiri-quran-fonts",
+            "buildsystem":"simple",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/aliftype/amiri/archive/refs/tags/1.001.tar.gz",
+                    "sha256": "5e53e5947bd0cf2dd7a9f26bbe77cd10805fdad074ca181c84b7a8ef8cb191be"
+                },
+                {
+                    "type": "file",
+                    "path": "amiri-fontconfig.conf"
+                },
+                {
+                    "type": "file",
+                    "path": "amiri-quran-fontconfig.conf"
+                },
+                {
+                    "type": "file",
+                    "path": "amiri-quran-colored-fontconfig.conf"
+                }
+            ],
+            "build-commands": [
+                "mkdir -p /app/share/fonts/",
+                "cp fonts/*.ttf /app/share/fonts/",
+                "mkdir -p /app/etc/fonts/conf.d/",
+                "cp amiri-fontconfig.conf /app/etc/fonts/conf.d/",
+                "cp amiri-quran-fontconfig.conf /app/etc/fonts/conf.d/",
+                "cp amiri-quran-colored-fontconfig.conf /app/etc/fonts/conf.d/",
+                "fc-cache -fs"
+            ]
+        },
+        {
+            "name" : "albasheer",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/yuceff28/Projects"
+                }
+            ],
+            "config-opts" : [
+                "--libdir=lib"
+            ]
+        }
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
+}

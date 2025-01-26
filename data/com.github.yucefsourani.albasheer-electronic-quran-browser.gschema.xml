@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="albasheer">
+	<schema id="com.github.yucefsourani.albasheer-electronic-quran-browser" path="/com/github/yucefsourani/albasheer_electronic_quran_browser/">
+    <key name="width" type="i">
+      <default>800</default>
+    </key>
+    <key name="height" type="i">
+      <default>600</default>
+    </key>
+    <key name="is-maximized" type="b">
+      <default>true</default>
+    </key>
+    <key name="is-fullscreen" type="b">
+      <default>false</default>
+    </key>
+    <key name="sura" type="i">
+      <default>0</default>
+    </key>
+    <key name="aya" type="i">
+      <default>0</default>
+    </key>
+    <key name="collapsed" type="b">
+      <default>true</default>
+    </key>
+    <key name="center" type="b">
+      <default>true</default>
+    </key>
+    <key name="amiri-color" type="b">
+      <default>true</default>
+    </key>
+    <key name="font-size" type="i">
+      <default>0</default>
+    </key>
+    <key name="tafasir-table" type="s">
+      <default>""</default>
+    </key>
+    <key name="taragem-table" type="s">
+      <default>""</default>
+    </key>
+    <key name="toolbar-toggle" type="b">
+      <default>false</default>
+    </key>
+    <key name="volume" type="i">
+      <default>10</default>
+    </key>
+    <key name="tilawa" type="i">
+      <default>0</default>
+    </key>
+    <key name="scroll-delay" type="i">
+      <default>200</default>
+    </key>
+	</schema>
+</schemalist>
+
