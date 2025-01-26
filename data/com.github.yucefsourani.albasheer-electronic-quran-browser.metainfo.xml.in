@@ -26,13 +26,13 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1flathub.png</image>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot24flathub.png</image>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot2.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot7flathub.png</image>
+      <image>https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot4.png</image>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
@@ -69,10 +69,9 @@
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
   <update_contact>youssef.m.sourani@gmail.com</update_contact>
-  <url type="bugtracker">https://github.com/yucefsourani/albasheer-electronic-quran-browser/issues</url>
-  <url type="translate">https://github.com/yucefsourani/albasheer-electronic-quran-browser</url>
   <translation type="gettext">albasheer</translation>
   <branding>
     <color type="primary" scheme_preference="dark">#993d3d</color>
   </branding>
 </component>
+
