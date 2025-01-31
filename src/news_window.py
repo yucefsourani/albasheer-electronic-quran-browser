@@ -106,6 +106,7 @@ class NewsGui():
     def on_connect_finish(self,session, result, data):
         try:
             if self.msg.get_status() ==  Soup.Status.NOT_FOUND :
+                print(self.msg.get_status())
                 return
             input_stream = session.send_finish(result)
             os.remove(self.json_save_location)
