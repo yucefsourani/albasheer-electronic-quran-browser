@@ -17,6 +17,8 @@ class ImagePaint(Gtk.Widget):
         self.image_source_link = image_source_link
         self.image_file        = None
         if os.path.exists(self.image_location):
+            if self.image_source_link:
+                self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
             self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
         else:
             self.__texture   = None
@@ -148,9 +150,13 @@ class NewsGui():
         if info_["body"]:
             text_view =  Gtk.TextView(cursor_visible=False,
                                       editable=False,
-                                      wrap_mode=Gtk.WrapMode.WORD)
+                                      wrap_mode=Gtk.WrapMode.WORD,
+                                      left_margin=5,
+                                      right_margin=5,
+                                      top_margin=5,
+                                      bottom_margin=5,
+                                      justification=Gtk.Justification.FILL )
             text_view.get_buffer().set_text(info_["body"],-1)
-            text_view.set_direction(Gtk.TextDirection.RTL)
             self.news_page_group.add(text_view)
 
         if info_["news_id"] != self.parent.app_settings.get_string("news-id"):
