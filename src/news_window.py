@@ -22,8 +22,6 @@ class ImagePaint(Gtk.Widget):
                 self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
             self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
             self.spinner.stop()
-            #self.parent.remove(self.spinner)
-            #self.parent.append(self)
         else:
             self.__texture   = None
             self.download_image()
@@ -77,8 +75,6 @@ class ImagePaint(Gtk.Widget):
                 if self.image_source_link:
                     self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
                 self.spinner.stop()
-                #self.parent.remove(self.spinner)
-                #self.parent.append(self)
                 self.queue_draw()
         except Exception as e:
             print(e)
