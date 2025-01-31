@@ -137,9 +137,10 @@ class NewsGui():
             print(e)
 
     def read_info(self,info_):
-        if ["image"][0].startswith("http"):
+        if info_["image"][0].startswith("http"):
+            print("ddddddddddd")
             image_l = os.path.join(self.image_save_location,info_["image"][2])
-            image_info_link = ["image"][0]
+            image_info_link = info_["image"][0]
         else:
             image_l = os.path.join(self.image_save_location,info_["image"][0])
             image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image']}"
