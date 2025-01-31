@@ -154,7 +154,6 @@ class NewsGui():
         else:
             image_l = os.path.join(self.image_save_location,info_["image"][0])
             image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image'][0]}"
-        print(image_info_link)
         image_box = Gtk.Box.new(Gtk.Orientation.VERTICAL,0)
         image_box.props.vexpand = True
         image_box.props.hexpand = True
