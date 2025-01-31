@@ -67,7 +67,7 @@ class ImagePaint(Gtk.Widget):
                 self.__texture = Gdk.Texture.new_from_filename(self.image_location)
                 self.queue_draw()
                 if self.image_source_link:
-                    self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(,self.image_source_link,"Picture Source"))
+                    self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
 
         except Exception as e:
             print(e)
