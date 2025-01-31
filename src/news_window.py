@@ -50,7 +50,6 @@ class ImagePaint(Gtk.Widget):
             if self.msg.get_status() ==  Soup.Status.NOT_FOUND :
                 return
             input_stream = session.send_finish(result)
-            print(input_stream)
             input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
         except Exception as e:
             print(e)
@@ -138,7 +137,6 @@ class NewsGui():
 
     def read_info(self,info_):
         if info_["image"][0].startswith("http"):
-            print("ddddddddddd")
             image_l = os.path.join(self.image_save_location,info_["image"][2])
             image_info_link = info_["image"][0]
         else:
