@@ -108,8 +108,9 @@ class NewsGui():
             if self.msg.get_status() ==  Soup.Status.NOT_FOUND :
                 return
             input_stream = session.send_finish(result)
-            with open(self.json_save_location,"w+b") as json_f:
-                json_f.write(b"")
+            os.remove(self.json_save_location)
+            #with open(self.json_save_location,"w+b") as json_f:
+             #   json_f.write(b"")
             self.json_file = open(self.json_save_location,"a+b")
             input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
         except Exception as e:
