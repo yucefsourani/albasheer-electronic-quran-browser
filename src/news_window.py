@@ -8,16 +8,18 @@ import threading
 
 
 class ImagePaint(Gtk.Widget):
-    def __init__(self,parent,image_location,image_link):
+    def __init__(self,parent,image_location,image_link,news_page_group,image_source_link):
         Gtk.Widget.__init__(self)
-        self.parent         = parent
-        self.image_link     = image_link
-        self.image_location = image_location
-        self.image_file     = None
+        self.parent            = parent
+        self.image_link        = image_link
+        self.image_location    = image_location
+        self.news_page_group   = news_page_group
+        self.image_source_link = image_source_link
+        self.image_file        = None
         if os.path.exists(self.image_location):
-            self.__texture  = Gdk.Texture.new_from_filename(self.image_location)
+            self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
         else:
-            self.__texture  = None
+            self.__texture   = None
             self.download_image()
 
     def do_snapshot(self,snapshot):
@@ -64,6 +66,8 @@ class ImagePaint(Gtk.Widget):
                 input_stream.close()
                 self.__texture = Gdk.Texture.new_from_filename(self.image_location)
                 self.queue_draw()
+                if self.image_source_link:
+                    self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(,self.image_source_link,"Picture Source"))
 
         except Exception as e:
             print(e)
@@ -131,10 +135,20 @@ class NewsGui():
             print(e)
 
     def read_info(self,info_):
-        image_l = os.path.join(self.image_save_location,info_["image"])
+        image_l = os.path.join(self.image_save_location,info_["image"][0])
         image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image']}"
-        image_w = ImagePaint(self.news_page_group,image_l,image_info_link)
+        image_w = ImagePaint(self.news_page_group,image_l,image_info_link,self.news_page_group,info_["image"][1])
         self.news_page_group.add(image_w)
+        if info_["title"]:
+            self.news_page_group.set_title(info_["title"])
+        if info_["body"]:
+            text_view =  Gtk.TextView(cursor_visible=False,
+                                      editable=False,
+                                      wrap_mode=Gtk.WrapMode.WORD)
+            text_view.get_buffer().set_text(info_["body"],-1)
+            text_view.set_direction(Gtk.TextDirection.RTL)
+            self.news_page_group.add(text_view)
+
         if info_["news_id"] != self.parent.app_settings.get_string("news-id"):
             self.parent.app_settings.set_string("news-id",info_["news_id"])
             GLib.timeout_add(2000,self.news_window.present,self.parent)
