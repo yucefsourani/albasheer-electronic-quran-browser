@@ -47,15 +47,18 @@ class ImagePaint(Gtk.Widget):
             self.msg  = Soup.Message.new("GET",self.image_link)
             self.session.send_async(self.msg,GLib.PRIORITY_LOW,None,self.on_connect_finish,None)
         except Exception as e:
+            self.spinner.stop()
             print(e)
 
     def on_connect_finish(self,session, result, data):
         try:
             if self.msg.get_status() ==  Soup.Status.NOT_FOUND :
+                self.spinner.stop()
                 return
             input_stream = session.send_finish(result)
             input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
         except Exception as e:
+            self.spinner.stop()
             print(e)
 
     def on_read_finish(self,input_stream, result):
@@ -80,6 +83,7 @@ class ImagePaint(Gtk.Widget):
         except Exception as e:
             print(e)
             try:
+                self.spinner.stop()
                 self.image_file.close()
                 input_stream.close()
             except Exception as e:
@@ -149,7 +153,8 @@ class NewsGui():
             image_info_link = info_["image"][0]
         else:
             image_l = os.path.join(self.image_save_location,info_["image"][0])
-            image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image']}"
+            image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image'][0]}"
+        print(image_info_link)
         image_box = Gtk.Box.new(Gtk.Orientation.VERTICAL,0)
         image_box.props.vexpand = True
         image_box.props.hexpand = True
