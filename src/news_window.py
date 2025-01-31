@@ -162,6 +162,8 @@ class NewsGui():
         self.news_page_group.add(image_box)
         if info_["title"]:
             self.news_page_group.set_title(info_["title"])
+        if info_["windows_title"]:
+            self.news_window.set_title(info_["windows_title"])
         if info_["body"]:
             sw = Gtk.ScrolledWindow.new()
             text_view =  Gtk.TextView(cursor_visible=False,
