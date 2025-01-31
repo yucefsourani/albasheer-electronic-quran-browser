@@ -1,7 +1,7 @@
 {
-	"news_id" : "000000010000",
+	"news_id" : "000000000000",
 	"title"   : "",
 	"body"    : "",
-	"image"   : ["albasheer-512.png",""]
+	"image"   : ["albasheer-512.png","https://github.com/yucefsourani/albasheer-electronic-quran-browser"]
 
 }
