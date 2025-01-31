@@ -137,8 +137,12 @@ class NewsGui():
     def read_info(self,info_):
         image_l = os.path.join(self.image_save_location,info_["image"][0])
         image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image']}"
-        image_w = ImagePaint(self.news_page_group,image_l,image_info_link,self.news_page_group,info_["image"][1])
-        self.news_page_group.add(image_w)
+        image_box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,0)
+        image_box.props.vexpand = True
+        image_box.props.hexpand = True
+        image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1])
+        image_box.append(image_w)
+        self.news_page_group.add(image_box)
         if info_["title"]:
             self.news_page_group.set_title(info_["title"])
         if info_["body"]:
