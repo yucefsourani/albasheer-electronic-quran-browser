@@ -1,8 +1,8 @@
 {
-	"news_id"        : "000000000000",
+	"news_id"        : "000000000001",
 	"windows_title"  : "رمضان مبارك",
 	"title"          : "",
 	"body"           : "",
-	"image"          : ["ramadan2.jpeg","","ramadan2.jpeg"]
+	"image"          : ["ramadan2.jpeg","https://github.com/yucefsourani/albasheer-electronic-quran-browser","ramadan2.jpeg"]
 
 }
