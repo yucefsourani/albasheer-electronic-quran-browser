@@ -148,16 +148,18 @@ class NewsGui():
         if info_["title"]:
             self.news_page_group.set_title(info_["title"])
         if info_["body"]:
+            sw = Gtk.ScrolledWindow.new()
             text_view =  Gtk.TextView(cursor_visible=False,
                                       editable=False,
-                                      wrap_mode=Gtk.WrapMode.WORD,
+                                      wrap_mode=Gtk.WrapMode.WORD  ,
                                       left_margin=5,
                                       right_margin=5,
                                       top_margin=5,
                                       bottom_margin=5,
                                       justification=Gtk.Justification.FILL )
             text_view.get_buffer().set_text(info_["body"],-1)
-            self.news_page_group.add(text_view)
+            sw.set_child(text_view)
+            self.news_page_group.add(sw)
 
         if info_["news_id"] != self.parent.app_settings.get_string("news-id"):
             self.parent.app_settings.set_string("news-id",info_["news_id"])
