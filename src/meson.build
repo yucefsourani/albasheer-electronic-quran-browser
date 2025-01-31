@@ -38,6 +38,7 @@ albasheer_sources = [
   'tilawa_settings.py',
   'search_window.py',
   'copy_gui.py',
+  'news_window.py',
 ]
 
 

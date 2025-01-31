@@ -49,6 +49,10 @@
       <attribute name="action">win.copy</attribute>
     </item>
     <item>
+      <attribute name="label" translatable="yes">News Window</attribute>
+      <attribute name="action">win.news</attribute>
+    </item>
+    <item>
       <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
       <attribute name="action">win.show-help-overlay</attribute>
     </item>

@@ -27,7 +27,7 @@ from .tools_bar import CToolBar
 from .tilawa_gui import TilawaGui
 from .search_window import search_window
 from .copy_gui import make_copy_window
-
+from .news_window import NewsGui
 css = b"""
         .amiri {
             color: @success_color;
@@ -83,6 +83,9 @@ tarajem_data_location = os.path.join(albasheer_data,"ayat_tarajem")
 os.makedirs(tarajem_data_location,exist_ok=True)
 tafasir_data_location = os.path.join(albasheer_data,"ayat_tafasir")
 os.makedirs(tafasir_data_location,exist_ok=True)
+albasheer_news_data = os.path.join(albasheer_data,"news_data")
+os.makedirs(albasheer_news_data,exist_ok=True)
+os.makedirs(os.path.join(albasheer_news_data,"images"),exist_ok=True)
 
 class AyaTitle(GObject.GObject):
     __gtype_name__ = 'AyaTitle'
@@ -260,7 +263,6 @@ class AlbasheerWindow(Adw.ApplicationWindow):
         Gtk.StyleContext.add_provider_for_display(Gdk.Display().get_default(),
                                                  style_provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
         self.__aya   = self.app_settings.get_int("aya")
         self.__sura  = self.app_settings.get_int("sura")
         self.__font_size  = self.app_settings.get_int("font-size")
@@ -380,6 +382,15 @@ class AlbasheerWindow(Adw.ApplicationWindow):
         self.make_side()
         self.make_ayat()
         self.make_breakpoint()
+
+        news_gui = NewsGui(self,albasheer_news_data)
+        self.news_window = news_gui.news_window
+        action = Gio.SimpleAction.new("news", None)
+        action.connect("activate", self.on_news_action_activate)
+        self.add_action(action)
+
+    def on_news_action_activate(self,simple_action, value=None):
+        self.news_window.present(self)
 
     def on_auto_scroll_action_activate(self,simple_action, value=None):
         self.auto_scroll_toggle_button.props.active = not self.auto_scroll_toggle_button.props.active

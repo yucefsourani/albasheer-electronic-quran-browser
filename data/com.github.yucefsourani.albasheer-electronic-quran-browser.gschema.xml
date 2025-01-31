@@ -49,6 +49,9 @@
     <key name="scroll-delay" type="i">
       <default>200</default>
     </key>
+    <key name="news-id" type="s">
+      <default>""</default>
+    </key>
 	</schema>
 </schemalist>
 
