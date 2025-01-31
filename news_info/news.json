@@ -2,6 +2,6 @@
 	"news_id" : "00000000000",
 	"title"   : "Test",
 	"body"    : "testing",
-	"image"   : "albasheer-512.png"
+	"image"   : ["albasheer-512.png","https://github.com/yucefsourani/albasheer-electronic-quran-browser"]
 
 }
