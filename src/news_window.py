@@ -172,6 +172,8 @@ class NewsGui():
                 pass
 
     def read_info(self,info_):
+        if not info_["id"]:
+            return
         if info_["image"][0].startswith("http"):
             image_l = os.path.join(self.image_save_location,info_["image"][2])
             image_info_link = info_["image"][0]
