@@ -93,7 +93,7 @@ class NewsGui():
         self.image_save_location = os.path.join(self.albasheer_news_data,"images")
         self.json_save_location  = os.path.join(self.albasheer_news_data,"news.json")
         self.news_window = Adw.PreferencesDialog.new()
-        self.news_window.set_title("")
+        self.news_window.set_title(_("News"))
         self.news_page   =  Adw.PreferencesPage.new()
         self.news_window .add(self.news_page)
         self.news_page_group =  Adw.PreferencesGroup.new()
