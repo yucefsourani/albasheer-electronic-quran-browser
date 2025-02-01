@@ -144,22 +144,25 @@ class NewsGui():
             print(e)
 
     def read_info(self,info_):
-        if not info_["image"][0]:
-            return
         if info_["image"][0].startswith("http"):
             image_l = os.path.join(self.image_save_location,info_["image"][2])
             image_info_link = info_["image"][0]
         else:
-            image_l = os.path.join(self.image_save_location,info_["image"][0])
-            image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image'][0]}"
+            if not info_["image"][0]:
+                image_l = ""
+                image_info_link = ""
+            else:
+                image_l = os.path.join(self.image_save_location,info_["image"][0])
+                image_info_link = f"https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/refs/heads/master/news_info/{info_['image'][0]}"
         image_box = Gtk.Box.new(Gtk.Orientation.VERTICAL,0)
         image_box.props.vexpand = True
         image_box.props.hexpand = True
-        spinner = Gtk.Spinner.new()
-        self.news_page_group.set_header_suffix(spinner)
-        spinner.start()
-        image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner)
-        image_box.append(image_w)
+        if image_l:
+            spinner = Gtk.Spinner.new()
+            self.news_page_group.set_header_suffix(spinner)
+            spinner.start()
+            image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner)
+            image_box.append(image_w)
         self.news_page_group.add(image_box)
         if info_["title"]:
             self.news_page_group.set_title(info_["title"])
