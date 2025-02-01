@@ -207,8 +207,11 @@ class NewsGui():
                                       bottom_margin=5,
                                       justification=Gtk.Justification.FILL )
             text_view.get_buffer().set_text(info_["body"],-1)
+            text_view.add_css_class("amiri")
+            sw.set_size_request(-1, 80)
             sw.set_child(text_view)
             self.news_page_group.add(sw)
+
 
         if info_["news_id"] != self.parent.app_settings.get_string("news-id"):
             self.parent.app_settings.set_string("news-id",info_["news_id"])
