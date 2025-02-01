@@ -109,11 +109,25 @@ class NewsGui():
             self.session.send_async(self.msg,GLib.PRIORITY_LOW,None,self.on_connect_finish,None)
         except Exception as e:
             print(e)
+            try:
+                if os.path.exists(self.json_save_location):
+                    with open(self.json_save_location,"r") as json_file:
+                        info_ = json.load(json_file)
+                    self.read_info(info_)
+            except Exception as e:
+                pass
 
     def on_connect_finish(self,session, result, data):
         try:
-            if self.msg.get_status() ==  Soup.Status.NOT_FOUND :
+            if self.msg.get_status() !=  Soup.Status.OK :
                 print(self.msg.get_status())
+                try:
+                    if os.path.exists(self.json_save_location):
+                        with open(self.json_save_location,"r") as json_file:
+                            info_ = json.load(json_file)
+                        self.read_info(info_)
+                except Exception as e:
+                    pass
                 return
             input_stream = session.send_finish(result)
             if os.path.exists(self.json_save_location):
@@ -122,6 +136,13 @@ class NewsGui():
             input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
         except Exception as e:
             print(e)
+            try:
+                if os.path.exists(self.json_save_location):
+                    with open(self.json_save_location,"r") as json_file:
+                        info_ = json.load(json_file)
+                    self.read_info(info_)
+            except Exception as e:
+                pass
 
     def on_read_finish(self,input_stream, result):
         try:
@@ -136,12 +157,19 @@ class NewsGui():
                     info_ = json.load(json_file)
                 self.read_info(info_)
         except Exception as e:
+            print(e)
             try:
                 self.json_file.close()
                 input_stream.close()
             except Exception as e:
                 pass
-            print(e)
+            try:
+                if os.path.exists(self.json_save_location):
+                    with open(self.json_save_location,"r") as json_file:
+                        info_ = json.load(json_file)
+                    self.read_info(info_)
+            except Exception as e:
+                pass
 
     def read_info(self,info_):
         if info_["image"][0].startswith("http"):

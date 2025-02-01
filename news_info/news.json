@@ -3,6 +3,6 @@
 	"windows_title"  : "رمضان مبارك",
 	"title"          : "",
 	"body"           : "",
-	"image"          : ["","https://github.com/yucefsourani/albasheer-electronic-quran-browser","ramadan2.jpeg"]
+	"image"          : ["ramadan2.jpeg","https://github.com/yucefsourani/albasheer-electronic-quran-browser","ramadan2.jpeg"]
 
 }
