@@ -49,7 +49,7 @@
       <attribute name="action">win.copy</attribute>
     </item>
     <item>
-      <attribute name="label" translatable="yes">News Window</attribute>
+      <attribute name="label" translatable="yes">News</attribute>
       <attribute name="action">win.news</attribute>
     </item>
     <item>
