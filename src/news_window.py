@@ -6,27 +6,21 @@ import json
 import os
 
 class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
-    def __init__(self, parent,path,news_window=None,run=False):
+    def __init__(self, parent,path,run=False,loop=True):
         super().__init__()
         self.parent          = parent
-        self.news_window     = news_window
         self.run             = run
+        self.loop            = loop
         self.animation       = GdkPixbuf.PixbufAnimation.new_from_file(path)
         self.is_static_image = self.animation.is_static_image()
-        if not self.is_static_image:
-            if news_window:
-                self.news_window.connect("map",lambda x:self.start())
-                self.news_window.connect("unmap",lambda x:self.stop())
         if self.run:
             self.start()
 
     def stop(self):
         if not self.is_static_image:
             self.run = False
-        print("stop")
 
     def start(self):
-        print("start")
         self.run = True
         self.iterator = self.animation.get_iter()
         self.delay    = self.iterator.get_delay_time()
@@ -43,8 +37,9 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
             self.delay = self.iterator.get_delay_time()
             if self.delay <0:
                 self.run = False
+                if self.loop and not self.is_static_image:
+                    self.start()
                 return GLib.SOURCE_REMOVE
-            print("dd")
             self.timeout = GLib.timeout_add(self.delay, self.on_delay)
             self.invalidate_contents()
 
