@@ -1,11 +1,64 @@
 import gi
 gi.require_version('Soup', '3.0')
 from gi.repository import Adw
-from gi.repository import Gtk,Soup,GLib,Gdk
+from gi.repository import Gtk,Soup,GLib,Gdk,GLib, GdkPixbuf, GObject
 import json
 import os
-import threading
 
+class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
+    def __init__(self, parent,path,run=True):
+        super().__init__()
+        self.parent          = parent
+        self.run             = run
+        self.animation       = GdkPixbuf.PixbufAnimation.new_from_file(path)
+        self.is_static_image = self.animation.is_static_image()
+        if self.run:
+            self.start()
+
+    def stop(self):
+        if not self.is_static_image:
+            self.run = False
+
+    def start(self):
+        self.run = True
+        self.iterator = self.animation.get_iter()
+        self.delay    = self.iterator.get_delay_time()
+        if self.delay <0:
+            if not self.is_static_image:
+                self.run = False
+            self.invalidate_contents()
+            return
+        self.timeout  = GLib.timeout_add(self.delay, self.on_delay)
+        self.invalidate_contents()
+
+    def on_delay(self):
+        if self.run:
+            self.delay = self.iterator.get_delay_time()
+            if self.delay <0:
+                self.run = False
+                return GLib.SOURCE_REMOVE
+            self.timeout = GLib.timeout_add(self.delay, self.on_delay)
+            self.invalidate_contents()
+
+        return GLib.SOURCE_REMOVE
+
+    def do_get_intrinsic_height(self):
+        return self.parent.get_height()
+
+    def do_get_intrinsic_width(self):
+        return self.parent.get_width()
+
+    def invalidate_contents(self):
+        self.emit("invalidate-contents")
+
+    def do_snapshot(self, snapshot, width, height):
+        if not self.is_static_image:
+            self.iterator.advance(None)
+
+        self.pixbuf = self.iterator.get_pixbuf()
+        texture = Gdk.Texture.new_for_pixbuf(self.pixbuf)
+
+        texture.snapshot(snapshot, width, height)
 
 class ImagePaint(Gtk.Widget):
     def __init__(self,parent,image_location,image_link,news_page_group,image_source_link,spinner):
@@ -20,7 +73,8 @@ class ImagePaint(Gtk.Widget):
         if os.path.exists(self.image_location):
             if self.image_source_link:
                 self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
-            self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
+            #self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
+            self.__texture   = ImageGifAutoPaintable(self,self.image_location)
             self.spinner.stop()
         else:
             self.__texture   = None
@@ -70,7 +124,8 @@ class ImagePaint(Gtk.Widget):
             else:
                 self.image_file.close()
                 input_stream.close()
-                self.__texture = Gdk.Texture.new_from_filename(self.image_location)
+                #self.__texture = Gdk.Texture.new_from_filename(self.image_location)
+                self.__texture   = ImageGifAutoPaintable(self,self.image_location)
                 self.queue_draw()
                 if self.image_source_link:
                     self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
