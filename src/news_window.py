@@ -18,8 +18,10 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
     def stop(self):
         if not self.is_static_image:
             self.run = False
+        print("stop")
 
     def start(self):
+        print("start")
         self.run = True
         self.iterator = self.animation.get_iter()
         self.delay    = self.iterator.get_delay_time()
@@ -61,10 +63,11 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
         texture.snapshot(snapshot, width, height)
 
 class ImagePaint(Gtk.Widget):
-    def __init__(self,parent,image_location,image_link,news_page_group,image_source_link,spinner):
+    def __init__(self,parent,image_location,image_link,news_page_group,image_source_link,spinner,news_window):
         Gtk.Widget.__init__(self)
         self.parent            = parent
         self.spinner           = spinner
+        self.news_window       = news_window
         self.image_link        = image_link
         self.image_location    = image_location
         self.news_page_group   = news_page_group
@@ -75,6 +78,8 @@ class ImagePaint(Gtk.Widget):
                 self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
             #self.__texture   = Gdk.Texture.new_from_filename(self.image_location)
             self.__texture   = ImageGifAutoPaintable(self,self.image_location)
+            self.news_window.connect("map",lambda x:self.__texture.start())
+            self.news_window.connect("unmap",lambda x:self.__texture.stop())
             self.spinner.stop()
         else:
             self.__texture   = None
@@ -126,6 +131,8 @@ class ImagePaint(Gtk.Widget):
                 input_stream.close()
                 #self.__texture = Gdk.Texture.new_from_filename(self.image_location)
                 self.__texture   = ImageGifAutoPaintable(self,self.image_location)
+                self.news_window.connect("map",lambda x:self.__texture.start())
+                self.news_window.connect("unmap",lambda x:self.__texture.stop())
                 self.queue_draw()
                 if self.image_source_link:
                     self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
@@ -246,7 +253,7 @@ class NewsGui():
             spinner = Gtk.Spinner.new()
             self.news_page_group.set_header_suffix(spinner)
             spinner.start()
-            image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner)
+            image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner,self.news_window)
             image_box.append(image_w)
         self.news_page_group.add(image_box)
         if info_["title"]:
