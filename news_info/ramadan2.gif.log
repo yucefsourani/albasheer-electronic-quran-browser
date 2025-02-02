@@ -1,22 +1,0 @@
-/app/bin/ffmpeg -hide_banner -y -y -r 10 -start_number 0 -start_number_range 1 -i /home/yuceff28/Projects/albasheer/news_info/frame%04d.png -i /home/yuceff28/Projects/albasheer/news_info/KritaTempPalettegen_%06d.png -lavfi scale=w=1080:h=1080:flags=bicubic[0:v];[0:v][1:v]paletteuse=dither=sierra2_4a:diff_mode=none -f gif -loop 0 -gifflags +transdiff /home/yuceff28/Projects/albasheer/news_info/ramadan2.gif
-=====================================================
-Input #0, image2, from '/home/yuceff28/Projects/albasheer/news_info/frame%04d.png':
-  Duration: 00:00:00.64, start: 0.000000, bitrate: N/A
-  Stream #0:0: Video: png, rgba(pc, gbr/unknown/unknown), 1024x1024 [SAR 11811:11811 DAR 1:1], 25 fps, 25 tbr, 25 tbn
-Input #1, image2, from '/home/yuceff28/Projects/albasheer/news_info/KritaTempPalettegen_%06d.png':
-  Duration: 00:00:00.04, start: 0.000000, bitrate: N/A
-  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 16x16 [SAR 1:1 DAR 1:1], 25 fps, 25 tbr, 25 tbn
-Stream mapping:
-  Stream #0:0 (png) -> scale:default
-  Stream #1:0 (png) -> paletteuse
-  paletteuse:default -> Stream #0:0 (gif)
-Press [q] to stop, [?] for help
-Output #0, gif, to '/home/yuceff28/Projects/albasheer/news_info/ramadan2.gif':
-  Metadata:
-    encoder         : Lavf60.16.100
-  Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1080x1080 [SAR 1:1 DAR 1:1], q=2-31, 200 kb/s, 10 fps, 100 tbn
-    Metadata:
-      encoder         : Lavc60.31.102 gif
-frame=    0 fps=0.0 q=-0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    [in#0/image2 @ 0x55b20c51e840] Thread message queue blocking; consider raising the thread_queue_size option (current value: 8)
-frame=    4 fps=3.0 q=-0.0 size=     512kB time=00:00:00.40 bitrate=10485.8kbits/s speed=0.297x    frame=    7 fps=3.3 q=-0.0 size=    1024kB time=00:00:00.70 bitrate=11983.7kbits/s speed=0.325x    frame=   10 fps=3.4 q=-0.0 size=    1536kB time=00:00:01.00 bitrate=12582.9kbits/s speed=0.34x    frame=   15 fps=3.3 q=-0.0 size=    2304kB time=00:00:01.50 bitrate=12582.9kbits/s speed=0.331x    [out#0/gif @ 0x55b20c545ac0] video:2881kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000678%
-frame=   16 fps=3.5 q=-0.0 Lsize=    2881kB time=00:00:01.50 bitrate=15736.0kbits/s speed=0.328x    
