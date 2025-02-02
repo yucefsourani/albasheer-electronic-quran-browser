@@ -64,10 +64,11 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
         texture.snapshot(snapshot, width, height)
 
 class ImagePaint():
-    def __init__(self,parent,image_location,image_link,news_page_group,image_source_link,spinner,news_window):
+    def __init__(self,parent,image_location,image_link,news_page_group,image_source_link,spinner,news_window,new_news):
         self.parent                = parent
         self.spinner               = spinner
         self.news_window           = news_window
+        self.new_news              = new_news
         self.image_link            = image_link
         self.image_location        = image_location
         self.news_page_group       = news_page_group
@@ -84,6 +85,8 @@ class ImagePaint():
             self.news_window.connect("map",lambda x:self.__texture.start())
             self.news_window.connect("unmap",lambda x:self.__texture.stop())
             self.spinner.stop()
+            if self.new_news:
+                self.__texture.start()
         else:
             self.__texture   = None
             self.download_image()
@@ -128,6 +131,8 @@ class ImagePaint():
                     self.news_page_group.set_header_suffix(Gtk.LinkButton.new_with_label(self.image_source_link,"Picture Source"))
                 self.spinner.stop()
                 self.picture.queue_draw()
+                if self.new_news:
+                    self.__texture.start()
         except Exception as e:
             print(e)
             try:
@@ -243,7 +248,7 @@ class NewsGui():
             spinner = Gtk.Spinner.new()
             self.news_page_group.set_header_suffix(spinner)
             spinner.start()
-            image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner,self.news_window)
+            image_w = ImagePaint(image_box,image_l,image_info_link,self.news_page_group,info_["image"][1],spinner,self.news_window,info_["news_id"] != self.parent.app_settings.get_string("news-id"))
             image_box.append(image_w.picture)
         self.news_page_group.add(image_box)
         if info_["title"]:
