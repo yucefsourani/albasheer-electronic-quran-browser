@@ -11,6 +11,7 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
         self.parent          = parent
         self.run             = run
         self.loop            = loop
+        self.iterator        = None
         self.animation       = GdkPixbuf.PixbufAnimation.new_from_file(path)
         self.is_static_image = self.animation.is_static_image()
         if self.run:
@@ -55,7 +56,7 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
         self.emit("invalidate-contents")
 
     def do_snapshot(self, snapshot, width, height):
-        if not self.is_static_image:
+        if not self.is_static_image and self.iterator:
             self.iterator.advance(None)
 
         self.pixbuf = self.iterator.get_pixbuf()
