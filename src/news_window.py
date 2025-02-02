@@ -34,6 +34,7 @@ class ImageGifAutoPaintable(GObject.Object, Gdk.Paintable):
         self.invalidate_contents()
 
     def on_delay(self):
+        print("dddd")
         if self.run:
             self.delay = self.iterator.get_delay_time()
             if self.delay <0:
