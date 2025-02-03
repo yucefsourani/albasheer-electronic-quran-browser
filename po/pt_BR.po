@@ -109,7 +109,7 @@ msgstr "_Sobre O Anunciador"
 
 #: src/window.ui:64
 msgid "Main Menu"
-msgstr "Jogar o menu"
+msgstr "Menu principal"
 
 #: src/tafasir_w.py:31
 msgid "Tafasir"
