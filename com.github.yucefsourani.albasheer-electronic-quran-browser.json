@@ -10,8 +10,7 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--socket=pulseaudio",
-        "--env=LC_ALL=pt_BR.UTF-8"
+        "--socket=pulseaudio"
     ],
     "cleanup" : [
         "/include",
