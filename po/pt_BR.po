@@ -1,0 +1,216 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the albasheer package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: albasheer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-25 18:42+0200\n"
+"PO-Revision-Date: 2025-02-03 18:04-0300\n"
+"Last-Translator: john peter <johnppetersa@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.desktop.in:3
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:4
+msgid "albasheer"
+msgstr "O Anunciador"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.desktop.in:9
+msgid "GTK;"
+msgstr "GTK;"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:5
+msgid "Electronic Quran Browser"
+msgstr "Navegador eletrônico do Alcorão"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:13
+msgid "Yucef Sourani"
+msgstr "Yucef Sourani/José Sorani"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:16
+msgid "Electronic Quran Browser."
+msgstr "Navegador eletrônico do Alcorão."
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:18
+msgid "Support Audio Tilawa (mp3 from ayat)"
+msgstr "Áudio de Suporte para leitura (mp3 do versículo)"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:19
+msgid "Support Auto Scroll + Run Tilawa"
+msgstr "Apoie o rolo automático + execute a leitura"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:20
+msgid "Support Tarajem (from ayat)"
+msgstr "Suporte tradução (do versículo)"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:21
+msgid "Support Tafasir (from ayat)"
+msgstr "Suporte a interpretação (do verso)"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:22
+msgid "Support Speed Up/Down Auto scroll"
+msgstr "Rolo de velocidade de velocidade de velocidade/descida"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:23
+msgid "Support save/load last current sura aya"
+msgstr "Apoio para salvar/carregar o último versículo do capítulo atual"
+
+#: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:24
+msgid "Support search for sura"
+msgstr "Apoie a pesquisa por capítulo"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:79
+msgid "translator-credits"
+msgstr ""
+"Translate this string as your translator credits.\n"
+"Name only:    john peter sa\n"
+"Name + URL:  /\n"
+"Name + Email: john peter sa <johnppetersa@gmail.com>\n"
+"Do not remove existing names.\n"
+"Names are separated with newlines."
+
+#: src/window.py:197 src/window.py:687 src/window.py:692 src/tools_bar.py:108
+#: src/tools_bar.py:113
+msgid "Aya "
+msgstr "versículo "
+
+#: src/window.py:200 src/window.py:690 src/tools_bar.py:111
+msgid "Aya"
+msgstr "versículo "
+
+#: src/window.ui:6
+msgid "Albasheer"
+msgstr "O Anunciador"
+
+#: src/window.ui:44
+msgid "_Search For Aya"
+msgstr "Busca por versículo"
+
+#: src/window.ui:48 src/copy_gui.py:33
+msgid "Copy Ayat"
+msgstr "Copiar Versículo"
+
+#: src/window.ui:52
+msgid "_Keyboard Shortcuts"
+msgstr "_Keyboard atalhos"
+
+#: src/window.ui:56
+msgid "_About Albasheer"
+msgstr "_Sobre O Anunciador"
+
+#: src/window.ui:64
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: src/tafasir_w.py:31
+msgid "Tafasir"
+msgstr "interpretações"
+
+#: src/tafasir_w.py:35
+msgid "Tarajem"
+msgstr "Traduções"
+
+#: src/tafasir_w.py:78
+msgid "Tafasir unavailable"
+msgstr "Interpretações indisponíveis"
+
+#: src/tafasir_w.py:79
+msgid "Download Tafasir"
+msgstr "Baixar as Interpretações"
+
+#: src/tafasir_w.py:176 src/tafasir_w.py:403
+msgid "Connect Faild"
+msgstr "Falha na Conexão"
+
+#: src/tafasir_w.py:201 src/tafasir_w.py:428 src/tilawa_download.py:146
+msgid "Download File Faild"
+msgstr "Baixar o arquivo falhou"
+
+#: src/tafasir_w.py:304
+msgid "Tarajem unavailable"
+msgstr "Traduções não disponíveis"
+
+#: src/tafasir_w.py:305
+msgid "Download Tarajem"
+msgstr "Baixar Traduções"
+
+#: src/utl.py:81 src/utl.py:132
+msgid "Done"
+msgstr "Feito"
+
+#: src/utl.py:85 src/utl.py:136
+msgid "Unpack File Faild"
+msgstr "Falha ao Descompactar o Arquivo"
+
+#: src/utl.py:285
+msgid "TILAWA NOT FOUND! Download Tilawa"
+msgstr "LEITURA NÃO LOCALIZADA! Baixe a Leitura"
+
+#: src/tilawa_download.py:179
+msgid "Search For Tilawa"
+msgstr "Procurar por leitura"
+
+#: src/tilawa_gui.py:26
+msgid "Settings"
+msgstr "Configurações"
+
+#: src/tilawa_gui.py:32
+msgid "Download"
+msgstr "Baixar"
+
+#: src/tilawa_gui.py:42 src/tilawa_gui.py:54
+msgid "settings"
+msgstr "Configurações"
+
+#: src/tilawa_gui.py:45 src/tilawa_gui.py:56
+msgid "download"
+msgstr "baixar"
+
+#: src/tilawa_settings.py:19
+msgid "Settings For Tilawa"
+msgstr "Configurações para Recitação"
+
+#: src/tilawa_settings.py:36
+msgid "Volume"
+msgstr "Volume"
+
+#: src/search_window.py:37
+msgid "Search"
+msgstr "Procurar"
+
+#: src/search_window.py:43
+msgid "Search For Aya"
+msgstr "Procurar por versículo"
+
+#: src/copy_gui.py:26
+msgid "Copy"
+msgstr "Cópia"
+
+#: src/copy_gui.py:35
+msgid "Clipboard"
+msgstr "Praça de transferência"
+
+#: src/copy_gui.py:53
+msgid "From Aya"
+msgstr "A partir do versículo"
+
+#: src/copy_gui.py:57
+msgid "To Aya"
+msgstr "Para o versículo"
+
+#: src/copy_gui.py:61
+msgid "Imla'i style"
+msgstr "Estilo Ortográfico Imla'i\""
+
+#: src/copy_gui.py:66
+msgid "an Aya per line"
+msgstr "Um versículo por linha"
