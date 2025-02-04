@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: albasheer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 15:39+0200\n"
+"POT-Creation-Date: 2025-02-04 15:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,11 +64,6 @@ msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:24
 msgid "Support search for sura"
-msgstr ""
-
-#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-#: src/main.py:79
-msgid "translator-credits"
 msgstr ""
 
 #: src/window.py:200 src/window.py:698 src/window.py:703 src/tools_bar.py:108

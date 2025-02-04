@@ -76,7 +76,7 @@ class AlbasheerApplication(Adw.Application):
         about.add_credit_section("Special thanks",["Amiri Font","https://www.amirifont.org/"])
         about.add_credit_section("This program uses ",["Ayat to provides tilawa/tafasir/tarajem","https://quran.ksu.edu.sa/ayat/"])
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(_('translator-credits'))
+        about.set_translator_credits("pt_BR  john peter sa <johnppetersa@gmail.com>")
         about.present(self.props.active_window)
 
 

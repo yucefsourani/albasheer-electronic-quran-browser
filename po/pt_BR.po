@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: albasheer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 15:39+0200\n"
+"POT-Creation-Date: 2025-02-04 15:45+0200\n"
 "PO-Revision-Date: 2025-02-03 18:04-0300\n"
 "Last-Translator: john peter <johnppetersa@gmail.com>\n"
 "Language-Team: \n"
@@ -66,17 +66,6 @@ msgstr "Apoio para salvar/carregar o último versículo do capítulo atual"
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:24
 msgid "Support search for sura"
 msgstr "Apoie a pesquisa por capítulo"
-
-#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-#: src/main.py:79
-msgid "translator-credits"
-msgstr ""
-"Translate this string as your translator credits.\n"
-"Name only:    john peter sa\n"
-"Name + URL:  /\n"
-"Name + Email: john peter sa <johnppetersa@gmail.com>\n"
-"Do not remove existing names.\n"
-"Names are separated with newlines."
 
 #: src/window.py:200 src/window.py:698 src/window.py:703 src/tools_bar.py:108
 #: src/tools_bar.py:113
@@ -218,3 +207,12 @@ msgstr "Estilo Ortográfico Imla'i\""
 #: src/copy_gui.py:66
 msgid "an Aya per line"
 msgstr "Um versículo por linha"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Translate this string as your translator credits.\n"
+#~ "Name only:    john peter sa\n"
+#~ "Name + URL:  /\n"
+#~ "Name + Email: john peter sa <johnppetersa@gmail.com>\n"
+#~ "Do not remove existing names.\n"
+#~ "Names are separated with newlines."
