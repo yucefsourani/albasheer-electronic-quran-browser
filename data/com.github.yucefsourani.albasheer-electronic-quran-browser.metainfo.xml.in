@@ -37,11 +37,12 @@
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
-    <release version="3.0.1" date="2025-02-02"/>
+    <release version="3.0.1" date="2025-02-04"/>
     <description>
       <p>Release notes</p>
         <ul>
           <li>Add Notification Window</li>
+          <li>Add pt_BR Translation (Special thanks john peter)</li>
         </ul>
     </description>
   </releases>
