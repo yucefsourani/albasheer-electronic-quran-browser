@@ -13,16 +13,11 @@
   <developer_name>Yucef Sourani</developer_name>
   <url type="homepage">https://github.com/yucefsourani/albasheer-electronic-quran-browser</url>
   <description>
-    <p>Electronic Quran Browser.</p>
-    <ul>
-      <li>Support Audio Tilawa (mp3 from ayat)</li>
-      <li>Support Auto Scroll + Run Tilawa</li>
-      <li>Support Tarajem (from ayat)</li>
-      <li>Support Tafasir (from ayat)</li>
-      <li>Support Speed Up/Down Auto scroll </li>
-      <li>Support save/load last current sura aya</li>
-      <li>Support search for sura</li>
-    </ul>
+      <p>Release notes</p>
+        <ul>
+          <li>Add Notification Window</li>
+          <li>Add pt_BR Translation (Special thanks john peter)</li>
+        </ul>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -38,13 +33,6 @@
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
     <release version="3.0.1" date="2025-02-04"/>
-    <description>
-      <p>Release notes</p>
-        <ul>
-          <li>Add Notification Window</li>
-          <li>Add pt_BR Translation (Special thanks john peter)</li>
-        </ul>
-    </description>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
