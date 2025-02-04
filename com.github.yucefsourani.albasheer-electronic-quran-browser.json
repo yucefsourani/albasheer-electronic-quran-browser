@@ -10,7 +10,8 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--socket=pulseaudio"
+        "--socket=pulseaudio",
+        "--env=LC_ALL=pt_BR.UTF-8"
     ],
     "cleanup" : [
         "/include",
@@ -25,28 +26,28 @@
     ],
     "modules" : [
         {
-            "name": "amiri-quran-fonts",
-            "buildsystem":"simple",
-            "sources": [
+            "name" : "amiri-quran-fonts",
+            "buildsystem" : "simple",
+            "sources" : [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/aliftype/amiri/archive/refs/tags/1.001.tar.gz",
-                    "sha256": "5e53e5947bd0cf2dd7a9f26bbe77cd10805fdad074ca181c84b7a8ef8cb191be"
+                    "type" : "archive",
+                    "url" : "https://github.com/aliftype/amiri/archive/refs/tags/1.001.tar.gz",
+                    "sha256" : "5e53e5947bd0cf2dd7a9f26bbe77cd10805fdad074ca181c84b7a8ef8cb191be"
                 },
                 {
-                    "type": "file",
-                    "path": "amiri-fontconfig.conf"
+                    "type" : "file",
+                    "path" : "amiri-fontconfig.conf"
                 },
                 {
-                    "type": "file",
-                    "path": "amiri-quran-fontconfig.conf"
+                    "type" : "file",
+                    "path" : "amiri-quran-fontconfig.conf"
                 },
                 {
-                    "type": "file",
-                    "path": "amiri-quran-colored-fontconfig.conf"
+                    "type" : "file",
+                    "path" : "amiri-quran-colored-fontconfig.conf"
                 }
             ],
-            "build-commands": [
+            "build-commands" : [
                 "mkdir -p /app/share/fonts/",
                 "cp fonts/*.ttf /app/share/fonts/",
                 "mkdir -p /app/etc/fonts/conf.d/",

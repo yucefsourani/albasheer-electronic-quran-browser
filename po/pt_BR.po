@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: albasheer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-25 18:42+0200\n"
+"POT-Creation-Date: 2025-02-04 15:39+0200\n"
 "PO-Revision-Date: 2025-02-03 18:04-0300\n"
 "Last-Translator: john peter <johnppetersa@gmail.com>\n"
 "Language-Team: \n"
@@ -78,12 +78,12 @@ msgstr ""
 "Do not remove existing names.\n"
 "Names are separated with newlines."
 
-#: src/window.py:197 src/window.py:687 src/window.py:692 src/tools_bar.py:108
+#: src/window.py:200 src/window.py:698 src/window.py:703 src/tools_bar.py:108
 #: src/tools_bar.py:113
 msgid "Aya "
 msgstr "versículo "
 
-#: src/window.py:200 src/window.py:690 src/tools_bar.py:111
+#: src/window.py:203 src/window.py:701 src/tools_bar.py:111
 msgid "Aya"
 msgstr "versículo "
 
@@ -100,14 +100,18 @@ msgid "Copy Ayat"
 msgstr "Copiar Versículo"
 
 #: src/window.ui:52
+msgid "Notification"
+msgstr ""
+
+#: src/window.ui:56
 msgid "_Keyboard Shortcuts"
 msgstr "_Keyboard atalhos"
 
-#: src/window.ui:56
+#: src/window.ui:60
 msgid "_About Albasheer"
 msgstr "_Sobre O Anunciador"
 
-#: src/window.ui:64
+#: src/window.ui:68
 msgid "Main Menu"
 msgstr "Menu principal"
 

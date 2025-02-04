@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: albasheer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-25 18:42+0200\n"
+"POT-Creation-Date: 2025-02-04 15:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ar\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.desktop.in:3
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:4
 msgid "albasheer"
-msgstr "البشير"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.desktop.in:9
 msgid "GTK;"
@@ -28,19 +28,19 @@ msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:5
 msgid "Electronic Quran Browser"
-msgstr "مصحف البشير الاكتروني"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:13
 msgid "Yucef Sourani"
-msgstr "يوسف صوراني"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:16
 msgid "Electronic Quran Browser."
-msgstr "مصحف البشير الاكتروني"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:18
 msgid "Support Audio Tilawa (mp3 from ayat)"
-msgstr "يدعم تنزيل التلاوة من مشروع آيات بصييغة mp3"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:19
 msgid "Support Auto Scroll + Run Tilawa"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:21
 msgid "Support Tafasir (from ayat)"
-msgstr "يعرض التفاسير من مشروع آيات"
+msgstr ""
 
 #: data/com.github.yucefsourani.albasheer-electronic-quran-browser.metainfo.xml.in:22
 msgid "Support Speed Up/Down Auto scroll"
@@ -71,139 +71,143 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: src/window.py:197 src/window.py:687 src/window.py:692 src/tools_bar.py:108
+#: src/window.py:200 src/window.py:698 src/window.py:703 src/tools_bar.py:108
 #: src/tools_bar.py:113
 msgid "Aya "
-msgstr "آية "
+msgstr ""
 
-#: src/window.py:200 src/window.py:690 src/tools_bar.py:111
+#: src/window.py:203 src/window.py:701 src/tools_bar.py:111
 msgid "Aya"
-msgstr "آية "
+msgstr ""
 
 #: src/window.ui:6
 msgid "Albasheer"
-msgstr "البشير"
+msgstr ""
 
 #: src/window.ui:44
 msgid "_Search For Aya"
-msgstr "البحث على آية"
+msgstr ""
 
 #: src/window.ui:48 src/copy_gui.py:33
 msgid "Copy Ayat"
-msgstr "نسح الآيات"
+msgstr ""
 
 #: src/window.ui:52
-msgid "_Keyboard Shortcuts"
-msgstr "إختصارات لوحة المفاتيح"
+msgid "Notification"
+msgstr ""
 
 #: src/window.ui:56
-msgid "_About Albasheer"
-msgstr "عن التطبيق"
+msgid "_Keyboard Shortcuts"
+msgstr ""
 
-#: src/window.ui:64
+#: src/window.ui:60
+msgid "_About Albasheer"
+msgstr ""
+
+#: src/window.ui:68
 msgid "Main Menu"
-msgstr "اقائمة الرئيسية"
+msgstr ""
 
 #: src/tafasir_w.py:31
 msgid "Tafasir"
-msgstr "تفاسير"
+msgstr ""
 
 #: src/tafasir_w.py:35
 msgid "Tarajem"
-msgstr "تراجم"
+msgstr ""
 
 #: src/tafasir_w.py:78
 msgid "Tafasir unavailable"
-msgstr "التفاسير غير متوفرة"
+msgstr ""
 
 #: src/tafasir_w.py:79
 msgid "Download Tafasir"
-msgstr "تنزيل التفاسير"
+msgstr ""
 
 #: src/tafasir_w.py:176 src/tafasir_w.py:403
 msgid "Connect Faild"
-msgstr "فشل الإتصال"
+msgstr ""
 
 #: src/tafasir_w.py:201 src/tafasir_w.py:428 src/tilawa_download.py:146
 msgid "Download File Faild"
-msgstr "فشل تنزيل الملف"
+msgstr ""
 
 #: src/tafasir_w.py:304
 msgid "Tarajem unavailable"
-msgstr "التراجم غير متوفرة"
+msgstr ""
 
 #: src/tafasir_w.py:305
 msgid "Download Tarajem"
-msgstr "تنزيل التراجم"
+msgstr ""
 
 #: src/utl.py:81 src/utl.py:132
 msgid "Done"
-msgstr "تم"
+msgstr ""
 
 #: src/utl.py:85 src/utl.py:136
 msgid "Unpack File Faild"
-msgstr "عملة فك الملف المضغوط فشلت"
+msgstr ""
 
 #: src/utl.py:285
 msgid "TILAWA NOT FOUND! Download Tilawa"
-msgstr "لم يعثر على التلاوة! قمبتنزيل التلاوة"
+msgstr ""
 
 #: src/tilawa_download.py:179
 msgid "Search For Tilawa"
-msgstr "بحث عن التلاوة"
+msgstr ""
 
 #: src/tilawa_gui.py:26
 msgid "Settings"
-msgstr "إعدادات"
+msgstr ""
 
 #: src/tilawa_gui.py:32
 msgid "Download"
-msgstr "تنزيل"
+msgstr ""
 
 #: src/tilawa_gui.py:42 src/tilawa_gui.py:54
 msgid "settings"
-msgstr "إعدادات"
+msgstr ""
 
 #: src/tilawa_gui.py:45 src/tilawa_gui.py:56
 msgid "download"
-msgstr "تنزيل"
+msgstr ""
 
 #: src/tilawa_settings.py:19
 msgid "Settings For Tilawa"
-msgstr "إعدادات التلاوة"
+msgstr ""
 
 #: src/tilawa_settings.py:36
 msgid "Volume"
-msgstr "مستوى الصوت"
+msgstr ""
 
 #: src/search_window.py:37
 msgid "Search"
-msgstr "بحث"
+msgstr ""
 
 #: src/search_window.py:43
 msgid "Search For Aya"
-msgstr "البحث عن آية"
+msgstr ""
 
 #: src/copy_gui.py:26
 msgid "Copy"
-msgstr "نسخ"
+msgstr ""
 
 #: src/copy_gui.py:35
 msgid "Clipboard"
-msgstr "الحافظة"
+msgstr ""
 
 #: src/copy_gui.py:53
 msgid "From Aya"
-msgstr "من آية"
+msgstr ""
 
 #: src/copy_gui.py:57
 msgid "To Aya"
-msgstr "إلى آية"
+msgstr ""
 
 #: src/copy_gui.py:61
 msgid "Imla'i style"
-msgstr "بأسلوب الإملاء"
+msgstr ""
 
 #: src/copy_gui.py:66
 msgid "an Aya per line"
-msgstr "كل آية في سطر"
+msgstr ""
