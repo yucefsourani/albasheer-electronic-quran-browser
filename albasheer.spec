@@ -24,6 +24,8 @@ Requires:       gnome-icon-theme
 Requires:       gstreamer1
 Requires:       gstreamer1-plugins-base
 Requires:       gstreamer1-plugins-good
+Requires:       libjpeg
+Requires:       libpng
 
 %description
 Electronic Quran Browser.
