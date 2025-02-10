@@ -17,7 +17,7 @@ Requires:       amiri-fonts
 Requires:       amiri-quran-fonts
 Requires:       amiri-quran-colored-fonts
 Requires:       python3-gobject
-Requires:       lidadwaita
+Requires:       libadwaita
 Requires:       gtk4
 Requires:       gettext
 Requires:       gnome-icon-theme
