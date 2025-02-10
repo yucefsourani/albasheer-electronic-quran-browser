@@ -35,7 +35,7 @@ https://github.com/ojuba-org/othman
 ## لينكس 
 ### فيدورا لينكس على مستودع copr
 ```
-sudo dnf copr enable youssefmsourani/albahseer -y
+sudo dnf copr enable youssefmsourani/albasheer -y
 
 sudo dnf install albasheer -y
 ```
@@ -110,7 +110,7 @@ https://github.com/ojuba-org/othman
 ### Fedora (copr repo)
 
 ```
-sudo dnf copr enable youssefmsourani/albahseer -y
+sudo dnf copr enable youssefmsourani/albasheer -y
 
 sudo dnf install albasheer -y
 ```
