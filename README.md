@@ -33,7 +33,12 @@ https://github.com/ojuba-org/othman
 
 
 ## لينكس 
+### فيدورا لينكس على مستودع copr
+```
+sudo dnf copr enable youssefmsourani/albahseer -y
 
+sudo dnf install albasheer -y
+```
 ### فلات باك من Flathub
 
 ```
@@ -101,6 +106,14 @@ https://github.com/ojuba-org/othman
 
 
 ## Linux 
+
+### Fedora (copr repo)
+
+```
+sudo dnf copr enable youssefmsourani/albahseer -y
+
+sudo dnf install albasheer -y
+```
 
 ### flatpak from flathub
 
