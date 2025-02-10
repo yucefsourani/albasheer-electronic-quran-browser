@@ -21,6 +21,9 @@ Requires:       libadwaita
 Requires:       gtk4
 Requires:       gettext
 Requires:       gnome-icon-theme
+Requires:       gstreamer1
+Requires:       gstreamer1-plugins-base
+Requires:       gstreamer1-plugins-good
 
 %description
 Electronic Quran Browser.
