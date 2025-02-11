@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        Electronic Quran Browser Beta
 License:        GPLv3     
 URL:            https://github.com/yucefsourani/albasheer-electronic-quran-browser
-Source0:        https://github.com/yucefsourani/albasheer-electronic-quran-browser/archive/beta.zip#/%{name}-%{version}-%{release}.zip
+Source0:        https://github.com/yucefsourani/albasheer-electronic-quran-browser/archive/beta.zip
 BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  gtk-update-icon-cache
@@ -32,7 +32,7 @@ Electronic Quran Browser Beta.
 
 
 %prep
-%autosetup -n albasheer-electronic-quran-browser-master
+%autosetup -n albasheer-electronic-quran-browser-beta
 
 %build
 %meson
