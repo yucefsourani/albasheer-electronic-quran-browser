@@ -1,7 +1,7 @@
 Name:           albasheer-beta
 Version:        3.0
 Release:        1%{?dist}
-Summary:        Electronic Quran Browser
+Summary:        Electronic Quran Browser Beta
 License:        GPLv3     
 URL:            https://github.com/yucefsourani/albasheer-electronic-quran-browser
 Source0:        https://github.com/yucefsourani/albasheer-electronic-quran-browser/archive/beta.zip#/%{name}-%{version}-%{release}.zip
@@ -28,7 +28,7 @@ Requires:       libjpeg
 Requires:       libpng
 
 %description
-Electronic Quran Browser.
+Electronic Quran Browser Beta.
 
 
 %prep
