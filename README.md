@@ -39,6 +39,8 @@ sudo dnf copr enable youssefmsourani/albasheer -y
 
 sudo dnf install albasheer -y
 ```
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/youssefmsourani/albasheer/package/albasheer/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/youssefmsourani/albasheer/package/albasheer/)
+
 ### فلات باك من Flathub
 
 ```
@@ -114,6 +116,8 @@ sudo dnf copr enable youssefmsourani/albasheer -y
 
 sudo dnf install albasheer -y
 ```
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/youssefmsourani/albasheer/package/albasheer/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/youssefmsourani/albasheer/package/albasheer/)
+
 
 ### flatpak from flathub
 
