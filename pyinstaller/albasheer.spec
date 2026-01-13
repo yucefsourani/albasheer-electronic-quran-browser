@@ -105,8 +105,29 @@ with open(str(albasheer_out) ,"w") as myf:
 datas = []
 
 
-datas.append((str(SRC_DIR / "*" ), "."))
+datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
+datas.append((str(SRC_DIR / "albasheer/__init__.py" ), "albasheerlib"))
+datas.append((str(SRC_DIR / "albasheer/univaruints.py" ), "albasheerlib"))
 
+datas.append((str(SRC_DIR / "__init__.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "main.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "window.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "tafasir_w.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "utl.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "tilawa_download.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "tilawa_gui.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "tilawa_settings.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "search_window.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "copy_gui.py" ), "albasheer"))
+datas.append((str(SRC_DIR / "news_window.py" ),  "albasheer"))
+
+
+datas.append((str(SRC_DIR / "albasheer-data/ix.db" ), "albasheerlib/albasheer-data"))
+datas.append((str(SRC_DIR / "albasheer-data/quran.db" ), "albasheerlib/albasheer-data"))
+
+datas.append((str(SRC_DIR / "tilawa_json_files" ), "share/albasheer/albasheer"))
+datas.append((str(SRC_DIR / "LICENSE-en" ), "licenses/albasheer"))
+datas.append((str(SRC_DIR / "LICENSE-ar.txt" ), "licenses/albasheer"))
 
 # Hidden imports for GTK4 and libadwaita
 hiddenimports = [
@@ -135,6 +156,7 @@ hiddenimports = [
 
 # Collect all gi submodules
 hiddenimports += collect_submodules('gi')
+hiddenimports += collect_submodules('sqlite3')
 
 # Platform-specific configurations
 if sys.platform == 'win32':
@@ -168,7 +190,7 @@ if sys.platform == 'win32':
             
             # Add icons
             icons_dir = share_path / 'icons'
-            datas.append((str(icons_dir), 'share/icons'))
+            datas.append((str(icons_dir  / "Adwaita" ), 'share'))
             
             # Add GStreamer plugins
             gst_plugins_dir = lib_path / 'gstreamer-1.0'
@@ -196,7 +218,7 @@ elif sys.platform == 'darwin':
             
         # Add icons
         icons_dir = share_path / 'icons'
-        datas.append((str(icons_dir), 'share/icons'))
+        datas.append((str(icons_dir / "Adwaita"), 'share/icons'))
 
 
 else:
@@ -223,7 +245,7 @@ else:
     
     for share_base in share_paths:
         icons_dir = Path(share_base) / 'icons'
-        datas.append((str(icons_dir), 'share/icons'))
+        datas.append((str(icons_dir / "Adwaita"), 'share/icons'))
         break
     
     # Add GStreamer plugins for Linux
