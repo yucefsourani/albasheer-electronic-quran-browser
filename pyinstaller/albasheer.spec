@@ -207,7 +207,6 @@ for gtk_path in gtk_paths:
         if hicolor_myicon.exists():
             datas.append((str(hicolor_myicon), "share/icons/hicolor"))
 
-        datas.append((str(icons_dir ), 'share/icons'))
         
         # Add GStreamer plugins
         gst_plugins_dir = lib_path / 'gstreamer-1.0'
