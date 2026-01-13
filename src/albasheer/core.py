@@ -40,7 +40,7 @@ def cmp(a, b):
 def guessDataDir():
     global data_dir
     if data_dir: return data_dir
-    if not hasattr(sys, "frozen"):
+    if not hasattr(sys, '_MEIPASS'):
         # we are not in py2exe
         f = os.path.abspath(os.path.realpath(os.path.dirname(__file__)))
         d = os.path.join(f, 'albasheer-data')
@@ -51,14 +51,8 @@ def guessDataDir():
         if os.path.exists(d):
             data_dir = os.path.abspath(os.path.realpath(d))
             return data_dir
-    # we are in py2exe or DATA can't be located relative to __FILE__
-    f = os.path.abspath(os.path.realpath(os.path.dirname(sys.argv[0])))
-    d = os.path.join(f, 'albasheer-data')
-    if os.path.exists(d):
-        data_dir=os.path.abspath(os.path.realpath(d))
-        return data_dir
-    d = os.path.join(f, '..', 'share', 'albasheer')
-    data_dir = os.path.abspath(os.path.realpath(d))
+
+    data_dir = os.path.join(sys._MEIPASS, 'albasheer-data')
     return data_dir
 
 def cmp_bisect_right(ccmp, a, x, lo=0, hi=None):
