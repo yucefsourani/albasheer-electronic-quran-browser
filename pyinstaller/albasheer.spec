@@ -99,8 +99,8 @@ with open(str(albasheer_out) ,"w") as myf:
 # Collect GTK4 and libadwaita data
 datas = []
 
-# Add application resources
-datas.append((str(gresource_file), "."))
+
+datas.append((str(SRC_DIR / "*" ), "."))
 
 
 # Hidden imports for GTK4 and libadwaita
