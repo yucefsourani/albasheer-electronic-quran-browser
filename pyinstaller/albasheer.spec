@@ -250,7 +250,7 @@ else:
 
 # Analysis configuration
 a = Analysis(
-    [str(SRC_DIR / 'albasheer'],
+    [str(SRC_DIR / 'albasheer')],
     pathex=[str(SRC_DIR)],
     binaries=[],
     datas=datas,
