@@ -12,6 +12,7 @@ hiddenimports = collect_submodules('gi')
 # Add specific GTK4 and libadwaita modules
 hiddenimports += [
     'gi.repository.Gtk',
+    'gi.repository.Soup',
     'gi.repository.Gdk',
     'gi.repository.GLib',
     'gi.repository.GObject',
@@ -76,6 +77,7 @@ def find_typelibs():
 
 required_typelibs = [
     'Gtk-4.0',
+    'Soup-3.0',
     'Gdk-4.0',
     'GLib-2.0',
     'GObject-2.0',
