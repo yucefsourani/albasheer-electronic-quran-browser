@@ -77,10 +77,16 @@ localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain('albasheer', localedir)
-locale.textdomain('albasheer')
-gettext.install('albasheer', localedir)
 
+try:
+    sys_lang_code, _ = locale.getdefaultlocale()
+    langs = [sys_lang_code] if sys_lang_code else None
+    lang = gettext.translation('albasheer', localedir, languages=langs, fallback=True)
+    lang.install()
+except Exception as e:
+    # في حال حدوث أي خطأ غير متوقع، نكتفي بالتثبيت الافتراضي
+    print(f"Warning: Could not load translations: {e}")
+    gettext.install('albasheer', localedir)
 
 if __name__ == '__main__':
     import gi
