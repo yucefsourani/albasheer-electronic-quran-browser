@@ -163,7 +163,7 @@ if sys.platform == 'win32':
             
             # Add icons
             icons_dir = share_path / 'icons'
-            datas.append((str(icons_dir / 'Adwaita'), 'share/icons/Adwaita'))
+            datas.append((str(icons_dir), 'share/icons'))
             
             # Add GStreamer plugins
             gst_plugins_dir = lib_path / 'gstreamer-1.0'
@@ -191,7 +191,7 @@ elif sys.platform == 'darwin':
             
         # Add icons
         icons_dir = share_path / 'icons'
-        datas.append((str(icons_dir / 'Adwaita'), 'share/icons/Adwaita'))
+        datas.append((str(icons_dir), 'share/icons'))
 
 
 else:
@@ -218,7 +218,7 @@ else:
     
     for share_base in share_paths:
         icons_dir = Path(share_base) / 'icons'
-        datas.append((str(icons_dir / 'Adwaita'), 'share/icons/Adwaita'))
+        datas.append((str(icons_dir), 'share/icons'))
         break
     
     # Add GStreamer plugins for Linux
@@ -251,7 +251,7 @@ else:
 # Analysis configuration
 a = Analysis(
     [str(SRC_DIR / 'albasheer.py')],
-    pathex=[str(SRC_DIR)],
+    pathex=[str(SRC_DIR),str(SRC_DIR / "albasheer")],
     binaries=[],
     datas=datas,
     hiddenimports=hiddenimports,
