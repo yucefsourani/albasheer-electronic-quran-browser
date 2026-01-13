@@ -104,6 +104,7 @@ with open(str(albasheer_out) ,"w") as myf:
 # Collect GTK4 and libadwaita data
 datas = []
 
+datas.append((str(gresource_file ), "."))
 
 datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
 datas.append((str(SRC_DIR / "albasheer/__init__.py" ), "albasheerlib"))
@@ -152,128 +153,70 @@ hiddenimports = [
     'gi.repository.GstApp',
     'gi.repository.GstPlayer',
     'gi.repository.GstGL',
+    'gi.repository.Soup',
 ]
 
 # Collect all gi submodules
 hiddenimports += collect_submodules('gi')
 hiddenimports += collect_submodules('sqlite3')
+hiddenimports += collect_submodules('zipfile')
+
 
 # Platform-specific configurations
-if sys.platform == 'win32':
-    # Windows: collect GTK4 DLLs from MSYS2/mingw64
-    
-    # Try to find GTK4 installation
-    gtk_paths = [
-        Path(os.environ.get('MSYSTEM_PREFIX', 'C:/msys64/mingw64')),
-        Path('C:/msys64/mingw64'),
-        Path('C:/gtk'),
-    ]
-    
-    for gtk_path in gtk_paths:
-        if (gtk_path / 'bin').exists():
-            # Add GTK4 binaries
-            bin_path = gtk_path / 'bin'
-            lib_path = gtk_path / 'lib'
-            share_path = gtk_path / 'share'
-            
-            # Add required DLLs
-            for dll in bin_path.glob('*.dll'):
-                datas.append((str(dll), '.'))
-            
-            # Add GLib schemas
-            schemas_dir = share_path / 'glib-2.0' / 'schemas'
-            install_gschema_xml(schemas_dir)
-            datas.append((str(schemas_dir), 'share/glib-2.0/schemas'))
-            
-            locale_dir = install_po(share_path)
-            datas.append((str(locale_dir), 'share/locale'))
-            
-            # Add icons
-            icons_dir = share_path / 'icons'
-            datas.append((str(icons_dir  / "Adwaita" ), 'share'))
-            
-            # Add GStreamer plugins
-            gst_plugins_dir = lib_path / 'gstreamer-1.0'
-            if gst_plugins_dir.exists():
-                for plugin in gst_plugins_dir.glob('*.dll'):
-                    datas.append((str(plugin), 'lib/gstreamer-1.0'))
-            
-            break
+# Windows: collect GTK4 DLLs from MSYS2/mingw64
+# Try to find GTK4 installation
+gtk_paths = [
+    Path(os.environ.get('MSYSTEM_PREFIX', 'C:/msys64/mingw64')),
+    Path('C:/msys64/mingw64'),
+    Path('C:/gtk'),
+]
 
-elif sys.platform == 'darwin':
-    # macOS: use Homebrew paths
-    homebrew_prefix = os.environ.get('HOMEBREW_PREFIX', '/opt/homebrew')
-    gtk_path = Path(homebrew_prefix)
-    
-    if gtk_path.exists():
+for gtk_path in gtk_paths:
+    if (gtk_path / 'bin').exists():
+        # Add GTK4 binaries
+        bin_path = gtk_path / 'bin'
+        lib_path = gtk_path / 'lib'
         share_path = gtk_path / 'share'
+        
+        # Add required DLLs
+        for dll in bin_path.glob('*.dll'):
+            datas.append((str(dll), '.'))
         
         # Add GLib schemas
         schemas_dir = share_path / 'glib-2.0' / 'schemas'
         install_gschema_xml(schemas_dir)
         datas.append((str(schemas_dir), 'share/glib-2.0/schemas'))
-
+        
         locale_dir = install_po(share_path)
         datas.append((str(locale_dir), 'share/locale'))
-            
+        
         # Add icons
-        icons_dir = share_path / 'icons'
-        datas.append((str(icons_dir / "Adwaita"), 'share/icons'))
-
-
-else:
-    # Linux: use system paths
-    share_paths = ['/usr/share', '/usr/local/share']
-    
-    for share_base in share_paths:
-        share_path = Path(share_base)
+        hicolor_icons = share_path / 'icons/hicolor'
+        if hicolor_icons.exists():
+            datas.append((str(hicolor_icons), 'share/icons/hicolor'))
         
-        # Add GLib schemas
-        schemas_dir = share_path / 'glib-2.0' / 'schemas'
-        if schemas_dir.exists():
-            install_gschema_xml(schemas_dir)
-            datas.append((str(schemas_dir), 'share/glib-2.0/schemas'))
-            break
-    for share_base in share_paths:
-        locale_dir = Path(share_base) / 'locale'
-        if locale_dir.exists():
-            locale_dir = install_po(share_path)
-            datas.append((str(locale_dir), 'share/locale'))
-            break
-        
+        adwaita_icons = share_path / 'icons/Adwaita'
+        if adwaita_icons.exists():
+            datas.append((str(adwaita_icons), 'share/icons/Adwaita'))
 
-    
-    for share_base in share_paths:
-        icons_dir = Path(share_base) / 'icons'
-        datas.append((str(icons_dir / "Adwaita"), 'share/icons'))
+        adwaita_myicon = DATA_DIR / "icons/Adwaita" 
+        if adwaita_myicon.exists():
+            datas.append((str(adwaita_myicon), "share/icons/Adwaita"))
+
+        hicolor_myicon = DATA_DIR / "icons/hicolor" 
+        if hicolor_myicon.exists():
+            datas.append((str(hicolor_myicon), "share/icons/hicolor"))
+
+        datas.append((str(icons_dir ), 'share/icons'))
+        
+        # Add GStreamer plugins
+        gst_plugins_dir = lib_path / 'gstreamer-1.0'
+        if gst_plugins_dir.exists():
+            for plugin in gst_plugins_dir.glob('*.dll'):
+                datas.append((str(plugin), 'lib/gstreamer-1.0'))
+        
         break
-    
-    # Add GStreamer plugins for Linux
-    gst_plugin_paths = [
-        Path('/usr/lib/x86_64-linux-gnu/gstreamer-1.0'),
-        Path('/usr/lib64/gstreamer-1.0'),
-        Path('/usr/lib/gstreamer-1.0'),
-        Path('/usr/lib/aarch64-linux-gnu/gstreamer-1.0'),
-    ]
-    for gst_path in gst_plugin_paths:
-        if gst_path.exists():
-            # Collect essential plugins
-            essential_plugins = [
-                'libgstcoreelements.so', 'libgstplayback.so', 'libgsttypefindfunctions.so',
-                'libgstaudioconvert.so', 'libgstaudioresample.so', 'libgstvideoconvert.so',
-                'libgstvideoscale.so', 'libgstvolume.so', 'libgstautodetect.so',
-                'libgstapp.so', 'libgstgio.so', 'libgstalsa.so', 'libgstpulseaudio.so',
-                'libgstlibav.so', 'libgstisomp4.so', 'libgstmatroska.so', 'libgstavi.so',
-                'libgstogg.so', 'libgstvorbis.so', 'libgstopus.so', 'libgstflac.so',
-                'libgstmpg123.so', 'libgstjpeg.so', 'libgstpng.so', 'libgstwavparse.so',
-                'libgstaudioparsers.so', 'libgstvpx.so', 'libgstwebp.so',
-                'libgstgtk.so', 'libgstgtk4.so', 'libgstopengl.so',
-            ]
-            for plugin_name in essential_plugins:
-                plugin_path = gst_path / plugin_name
-                if plugin_path.exists():
-                    datas.append((str(plugin_path), 'lib/gstreamer-1.0'))
-            break
+
 
 # Analysis configuration
 a = Analysis(
@@ -303,29 +246,28 @@ a = Analysis(
 )
 
 # Filter out Windows system DLLs and unnecessary libraries
-if sys.platform == 'win32':
-    exclude_binaries = [
-        # Windows UCRT and API-MS DLLs (system libraries)
-        'api-ms-win-',
-        'ucrtbase',
-        # Boost Python (from OpenEXR, not needed)
-        'libboost_python',
-        # OpenEXR/Imath (not needed for basic media playback)
-        'libImath',
-        'libOpenEXR',
-        'libIex',
-        'libIlmThread',
-        'libPyImath',
-        'libPyIex',
-    ]
+exclude_binaries = [
+    # Windows UCRT and API-MS DLLs (system libraries)
+    'api-ms-win-',
+    'ucrtbase',
+    # Boost Python (from OpenEXR, not needed)
+    'libboost_python',
+    # OpenEXR/Imath (not needed for basic media playback)
+    'libImath',
+    'libOpenEXR',
+    'libIex',
+    'libIlmThread',
+    'libPyImath',
+    'libPyIex',
+]
     
-    filtered_binaries = []
-    for binary in a.binaries:
-        name = binary[0].lower()
-        if not any(exclude in name for exclude in exclude_binaries):
-            filtered_binaries.append(binary)
-    
-    a.binaries = filtered_binaries
+filtered_binaries = []
+for binary in a.binaries:
+    name = binary[0].lower()
+    if not any(exclude in name for exclude in exclude_binaries):
+        filtered_binaries.append(binary)
+
+a.binaries = filtered_binaries
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=None)
 
@@ -345,7 +287,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=str(DATA_DIR / 'com.github.yucefsourani.albasheer-electronic-quran-browser.ico') if sys.platform == 'win32' and (DATA_DIR / 'com.github.yucefsourani.albasheer-electronic-quran-browser.ico').exists() else None,
+    icon=str(DATA_DIR / 'com.github.yucefsourani.albasheer-electronic-quran-browser.ico') if  (DATA_DIR / 'com.github.yucefsourani.albasheer-electronic-quran-browser.ico').exists() else None,
 )
 
 coll = COLLECT(
@@ -358,19 +300,3 @@ coll = COLLECT(
     upx_exclude=[],
     name=APP_NAME,
 )
-
-# macOS App Bundle
-if sys.platform == 'darwin':
-    app = BUNDLE(
-        coll,
-        name=f'albasheer.app',
-        icon=str(DATA_DIR / 'com.github.yucefsourani.albasheer-electronic-quran-browser.icns'),
-        bundle_identifier=APP_ID,
-        info_plist={
-            'CFBundleName': 'albasheer',
-            'CFBundleDisplayName': 'albasheer',
-            'CFBundleVersion': '3.0',
-            'CFBundleShortVersionString': '3.0',
-            'NSHighResolutionCapable': True,
-        },
-    )
