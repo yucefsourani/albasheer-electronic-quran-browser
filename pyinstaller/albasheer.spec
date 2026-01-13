@@ -125,7 +125,7 @@ datas.append((str(SRC_DIR / "news_window.py" ),  "albasheer"))
 datas.append((str(SRC_DIR / "albasheer-data/ix.db" ), "albasheerlib/albasheer-data"))
 datas.append((str(SRC_DIR / "albasheer-data/quran.db" ), "albasheerlib/albasheer-data"))
 
-datas.append((str(SRC_DIR / "tilawa_json_files" ), "share/albasheer/albasheer"))
+datas.append((str(SRC_DIR / "tilawa_json_files/*" ), "share/albasheer/albasheer/tilawa_json_files"))
 datas.append((str(SRC_DIR / "LICENSE-en" ), "licenses/albasheer"))
 datas.append((str(SRC_DIR / "LICENSE-ar.txt" ), "licenses/albasheer"))
 
