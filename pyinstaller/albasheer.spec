@@ -139,6 +139,7 @@ hiddenimports = [
     'gi.repository.GLib',
     'gi.repository.GObject',
     'gi.repository.Gio',
+    'gi.repository.GioWin32',
     'gi.repository.Pango',
     'gi.repository.PangoCairo',
     'gi.repository.GdkPixbuf',
