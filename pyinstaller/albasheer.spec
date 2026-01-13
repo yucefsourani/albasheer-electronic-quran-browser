@@ -121,6 +121,7 @@ datas.append((str(SRC_DIR / "tilawa_settings.py" ), "albasheer"))
 datas.append((str(SRC_DIR / "search_window.py" ), "albasheer"))
 datas.append((str(SRC_DIR / "copy_gui.py" ), "albasheer"))
 datas.append((str(SRC_DIR / "news_window.py" ),  "albasheer"))
+datas.append((str(SRC_DIR / "tools_bar.py" ),  "albasheer"))
 
 
 datas.append((str(SRC_DIR / "albasheer-data/ix.db" ), "albasheerlib/albasheer-data"))
