@@ -63,7 +63,7 @@ hicolor_icon.rename(adwaita_icon)
 
 
 
-albasheer_out = SRC_DIR / "albasheer" 
+albasheer_out = SRC_DIR / "albasheer.py" 
 albasheer_windows_exe = """import os
 import sys
 import signal
@@ -250,7 +250,7 @@ else:
 
 # Analysis configuration
 a = Analysis(
-    [str(SRC_DIR / 'albasheer')],
+    [str(SRC_DIR / 'albasheer.py')],
     pathex=[str(SRC_DIR)],
     binaries=[],
     datas=datas,
