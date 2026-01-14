@@ -19,13 +19,16 @@
 
 import sys
 import gi
-
+import os
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Adw,Gst
 from .window import AlbasheerWindow
 Gst.init(None)
+
+if hasattr(sys, '_MEIPASS'):
+    os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
 
 class AlbasheerApplication(Adw.Application):
     """The main application singleton class."""
