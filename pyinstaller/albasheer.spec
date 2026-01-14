@@ -173,6 +173,8 @@ hiddenimports = [
 hiddenimports += collect_submodules('gi')
 hiddenimports += collect_submodules('sqlite3')
 hiddenimports += collect_submodules('zipfile')
+hiddenimports += collect_submodules('ctypes')
+
 
 
 # Platform-specific configurations
@@ -242,10 +244,6 @@ a = Analysis(
     runtime_hooks=[],
     excludes=[
         'tkinter',
-        'matplotlib',
-        'numpy',
-        'scipy',
-        'PIL',
         'PyQt5',
         'PyQt6',
         'PySide2',
@@ -264,13 +262,6 @@ exclude_binaries = [
     'ucrtbase',
     # Boost Python (from OpenEXR, not needed)
     'libboost_python',
-    # OpenEXR/Imath (not needed for basic media playback)
-    'libImath',
-    'libOpenEXR',
-    'libIex',
-    'libIlmThread',
-    'libPyImath',
-    'libPyIex',
 ]
     
 filtered_binaries = []
