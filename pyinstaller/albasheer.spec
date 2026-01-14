@@ -18,6 +18,8 @@ SRC_DIR = PROJECT_DIR / "src"
 DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
+FONTS_DIR     = PROJECT_DIR / "pyinstaller" /  "fonts"
+FONTS_CONFIG  = PROJECT_DIR / "pyinstaller" / "font.conf"
 
 # Application metadata
 APP_NAME = "albasheer"
@@ -65,20 +67,15 @@ hicolor_icon.rename(adwaita_icon)
 
 albasheer_out = SRC_DIR / "albasheer.py" 
 albasheer_windows_exe = """import os
-import sys
-import ctypes
 import signal
+import sys
 import locale
 import gettext
 from pathlib import Path
+import ctypes
 
-VERSION = '3.0'
-pkgdatadir = str(Path(sys._MEIPASS))
+os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
-
-sys.path.insert(1, pkgdatadir)
-signal.signal(signal.SIGINT, signal.SIG_DFL)
-
 def get_windows_language():
     try:
         windll = ctypes.windll.kernel32
@@ -89,14 +86,24 @@ def get_windows_language():
     except:
         pass
     return ['en','en_US']
-    
+
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albasheer', localedir, languages=sys_lang_code, fallback=True)
+    lang = gettext.translation('albasherr', localedir, languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
-    gettext.install('albasheer', localedir)
+    gettext.install('albasherr', localedir)
+
+
+VERSION = '3.0'
+pkgdatadir = str(Path(sys._MEIPASS))
+localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
+
+sys.path.insert(1, pkgdatadir)
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+
 
 if __name__ == '__main__':
     import gi
@@ -114,7 +121,11 @@ with open(str(albasheer_out) ,"w") as myf:
     
 # Collect GTK4 and libadwaita data
 datas = []
+if FONTS_CONFIG.exists():
+    datas.append((str(FONTS_CONFIG), "etc/fonts"))
 
+if FONTS_DIR.exists():
+    datas.append((str(FONTS_DIR), "shate/fonts"))
 datas.append((str(gresource_file ), "."))
 
 datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
