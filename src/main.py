@@ -35,7 +35,7 @@ class AlbasheerApplication(Adw.Application):
 
     def __init__(self):
         super().__init__(application_id='com.github.yucefsourani.albasheer-electronic-quran-browser',
-                         flags==Gio.ApplicationFlags.NON_UNIQUE if hasattr(sys, '_MEIPASS') else Gio.ApplicationFlags.DEFAULT_FLAGS)
+                         flags=Gio.ApplicationFlags.NON_UNIQUE if hasattr(sys, '_MEIPASS') else Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
 
