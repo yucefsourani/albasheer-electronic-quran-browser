@@ -92,7 +92,7 @@ def get_windows_language():
     
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albasheer', localedir, languages=langs, fallback=True)
+    lang = gettext.translation('albasheer', localedir, languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
