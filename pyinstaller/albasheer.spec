@@ -85,13 +85,13 @@ def get_windows_language():
         lang_id = windll.GetUserDefaultUILanguage()
         lang_code = locale.windows_locale.get(lang_id)
         if lang_code:
-            return lang_code.split('_')[0]
+            return [lang_code.split('_')[0],lang_code  ] 
     except:
         pass
-    return 'en'
+    return ['en','en_US']
     
 try:
-    sys_lang_code = [get_windows_language()]
+    sys_lang_code = get_windows_language()
     lang = gettext.translation('albasheer', localedir, languages=langs, fallback=True)
     lang.install()
 except Exception as e:
