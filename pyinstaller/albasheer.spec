@@ -66,6 +66,7 @@ hicolor_icon.rename(adwaita_icon)
 albasheer_out = SRC_DIR / "albasheer.py" 
 albasheer_windows_exe = """import os
 import sys
+import ctypes
 import signal
 import locale
 import gettext
@@ -78,9 +79,19 @@ localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
+def get_windows_language():
+    try:
+        windll = ctypes.windll.kernel32
+        lang_id = windll.GetUserDefaultUILanguage()
+        lang_code = locale.windows_locale.get(lang_id)
+        if lang_code:
+            return lang_code.split('_')[0]
+    except:
+        pass
+    return 'en'
+    
 try:
-    sys_lang_code, _ = locale.getdefaultlocale()
-    langs = [sys_lang_code] if sys_lang_code else None
+    sys_lang_code = [get_windows_language()]
     lang = gettext.translation('albasheer', localedir, languages=langs, fallback=True)
     lang.install()
 except Exception as e:
