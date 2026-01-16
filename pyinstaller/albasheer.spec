@@ -149,7 +149,7 @@ with open(str(albasheer_out) ,"w") as myf:
 datas = []
 
 if FONTS_DIR.exists():
-    datas.append((str(FONTS_DIR), "shate/fonts"))
+    datas.append((str(FONTS_DIR), "share/fonts"))
 datas.append((str(gresource_file ), "."))
 
 datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
