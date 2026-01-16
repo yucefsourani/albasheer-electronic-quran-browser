@@ -75,7 +75,7 @@ from pathlib import Path
 import ctypes
 import gi
 gi.require_version('PangoCairo', '1.0')
-from gi.repository import Pango, PangoCairo
+from gi.repository import  PangoCairo
 
 #os.environ['FONTCONFIG_FILE'] = os.path.join(sys._MEIPASS, 'etc', 'fonts', 'fonts.conf')
 #os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
