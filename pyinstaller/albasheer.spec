@@ -18,8 +18,8 @@ SRC_DIR = PROJECT_DIR / "src"
 DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
-FONTS_DIR     = PROJECT_DIR / "pyinstaller" /  "fonts"
-FONTS_CONFIG  = PROJECT_DIR / "pyinstaller" / "fonts.conf"
+#FONTS_DIR     = PROJECT_DIR / "pyinstaller" /  "fonts"
+#FONTS_CONFIG  = PROJECT_DIR / "pyinstaller" / "fonts.conf"
 
 # Application metadata
 APP_NAME = "albasheer"
@@ -73,14 +73,31 @@ import locale
 import gettext
 from pathlib import Path
 import ctypes
+from gi.repository import Pango
 
-os.environ['FONTCONFIG_FILE'] = os.path.join(sys._MEIPASS, 'etc', 'fonts', 'fonts.conf')
-os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
+#os.environ['FONTCONFIG_FILE'] = os.path.join(sys._MEIPASS, 'etc', 'fonts', 'fonts.conf')
+#os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
 
 os.environ['GST_PLUGIN_SYSTEM_PATH'] = os.path.join(sys._MEIPASS, 'gst_plugins')
 os.environ['GST_PLUGIN_PATH'] = os.path.join(sys._MEIPASS, 'gst_plugins')
 os.environ['GST_PLUGIN_SCANNER'] = os.path.join(sys._MEIPASS,'gst-plugin-scanner.exe')
 os.environ['GST_REGISTRY_FORK'] = 'yes'
+
+def load_custom_fonts():
+    base_path = sys._MEIPASS
+    fonts_dir = os.path.join(base_path, "share", "fonts")
+    font_map = Pango.CairoFontMap.get_default()
+    
+    fonts = [font for font in os.listdir(fonts_dir) ]
+    for font in fonts:
+        font_path = os.path.join(fonts_dir, font)
+        try:
+            font_map.add_font_file(font_path)
+            print(f"Loaded: {font}")
+        except Exception as e:
+            print(f"Error loading {font}: {e}")
+
+load_custom_fonts()
 
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 def get_windows_language():
@@ -128,11 +145,11 @@ with open(str(albasheer_out) ,"w") as myf:
     
 # Collect GTK4 and libadwaita data
 datas = []
-if FONTS_CONFIG.exists():
-    datas.append((str(FONTS_CONFIG), "etc/fonts"))
+#if FONTS_CONFIG.exists():
+#    datas.append((str(FONTS_CONFIG), "etc/fonts"))
 
-if FONTS_DIR.exists():
-    datas.append((str(FONTS_DIR), "shate/fonts"))
+#if FONTS_DIR.exists():
+#    datas.append((str(FONTS_DIR), "shate/fonts"))
 datas.append((str(gresource_file ), "."))
 
 datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
