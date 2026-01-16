@@ -76,6 +76,12 @@ import ctypes
 
 os.environ['FONTCONFIG_FILE'] = os.path.join(sys._MEIPASS, 'etc', 'fonts', 'fonts.conf')
 os.environ['FONTCONFIG_PATH'] = os.path.join(sys._MEIPASS, 'etc', 'fonts')
+
+os.environ['GST_PLUGIN_SYSTEM_PATH'] = os.path.join(sys._MEIPASS, 'gst_plugins')
+os.environ['GST_PLUGIN_PATH'] = os.path.join(sys._MEIPASS, 'gst_plugins')
+os.environ['GST_PLUGIN_SCANNER'] = os.path.join(sys._MEIPASS,'gst-plugin-scanner.exe')
+os.environ['GST_REGISTRY_FORK'] = 'yes'
+
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 def get_windows_language():
     try:
