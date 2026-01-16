@@ -104,11 +104,15 @@ load_custom_fonts()
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 def get_windows_language():
     try:
-        windll = ctypes.windll.kernel32
-        lang_id = windll.GetUserDefaultUILanguage()
-        lang_code = locale.windows_locale.get(lang_id)
+        lang_code = None
+        lang_code = os.environ.get('LANG') or os.environ.get('LC_ALL') or os.environ.get('LANGUAGE')
+        if not lang_code:
+            windll = ctypes.windll.kernel32
+            lang_id = windll.GetUserDefaultUILanguage()
+            lang_code = locale.windows_locale.get(lang_id)
         if lang_code:
-            return [lang_code.split('_')[0],lang_code  ] 
+            lang_code = lang_code.split('.')[0]
+            return [lang_code ,lang_code.split('_')[0]] 
     except:
         pass
     return ['en','en_US']
