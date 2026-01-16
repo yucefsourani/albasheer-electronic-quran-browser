@@ -228,4 +228,4 @@ if sys.platform != 'win32':
                 for helper in gst_helpers:
                     helper_path = libexec_dir / helper
                     if helper_path.exists():
-                        binaries.append((str(helper_path), 'lib/gstreamer-1.0'))
+                        binaries.append((str(helper_path), '.'))
