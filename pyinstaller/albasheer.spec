@@ -19,7 +19,7 @@ DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
 FONTS_DIR     = DATA_DIR /  "fonts"
-os.makedirs(str(locale_dir),exist_ok=True)
+os.makedirs(str(FONTS_DIR),exist_ok=True)
 
 # Application metadata
 APP_NAME = "albasheer"
