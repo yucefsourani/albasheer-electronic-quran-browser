@@ -18,7 +18,7 @@ SRC_DIR = PROJECT_DIR / "src"
 DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
-FONTS_DIR     = PROJECT_DIR / "pyinstaller" /  "fonts"
+FONTS_DIR     = DATA_DIR /  "fonts"
 
 
 # Application metadata
