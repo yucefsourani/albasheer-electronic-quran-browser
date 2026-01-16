@@ -96,7 +96,7 @@ def collect_gstreamer_plugins(plugins_dir, plugin_categories=None):
     
     # Plugin prefixes by category
     category_prefixes = {
-        'core': ['libgstcore', 'libgstcoretracers'],
+        'core': ['libgstcore', 'libgstcoretracers','libgstcoreelements'],
         'base': ['libgstapp', 'libgstaudioconvert', 'libgstaudioresample', 
                  'libgstplayback', 'libgsttypefindfunctions', 'libgstvideoconvert',
                  'libgstvideoscale', 'libgstvolume', 'libgstogg', 'libgstvorbis',
@@ -114,12 +114,12 @@ def collect_gstreamer_plugins(plugins_dir, plugin_categories=None):
                  'libgstspectrum', 'libgstaudioparsers', 'libgstvpx', 'libgstwebp',
                  'libgstximagesrc', 'libgstgtk', 'libgstdeinterlace',
                  'libgsteffectv', 'libgstequalizer', 'libgstmultifile',
-                 'libgstosxaudio', 'libgstosxvideo', 'libgstv4l2'],
+                 'libgstosxaudio', 'libgstosxvideo', 'libgstv4l2','libgstdirectsound'],
         'bad': ['libgstopencv', 'libgstwebrtc', 'libgstdash', 'libgsthls',
                 'libgstsrt', 'libgstx265', 'libgstx264', 'libgstopenh264',
                 'libgstfdkaac', 'libgstresindvd', 'libgstdtls', 'libgstsctp',
                 'libgstwebrtcdsp', 'libgstzbar', 'libgstopenjpeg', 'libgstsvtav1',
-                'libgstva', 'libgstuvch264', 'libgstwaylandsink'],
+                'libgstva', 'libgstuvch264', 'libgstwaylandsink','libgstwasapi'],
         'ugly': ['libgsta52dec', 'libgstamrnb', 'libgstamrwbdec', 'libgstasf',
                  'libgstdvdread', 'libgstdvdsub', 'libgstmpeg2dec', 'libgstx264',
                  'libgstsid', 'libgsttwolame'],
@@ -217,15 +217,17 @@ if gst_paths['typelibs']:
 
 # Collect GStreamer helper binaries
 if sys.platform != 'win32':
+    gst_helpers = ['gst-plugin-scanner', 'gst-ptp-helper']
+else:
     gst_helpers = ['gst-plugin-scanner.exe', 'gst-ptp-helper.exe']
-    if gst_paths['lib']:
-        libexec_dirs = [
-            gst_paths['lib'].parent / 'libexec' / 'gstreamer-1.0',
-            gst_paths['lib'] / 'gstreamer-1.0',
-        ]
-        for libexec_dir in libexec_dirs:
-            if libexec_dir.exists():
-                for helper in gst_helpers:
-                    helper_path = libexec_dir / helper
-                    if helper_path.exists():
-                        binaries.append((str(helper_path), '.'))
+if gst_paths['lib']:
+    libexec_dirs = [
+        gst_paths['lib'].parent / 'libexec' / 'gstreamer-1.0',
+        gst_paths['lib'] / 'gstreamer-1.0',
+    ]
+    for libexec_dir in libexec_dirs:
+        if libexec_dir.exists():
+            for helper in gst_helpers:
+                helper_path = libexec_dir / helper
+                if helper_path.exists():
+                    binaries.append((str(helper_path), '.'))
