@@ -19,7 +19,7 @@ DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
 FONTS_DIR     = DATA_DIR /  "fonts"
-
+os.makedirs(str(locale_dir),exist_ok=True)
 
 # Application metadata
 APP_NAME = "albasheer"
@@ -319,7 +319,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,  # Set to True for debugging
+    console=False,  # Set to True for debugging
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
