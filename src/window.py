@@ -31,10 +31,10 @@ from .news_window import NewsGui
 css = b"""
         .amiri {
             color: @success_color;
-            font-family:AmiriQuran;
+            font-family:Amiri Quran;
         }
         .amiri_color {
-            font-family:AmiriQuranColored ;
+            font-family:Amiri Quran Colored ;
         }
         #listv row:selected {
             background-color: #1A1A1A;
