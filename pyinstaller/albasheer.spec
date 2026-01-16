@@ -19,7 +19,7 @@ DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
 FONTS_DIR     = PROJECT_DIR / "pyinstaller" /  "fonts"
-FONTS_CONFIG  = PROJECT_DIR / "pyinstaller" / "font.conf"
+FONTS_CONFIG  = PROJECT_DIR / "pyinstaller" / "fonts.conf"
 
 # Application metadata
 APP_NAME = "albasheer"
