@@ -296,7 +296,8 @@ class TilawaPlayer(GObject.Object):
             a_ = ("0"*(3-len(aya_)))+aya_
             filename = os.path.join(filename,s_+a_+".mp3")
         if os.path.isfile(filename):
-            self.player.set_property('uri',"file://"+filename)
+            file_uri = Gst.filename_to_uri(filename)
+            self.player.set_property('uri',file_uri)
         else:
             return False
         self.player.props.volume = self.props.volume / 10
