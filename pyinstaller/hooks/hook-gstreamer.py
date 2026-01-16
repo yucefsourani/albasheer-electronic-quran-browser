@@ -217,7 +217,7 @@ if gst_paths['typelibs']:
 
 # Collect GStreamer helper binaries
 if sys.platform != 'win32':
-    gst_helpers = ['gst-plugin-scanner', 'gst-ptp-helper']
+    gst_helpers = ['gst-plugin-scanner.exe', 'gst-ptp-helper.exe']
     if gst_paths['lib']:
         libexec_dirs = [
             gst_paths['lib'].parent / 'libexec' / 'gstreamer-1.0',
