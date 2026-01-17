@@ -21,10 +21,13 @@ gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-b
 FONTS_DIR     = DATA_DIR /  "fonts"
 os.makedirs(str(FONTS_DIR),exist_ok=True)
 
+
 # Application metadata
 APP_NAME = "albasheer"
 APP_ID = "com.github.yucefsourani.albasheer-electronic-quran-browser"
-
+licenses = {
+            "albasheer" : PROJECT_DIR / "COPYING"
+           }
 
 def install_po(prefix_dir):
     locale_dir = prefix_dir / "locale"
@@ -154,6 +157,10 @@ with open(str(albasheer_out) ,"w") as myf:
 # Collect GTK4 and libadwaita data
 datas = []
 
+for license_folder_name,license_file in licenses.items():
+    if license_file.exists():
+        datas.append((str(licenses),f"_licenses/{license_folder_name}"))
+        
 if FONTS_DIR.exists():
     datas.append((str(FONTS_DIR), "share/fonts"))
 datas.append((str(gresource_file ), "."))
