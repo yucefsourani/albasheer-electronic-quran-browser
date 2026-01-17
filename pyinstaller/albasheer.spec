@@ -109,6 +109,8 @@ def load_custom_fonts():
 load_custom_fonts()
 
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
+print(localedir)
+print(os.listdir(str(localedir)))
 def get_windows_language():
     try:
         lang_code = None
@@ -119,9 +121,18 @@ def get_windows_language():
             lang_code = locale.windows_locale.get(lang_id)
         if lang_code:
             lang_code = lang_code.split('.')[0]
-            return [lang_code ,lang_code.split('_')[0]] 
+            langs = []
+            for l in [lang_code ,lang_code.split('_')[0]]:
+                mo_l = localedir / l / "LC_MESSAGES" / "albasheer.mo"
+                if mo_l.exists():
+                    os.environ['LANG'] = l 
+                    langs.insert(0,l)
+                else:
+                    langs.append(l)
+            return langs 
     except:
         pass
+    os.environ['LANG'] = "en"
     return ['en','en_US']
 
 try:
