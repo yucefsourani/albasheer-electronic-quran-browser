@@ -26,7 +26,9 @@ os.makedirs(str(FONTS_DIR),exist_ok=True)
 APP_NAME = "albasheer"
 APP_ID = "com.github.yucefsourani.albasheer-electronic-quran-browser"
 licenses = {
-            "albasheer" : PROJECT_DIR / "COPYING"
+            "albasheer" : PROJECT_DIR / "COPYING",
+            "albasheer" : SRC_DIR / "LICENSE-ar.txt",
+            "albasheer" : SRC_DIR / "LICENSE-en"
            }
 
 def install_po(prefix_dir):
@@ -187,8 +189,7 @@ datas.append((str(SRC_DIR / "albasheer-data/ix.db" ), "albasheer-data"))
 datas.append((str(SRC_DIR / "albasheer-data/quran.db" ), "albasheer-data"))
 
 datas.append((str(SRC_DIR / "tilawa_json_files/*" ), "albasheer/tilawa_json_files"))
-datas.append((str(SRC_DIR / "LICENSE-en" ), "licenses/albasheer"))
-datas.append((str(SRC_DIR / "LICENSE-ar.txt" ), "licenses/albasheer"))
+
 
 # Hidden imports for GTK4 and libadwaita
 hiddenimports = [
