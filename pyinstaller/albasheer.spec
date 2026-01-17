@@ -121,23 +121,27 @@ def get_windows_language():
             for l in [lang_code ,lang_code.split('_')[0]]:
                 mo_l = localedir / l / "LC_MESSAGES" / "albasheer.mo"
                 if mo_l.exists():
+                    print("exists")
                     os.environ['LANG'] = l 
                     langs.insert(0,l)
                 else:
                     langs.append(l)
+            print(lang_code)
+            print(os.environ.get('LANG'))
             return langs 
-    except:
-        pass
+    except Exception as e:
+        print(e)
     os.environ['LANG'] = "en"
+    print(os.environ.get('LANG'))
     return ['en','en_US']
 
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albasheer', localedir, languages=sys_lang_code, fallback=True)
+    lang = gettext.translation('albasheer', str(localedir), languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
-    gettext.install('albasheer', localedir)
+    gettext.install('albasheer', str(localedir))
 
 
 VERSION = '3.0'
