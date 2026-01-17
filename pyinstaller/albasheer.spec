@@ -93,9 +93,8 @@ os.environ['GST_REGISTRY_FORK'] = 'yes'
 def load_custom_fonts():
     base_path = sys._MEIPASS
     fonts_dir = os.path.join(base_path, "share", "fonts")
-    font_map = PangoCairo.FontMap.get_default()
-
     if os.path.isdir(fonts_dir):
+        font_map = PangoCairo.FontMap.get_default()
         fonts = [font for font in os.listdir(fonts_dir) ]
         for font in fonts:
             font_path = os.path.join(fonts_dir, font)
