@@ -123,18 +123,14 @@ def get_windows_language():
             for l in [lang_code ,lang_code.split('_')[0]]:
                 mo_l = os.path.join(localedir , l , "LC_MESSAGES" , "albasheer.mo")
                 if os.path.isfile(mo_l):
-                    print("exists")
                     os.environ['LANG'] = l 
                     langs.insert(0,l)
                 else:
                     langs.append(l)
-            print(lang_code)
-            print(os.environ.get('LANG'))
             return langs 
     except Exception as e:
         print(e)
     os.environ['LANG'] = "en"
-    print(os.environ.get('LANG'))
     return ['en','en_US']
 
 try:
@@ -346,7 +342,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,  # Set to True for debugging
+    console=False,  # Set to True for debugging
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
