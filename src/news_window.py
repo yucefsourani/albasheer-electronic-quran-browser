@@ -175,9 +175,9 @@ class NewsGui():
                 pass
 
     def on_connect_finish(self,session, result, data):
+        self.accumulated_data = b""
         try:
             if self.msg.get_status() !=  Soup.Status.OK :
-                print(self.msg.get_status())
                 try:
                     if os.path.exists(self.json_save_location):
                         with open(self.json_save_location,"r") as json_file:
@@ -189,7 +189,6 @@ class NewsGui():
             input_stream = session.send_finish(result)
             if os.path.exists(self.json_save_location):
                 os.remove(self.json_save_location)
-            self.json_file = open(self.json_save_location,"a+b")
             input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
         except Exception as e:
             print(e)
@@ -205,18 +204,17 @@ class NewsGui():
         try:
             chunk = input_stream.read_bytes_finish(result)
             if chunk.get_size()>0:
-                self.json_file.write(chunk.unref_to_data())
+                self.accumulated_data += chunk.get_data()
                 input_stream.read_bytes_async(1024*500,GLib.PRIORITY_HIGH_IDLE  ,None,self.on_read_finish)
             else:
-                self.json_file.close()
                 input_stream.close()
-                with open(self.json_save_location,"r") as json_file:
-                    info_ = json.load(json_file)
-                self.read_info(info_)
+                self.accumulated_data = self.accumulated_data.decode("utf-8")
+                with open(self.json_save_location,"w") as json_file:
+                    json_file.write(self.accumulated_data)
+                self.read_info(json.loads(self.accumulated_data))
         except Exception as e:
             print(e)
             try:
-                self.json_file.close()
                 input_stream.close()
             except Exception as e:
                 pass
