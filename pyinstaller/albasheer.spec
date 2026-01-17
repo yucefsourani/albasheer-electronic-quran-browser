@@ -19,6 +19,7 @@ DATA_DIR = PROJECT_DIR / "data"
 PO_DIR = PROJECT_DIR / "po"
 gschema_xml   = DATA_DIR / "com.github.yucefsourani.albasheer-electronic-quran-browser.gschema.xml"
 FONTS_DIR     = DATA_DIR /  "fonts"
+AMIRI_FONTS   = FONTS_DIR / "Amiri_Fonts"
 os.makedirs(str(FONTS_DIR),exist_ok=True)
 
 
@@ -26,9 +27,10 @@ os.makedirs(str(FONTS_DIR),exist_ok=True)
 APP_NAME = "albasheer"
 APP_ID = "com.github.yucefsourani.albasheer-electronic-quran-browser"
 licenses = {
-            "albasheer" : PROJECT_DIR / "COPYING",
-            "albasheer" : SRC_DIR / "LICENSE-ar.txt",
-            "albasheer" : SRC_DIR / "LICENSE-en"
+            "albasheer"   : PROJECT_DIR / "COPYING",
+            "albasheer"   : SRC_DIR / "LICENSE-ar.txt",
+            "albasheer"   : SRC_DIR / "LICENSE-en",
+            "Amiri_Fonts" : AMIRI_FONTS / "OFL.txt"
            }
 
 def install_po(prefix_dir):
@@ -119,8 +121,8 @@ def get_windows_language():
             lang_code = lang_code.split('.')[0]
             langs = []
             for l in [lang_code ,lang_code.split('_')[0]]:
-                mo_l = localedir / l / "LC_MESSAGES" / "albasheer.mo"
-                if mo_l.exists():
+                mo_l = os.path.join(localedir , l , "LC_MESSAGES" , "albasheer.mo")
+                if os.path.isfile(mo_l):
                     print("exists")
                     os.environ['LANG'] = l 
                     langs.insert(0,l)
@@ -137,16 +139,15 @@ def get_windows_language():
 
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albasheer', str(localedir), languages=sys_lang_code, fallback=True)
+    lang = gettext.translation('albasheer', localedir, languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
-    gettext.install('albasheer', str(localedir))
+    gettext.install('albasheer', localedir)
 
 
 VERSION = '3.0'
 pkgdatadir = str(Path(sys._MEIPASS))
-localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -174,8 +175,9 @@ for license_folder_name,license_file in licenses.items():
     if license_file.exists():
         datas.append((str(license_file),f"_licenses/{license_folder_name}"))
         
-if FONTS_DIR.exists():
-    datas.append((str(FONTS_DIR), "share/fonts"))
+if  AMIRI_FONTS.exists() :
+    datas.append((str(AMIRI_FONTS / "AmiriQuran.ttf"), "share/fonts"))
+    datas.append((str(AMIRI_FONTS / "AmiriQuranColored.ttf"), "share/fonts"))
 datas.append((str(gresource_file ), "."))
 
 datas.append((str(SRC_DIR / "albasheer/core.py" ), "albasheerlib"))
