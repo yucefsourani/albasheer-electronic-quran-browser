@@ -1,6 +1,6 @@
 Name:           albasheer
 Version:        3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Electronic Quran Browser
 License:        GPLv3     
 URL:            https://github.com/yucefsourani/albasheer-electronic-quran-browser
@@ -61,5 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jan 17 2026 yucuf sourani <youssef.m.sourani@gmail.com> 3.0-2
+- Initial
 * Mon Feb 10 2025 yucuf sourani <youssef.m.sourani@gmail.com> 3.0-1
 - Initial
