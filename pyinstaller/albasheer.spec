@@ -170,7 +170,7 @@ datas = []
 
 for license_folder_name,license_file in licenses.items():
     if license_file.exists():
-        datas.append((str(licenses),f"_licenses/{license_folder_name}"))
+        datas.append((str(license_file),f"_licenses/{license_folder_name}"))
         
 if FONTS_DIR.exists():
     datas.append((str(FONTS_DIR), "share/fonts"))
