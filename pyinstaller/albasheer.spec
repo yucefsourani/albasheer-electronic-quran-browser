@@ -31,7 +31,9 @@ def install_po(prefix_dir):
     os.makedirs(str(locale_dir),exist_ok=True)
     for po in glob.glob(f"{PO_DIR}/*.po"):
         mo      = "albasheer.mo"
-        mo_file =  os.path.join(str(locale_dir),os.path.basename(po).split(".")[0],"LC_MESSAGES",mo)
+        mo_location =  os.path.join(str(locale_dir),os.path.basename(po).split(".")[0],"LC_MESSAGES")
+        os.makedirs(mo_location,exist_ok=True)
+        mo_file =  os.path.join(mo_location,mo)
         subprocess.run(["msgfmt",po,"-o",mo_file], check=True)
     return locale_dir
         
@@ -119,11 +121,11 @@ def get_windows_language():
 
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albasherr', localedir, languages=sys_lang_code, fallback=True)
+    lang = gettext.translation('albsheer', localedir, languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
-    gettext.install('albasherr', localedir)
+    gettext.install('albsheer', localedir)
 
 
 VERSION = '3.0'
