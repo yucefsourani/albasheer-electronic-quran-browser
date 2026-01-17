@@ -107,8 +107,6 @@ def load_custom_fonts():
 load_custom_fonts()
 
 localedir  = str(Path(sys._MEIPASS) / "share" / "locale")
-print(localedir)
-print(os.listdir(str(localedir)))
 def get_windows_language():
     try:
         lang_code = None
@@ -135,11 +133,11 @@ def get_windows_language():
 
 try:
     sys_lang_code = get_windows_language()
-    lang = gettext.translation('albsheer', localedir, languages=sys_lang_code, fallback=True)
+    lang = gettext.translation('albasheer', localedir, languages=sys_lang_code, fallback=True)
     lang.install()
 except Exception as e:
     print(f"Warning: Could not load translations: {e}")
-    gettext.install('albsheer', localedir)
+    gettext.install('albasheer', localedir)
 
 
 VERSION = '3.0'
