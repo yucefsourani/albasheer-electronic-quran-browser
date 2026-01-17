@@ -32,7 +32,7 @@
   </screenshots>
   <launchable type="desktop-id">com.github.yucefsourani.albasheer-electronic-quran-browser.desktop</launchable>
   <releases>
-    <release version="3.0.1" date="2025-02-04"/>
+    <release version="3.0.2" date="2026-01-17"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
