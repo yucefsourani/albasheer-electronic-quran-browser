@@ -1,3 +1,5 @@
+
+
 # مصحف البشير الالكتروني (مبني على مصحف عثمان الالكتروني) [English](#albasheer-electronic-quran-browser-based-on--othman-electronic-quran-browser)
 
 <div align="center">
@@ -129,6 +131,9 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
   <img width="200" src="https://flathub.org/assets/badges/flathub-badge-i-en.png">
 </a>
 
+### Windows (GitHub Release)
+Windows binaries are automatically built via GitHub Actions. You can download the latest version from the [Releases page](https://github.com/yucefsourani/albasheer-electronic-quran-browser/releases).
+
 
 ## License
 
@@ -154,7 +159,3 @@ https://ojuba.org/waqf:license
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot8.png "Screenshot")
 
 ![Alt text](https://raw.githubusercontent.com/yucefsourani/albasheer-electronic-quran-browser/master/Screenshot9.png "Screenshot")
-
-
-
-
